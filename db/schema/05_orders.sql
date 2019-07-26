@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS orders CASCADE;
 
-CREATE TYPE status_opt AS ENUM('new', 'fulfilled', 'active', 'declined')
+CREATE TYPE status_opt AS ENUM('new', 'processing', 'declined', 'fulfilled');
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
@@ -8,5 +8,5 @@ CREATE TABLE orders (
   ordered_at TIMESTAMP,
   status STATUS_OPT DEFAULT 'new',
   total_cost INTEGER DEFAULT NULL,
-  comments TEXT
+  customer_comments TEXT
 );

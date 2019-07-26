@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS extras CASCADE;
-
-CREATE TABLE extras (
-  id SERIAL PRIMARY KEY,
-  name TEXT,
-  price INTEGER
-);
