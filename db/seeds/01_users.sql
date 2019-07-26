@@ -1,7 +1,3 @@
--- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
-
 INSERT INTO users (name,email,phone_number,password, admin)
 VALUES ('admin','admin@test.com','514-555-5555','$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', TRUE);
 
