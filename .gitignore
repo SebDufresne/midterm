@@ -1,5 +1,15 @@
+# Project dependencies
 node_modules/
+
+# CSS compiled files
 public/styles
+
+# env variable file
 .env
+
+# Mac OS folder attributes
+.DS_Store
+
+# temporary files
 *.log
 *.sqlite3
