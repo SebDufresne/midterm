@@ -9,5 +9,5 @@ CREATE TABLE dog_menus (
   vegan BOOLEAN,
   vegetarian BOOLEAN,
   gluten_free BOOLEAN
-)
+);
 
