@@ -3,8 +3,9 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name TEXT,
-  email TEXT,
-  phone_number TEXT,
-  password TEXT,
-  admin BOOLEAN
+  email TEXT NOT NULL,
+  phone_number TEXT NOT NULL,
+  password TEXT NOT NULL,
+  active BOOLEAN DEFAULT TRUE,
+  admin BOOLEAN DEFAULT FALSE
 );
