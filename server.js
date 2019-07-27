@@ -14,7 +14,6 @@ const morgan     = require('morgan');
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
-db.connect();
 
 // Cookie Handling
 const KEY_ONE = process.env.KEY_ONE;
@@ -70,11 +69,20 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
 app.get("/", (req, res) => {
+
   // const user = users[req.session.userId] || '';
   const user = users[0];
-  const params = {user};
-  res.render("index", params);
+
+  db.query(`SELECT name FROM foods`)
+    .then(response => {
+      const foodNames = response.rows;
+      // res.json(response);
+      const params = {user, foodNames};
+      res.render("index", params);
+    });
+
 });
 
 app.get("/login", (req, res) => {
