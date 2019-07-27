@@ -1,5 +1,7 @@
 // load .env data into process.env
 require('dotenv').config();
+const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
 
 // Web server config
 const PORT       = process.env.PORT || 8080;
@@ -15,13 +17,25 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
+const KEY_ONE = process.env.KEY_ONE;
+const KEY_TWO = process.env.KEY_TWO;
 
-// Initial users
-const autoUser = {
-    id: "theid",
-    email: "theemail",
-    password: "thepass"
-};
+app.use(cookieSession({
+  name: 'userSession',
+  keys: [KEY_ONE, KEY_TWO]
+}));
+
+// Initial users database
+const users = [
+  {
+    id: 2,
+    name: 'seb',
+    email: 'seb@test.com',
+    phone_number: '514-555-5555',
+    password: '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.',
+    admin: FALSE,
+  }
+];
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -54,23 +68,45 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-// db.connect()
+app.get("/", (req, res) => {
 
-  // .then(client => {
-    app.get("/", (req, res) => {
-      db.query(`SELECT name FROM foods`)
-        .then(response => {
-          const foodNames = response.rows;
-          // res.json(response);
-          res.render("index", {autoUser, foodNames});
-        })
+  const user = users[req.session.userId] || '';
+  // const user = autoUser;
 
-    });
+  db.query(`SELECT name FROM foods`)
+  .then(response => {
+    const foodNames = response.rows;
+    // res.json(response);
+    const params = {user, foodNames};
+    res.render("index", params);
+  })
 
-// })
+});
 
 app.get("/login", (req, res) => {
   res.render("login");
+});
+
+// Submits Login Page
+app.post('/login', (req, res) => {
+  const userId = req.session.userId || '';
+
+  // should get user by email
+  const user = users[0].email = req.body.email ? users[0] : '';
+  if (!userId) {
+    res.status(403);
+  } else if (!bcrypt.compareSync(req.body.password,user.password)) {
+    res.status(403);
+  } else {
+    req.session.userId = user.id;
+    res.redirect('/');
+  }
+});
+
+// Logout user (removes cookie)
+app.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
 });
 
 app.get("/checkout", (req, res) => {
