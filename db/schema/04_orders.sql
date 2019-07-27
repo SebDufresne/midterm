@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS orders CASCADE;
-DROP TYPE status_opt;
+DROP TYPE IF EXISTS status_opt;
 
 CREATE TYPE status_opt AS ENUM('new', 'processing', 'declined', 'fulfilled');
 
