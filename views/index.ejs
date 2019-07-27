@@ -19,6 +19,7 @@
     <h1>Menu</h1>
     <% for (let food in foods) { %>
       <ul>
+        <li><img src="<%= foods[food].picture_url %>" alt=""></li>
         <li><h1><%= foods[food].name %></h1></li>
         <li><%= foods[food].description %></li>
         <li><%= foods[food].price %>$</li>
