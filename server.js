@@ -82,12 +82,15 @@ app.get("/login", (req, res) => {
 // Submits Login Page
 app.post('/login', (req, res) => {
   const userId = req.session.userId || '';
+
+  // should get user by email
+  const user = users[0].email = req.body.email ? users[0] : '';
   if (!userId) {
     res.status(403);
-  } else if (!bcrypt.compareSync(req.body.password,users[0].password)) {
+  } else if (!bcrypt.compareSync(req.body.password,user.password)) {
     res.status(403);
   } else {
-    req.session.userId = userId;
+    req.session.userId = user.id;
     res.redirect('/');
   }
 });
