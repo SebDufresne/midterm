@@ -82,12 +82,8 @@ app.get("/", (req, res) => {
     .then(response => {
       const foods = response.rows;
       // res.json(response);
-<<<<<<< HEAD
-      console.log("foods:",foods)
-      const params = {user, foods};
-=======
-      const params = {user, foodNames, iconsKey};
->>>>>>> fea48c0fc0132683bb5a4d4ec3862190b889c33c
+      // console.log("foods:",foods)
+      const params = {user, foods, iconsKey};
       res.render("index", params);
     });
 
