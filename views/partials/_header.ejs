@@ -1,7 +1,9 @@
 <header>
   <nav>
     <ul>
-      <li>1</li>
+        <% if(user) { %>
+      <li><%= user.name %></li>
+      <% } %>
     </ul>
   </nav>
 </header>

@@ -18,10 +18,22 @@ db.connect();
 
 // Initial users database
 const autoUser = {
-    id: "theid",
-    email: "theemail",
-    password: "thepass"
+  id: "testID",
+  name: "MyName",
+  email: "auto@auto.com",
+  password: "password"
 };
+
+const users = [
+  {
+    id: 2,
+    name: 'seb',
+    email: 'seb@test.com',
+    phone_number: '514-555-5555',
+    password: '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.',
+    admin: FALSE,
+  }
+];
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -54,8 +66,10 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-
-  res.render("index", autoUser);
+  const user = users[req.session.userId] || '';
+  // const user = autoUser;
+  const params = {user};
+  res.render("index", params);
 });
 
 app.get("/login", (req, res) => {
