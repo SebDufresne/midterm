@@ -1,5 +1,7 @@
 // load .env data into process.env
 require('dotenv').config();
+const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
 
 // Web server config
 const PORT       = process.env.PORT || 8080;
@@ -16,14 +18,15 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
-// Initial users database
-const autoUser = {
-  id: "testID",
-  name: "MyName",
-  email: "auto@auto.com",
-  password: "password"
-};
+const KEY_ONE = process.env.KEY_ONE;
+const KEY_TWO = process.env.KEY_TWO;
 
+app.use(cookieSession({
+  name: 'userSession',
+  keys: [KEY_ONE, KEY_TWO]
+}));
+
+// Initial users database
 const users = [
   {
     id: 2,
@@ -74,6 +77,25 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
   res.render("login");
+});
+
+// Submits Login Page
+app.post('/login', (req, res) => {
+  const userId = req.session.userId || '';
+  if (!userId) {
+    res.status(403);
+  } else if (!bcrypt.compareSync(req.body.password,users[0].password)) {
+    res.status(403);
+  } else {
+    req.session.userId = userId;
+    res.redirect('/');
+  }
+});
+
+// Logout user (removes cookie)
+app.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
 });
 
 app.get("/checkout", (req, res) => {
