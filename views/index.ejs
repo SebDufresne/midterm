@@ -20,6 +20,7 @@
     <section>
       <% for (let food in foods) { %>
         <div class="food-item">
+          <img src="<%= foods[food].picture_url %>" alt="">
           <h1><%= foods[food].name %></h1>
           <p><%= foods[food].description %></p>
           <p class="price"><%= foods[food].price %>$</p>
