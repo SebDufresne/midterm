@@ -27,6 +27,8 @@ app.use(cookieSession({
 // Secure authentication
 const bcrypt = require('bcrypt');
 
+const iconsKey = process.env.FONT_AWESOME;
+
 // Initial users database
 const users = [
   {
@@ -73,13 +75,14 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.get("/", (req, res) => {
 
   // const user = users[req.session.userId] || '';
-  const user = users[0];
+  // const user = users[0];
+  const user = '';
 
   db.query(`SELECT name FROM foods`)
     .then(response => {
       const foodNames = response.rows;
       // res.json(response);
-      const params = {user, foodNames};
+      const params = {user, foodNames, iconsKey};
       res.render("index", params);
     });
 

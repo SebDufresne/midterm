@@ -1,11 +1,12 @@
 <header>
   <nav>
-    <ul>
       <% if(user) { %>
+        <!-- User Is Authenticated -->
         <%= user.name %>
       <% } else { %>
-        <%= user.name %>
+        <a href="Login" alt="login">Login</a>
       <% }%>
-    </ul>
+    <h1>SUPER DOGS!</h1>
+    <i class="fas fa-shopping-cart"></i>
   </nav>
 </header>
