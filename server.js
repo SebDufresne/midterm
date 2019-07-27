@@ -14,9 +14,9 @@ const morgan     = require('morgan');
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
-db.connect();
 
-// Initial users database
+
+// Initial users
 const autoUser = {
     id: "theid",
     email: "theemail",
@@ -53,10 +53,21 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
 
-  res.render("index", autoUser);
-});
+// db.connect()
+
+  // .then(client => {
+    app.get("/", (req, res) => {
+      db.query(`SELECT name FROM foods`)
+        .then(response => {
+          const foodNames = response.rows;
+          // res.json(response);
+          res.render("index", {autoUser, foodNames});
+        })
+
+    });
+
+// })
 
 app.get("/login", (req, res) => {
   res.render("login");
