@@ -1,7 +1,5 @@
 // load .env data into process.env
 require('dotenv').config();
-const bcrypt = require('bcrypt');
-const cookieSession = require('cookie-session');
 
 // Web server config
 const PORT       = process.env.PORT || 8080;
@@ -18,13 +16,17 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
+// Cookie Handling
 const KEY_ONE = process.env.KEY_ONE;
 const KEY_TWO = process.env.KEY_TWO;
-
+const cookieSession = require('cookie-session');
 app.use(cookieSession({
   name: 'userSession',
   keys: [KEY_ONE, KEY_TWO]
 }));
+
+// Secure authentication
+const bcrypt = require('bcrypt');
 
 // Initial users database
 const users = [
@@ -34,7 +36,7 @@ const users = [
     email: 'seb@test.com',
     phone_number: '514-555-5555',
     password: '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.',
-    admin: FALSE,
+    admin: false
   }
 ];
 
@@ -69,8 +71,8 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  const user = users[req.session.userId] || '';
-  // const user = autoUser;
+  // const user = users[req.session.userId] || '';
+  const user = users[0];
   const params = {user};
   res.render("index", params);
 });

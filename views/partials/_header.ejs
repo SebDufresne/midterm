@@ -2,8 +2,10 @@
   <nav>
     <ul>
       <% if(user) { %>
-      <li><%= user.name %></li>
-      <% } %>
+        <%= user.name %>
+      <% } else { %>
+        <%= user.name %>
+      <% }%>
     </ul>
   </nav>
 </header>
