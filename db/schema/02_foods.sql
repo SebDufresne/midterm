@@ -8,6 +8,6 @@ CREATE TABLE foods (
   picture_url TEXT,
   vegan BOOLEAN DEFAULT FALSE,
   vegetarian BOOLEAN DEFAULT FALSE,
-  gluten_free BOOLEAN DEFAULT FALSE
+  gluten_free BOOLEAN DEFAULT FALSE,
+  active BOOLEAN DEFAULT TRUE
 );
-

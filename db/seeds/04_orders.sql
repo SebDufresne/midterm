@@ -9,6 +9,6 @@ VALUES
 ('9','2019-07-26 09:56:20','declined',NULL,'Extra mustard with mine. :-)'),
 ('3','2019-07-26 09:55:20','declined',NULL,NULL),
 ('4','2019-07-26 09:54:20','declined',NULL,NULL),
-('5','2019-07-26 09:53:20','fulfilled',1799,'Take your time, I have time.'),
+('5','2019-07-26 09:53:20','fulfilled',1799,'Take your time.'),
 ('6','2019-07-26 09:52:20','fulfilled',4652,NULL),
 ('7','2019-07-26 09:51:20','fulfilled',1642,NULL);
