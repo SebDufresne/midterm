@@ -17,20 +17,29 @@
   <body>
     <% include ./partials/_header %>
     <h1>Menu</h1>
-    <% for (let food in foods) { %>
-      <ul>
-        <li><h1><%= foods[food].name %></h1></li>
-        <li><%= foods[food].description %></li>
-        <li><%= foods[food].price %>$</li>
-        <li><%= foods[food].vegan %></li>
-        <li><%= foods[food].vegetarian %></li>
-        <li><%= foods[food].gluten_free %></li>
-        <i class="fas fa-seedling"></i>
-        <i class="fas fa-carrot"></i>
+    <section>
+      <% for (let food in foods) { %>
+        <div class="food-item">
+          <h1><%= foods[food].name %></h1>
+          <p><%= foods[food].description %></p>
+          <p class="price"><%= foods[food].price %>$</p>
+          <div class="dietary-restrictions">
+            <% if(foods[food].vegan) { %></li>
+              <i class="fas fa-carrot"></i>
+            <% } %>
 
-        <button type="submit" value="<%= foods[food].id %>" class="">Add</button>
-      </ul>
-    <% } %>
+            <% if(foods[food].vegetarian) { %></li>
+              <i class="fas fa-seedling"></i>
+            <% } %>
+
+            <% if(foods[food].gluten_free) { %></li>
+              <i class="fas fa-bread-slice"></i>
+            <% } %>
+          </div>
+          <button type="submit" value="<%= foods[food].id %>" class="">Add</button>
+        </div>
+      <% } %>
+    </section>
   </body>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
