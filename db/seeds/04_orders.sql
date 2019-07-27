@@ -1,4 +1,4 @@
-INSERT INTO users (user_id, ordered_at, status, total_cost, customer_comments)
+INSERT INTO orders (user_id, ordered_at, status, total_cost, customer_comments)
 VALUES
 ('3','2019-07-26 10:02:20','new',NULL,NULL),
 ('4','2019-07-26 10:01:20','new',NULL,NULL),

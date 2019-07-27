@@ -1,4 +1,4 @@
-INSERT INTO food_extras (name, price)
+INSERT INTO extras (name, price)
 VALUES
 ('mushroom',50),
 ('hot peppers',75),

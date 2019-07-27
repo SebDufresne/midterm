@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS food_items CASCADE;
+DROP TABLE IF EXISTS foods CASCADE;
 
-CREATE TABLE food_items (
+CREATE TABLE foods (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT NOT NULL,

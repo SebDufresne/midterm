@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS food_extras CASCADE;
+
+CREATE TABLE food_extras (
+  id SERIAL PRIMARY KEY,
+  food_order_id INTEGER REFERENCES food_orders(id) ON DELETE CASCADE,
+  extra_id INTEGER REFERENCES extras(id) ON DELETE CASCADE
+);
