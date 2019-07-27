@@ -75,11 +75,12 @@ app.get("/", (req, res) => {
   // const user = users[req.session.userId] || '';
   const user = users[0];
 
-  db.query(`SELECT name FROM foods`)
+  db.query(`SELECT * FROM foods`)
     .then(response => {
-      const foodNames = response.rows;
+      const foods = response.rows;
       // res.json(response);
-      const params = {user, foodNames};
+      console.log("foods:",foods)
+      const params = {user, foods};
       res.render("index", params);
     });
 
