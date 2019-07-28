@@ -90,12 +90,18 @@ app.get("/", (req, res) => {
 });
 
 
-app.post("/checkout", (req, res) => {
+app.post("/checkout/:cart", (req, res) => {
+  const cartURL = req.params.cart;
+  console.log(cartURL);
+  const cart = $.parseJSON(cartURL);
+  console.log("cart: ", cart);
+
   const user = '';
-  const cart = req.body;
   const params = {user, cart, iconsKey};
-  console.log("And I'm here");
-  res.render("checkout",params);
+
+  console.log('cart: ', cart);
+  console.log("And I'm here2");
+  res.render("checkout", params);
 });
 
 app.get("/login", (req, res) => {
