@@ -92,15 +92,12 @@ app.get("/", (req, res) => {
 
 app.post("/checkout/:cart", (req, res) => {
   const cartURL = req.params.cart;
-  console.log(cartURL);
-  const cart = $.parseJSON(cartURL);
-  console.log("cart: ", cart);
+
+  const cart = JSON.parse(cartURL);
 
   const user = '';
   const params = {user, cart, iconsKey};
 
-  console.log('cart: ', cart);
-  console.log("And I'm here2");
   res.render("checkout", params);
 });
 
