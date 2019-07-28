@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
 
     <!-- Font Awesome External JS-->
@@ -16,31 +17,33 @@
 
   <body>
     <% include ./partials/_header %>
-    <h1>Menu</h1>
-    <section>
-      <% for (let food in foods) { %>
-        <div class="food-item">
-          <img src="<%= foods[food].picture_url %>" alt="">
-          <h1><%= foods[food].name %></h1>
-          <p><%= foods[food].description %></p>
-          <p class="price"><%= foods[food].price %>$</p>
-          <div class="dietary-restrictions">
-            <% if(foods[food].vegan) { %></li>
-              <i class="fas fa-carrot"></i>
-            <% } %>
+    <main>
+      <h1>Menu</h1>
+      <section id="food-list">
+        <% for (let food in foods) { %>
+          <div class="food-item">
+            <img src="<%= foods[food].picture_url %>" alt="">
+            <h1><%= foods[food].name %></h1>
+            <p class="description"><%= foods[food].description %></p>
+            <p class="price"><%= foods[food].price %>$</p>
+            <div class="dietary-restrictions">
+              <% if(foods[food].vegan) { %></li>
+                <i class="fas fa-carrot"></i>
+              <% } %>
 
-            <% if(foods[food].vegetarian) { %></li>
-              <i class="fas fa-seedling"></i>
-            <% } %>
+              <% if(foods[food].vegetarian) { %></li>
+                <i class="fas fa-seedling"></i>
+              <% } %>
 
-            <% if(foods[food].gluten_free) { %></li>
-              <i class="fas fa-bread-slice"></i>
-            <% } %>
+              <% if(foods[food].gluten_free) { %></li>
+                <i class="fas fa-bread-slice"></i>
+              <% } %>
+            </div>
+            <button type="submit" value="<%= foods[food].id %>" class="">Add</button>
           </div>
-          <button type="submit" value="<%= foods[food].id %>" class="">Add</button>
-        </div>
-      <% } %>
-    </section>
+        <% } %>
+      </section>
+    </main>
   </body>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
