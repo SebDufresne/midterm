@@ -2,7 +2,10 @@
   <nav>
       <% if(user.id) { %>
         <!-- User Is Authenticated -->
-        <%= user.name %>
+        <form method='POST' action='/logout' class='form-inline my-2 my-lg-0'>
+          <span class='mr-2'><%= user.name %></span>
+          <button type='submit' class='btn btn-outline-dark my-2 my-sm-0'>Logout</button>
+        </form>
       <% } else { %>
         <a href="Login" alt="login">Login</a>
       <% }%>

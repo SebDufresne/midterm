@@ -59,12 +59,14 @@ const usersRoutes = require("./routes/users");
 const foodsRoutes = require("./routes/foods");
 const checkoutRoutes = require("./routes/checkout");
 const loginRoutes = require("./routes/login");
+const logoutRoute = require("./routes/logout");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/foods", foodsRoutes(db));
 app.use("/login", loginRoutes(db, iconsKey));
+app.use("/logout", logoutRoute());
 app.use("/checkout", checkoutRoutes(db, iconsKey));
 // Note: mount other resources here, using the same pattern above
 
@@ -105,6 +107,11 @@ app.get("/", (req, res) => {
         const params = {user, foods, iconsKey};
         res.render("index", params);
       }
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
     });
 
 });
