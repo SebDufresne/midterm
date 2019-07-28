@@ -12,6 +12,8 @@ module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
     const order = JSON.parse(req.session.cart);
 
+    console.log('In the checkout GET', order);
+
     const params = {user, cart, iconsKey};
     res.render("checkout", params);
 
