@@ -24,19 +24,8 @@ app.use(cookieSession({
   keys: [KEY_ONE, KEY_TWO]
 }));
 
+// Key for Font Awesome
 const iconsKey = process.env.FONT_AWESOME;
-
-// Initial users database
-const users = [
-  {
-    id: 2,
-    name: 'seb',
-    email: 'seb@test.com',
-    phone_number: '514-555-5555',
-    password: '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.',
-    admin: false
-  }
-];
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -55,19 +44,25 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
+// API
 const foodsRoutes = require("./routes/foods");
+const usersRoutes = require("./routes/users");
+
+// APP
 const checkoutRoutes = require("./routes/checkout");
-const loginRoutes = require("./routes/login");
-const logoutRoute = require("./routes/logout");
+const loginRoutes    = require("./routes/login");
+const logoutRoute    = require("./routes/logout");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
+// API
 app.use("/api/foods", foodsRoutes(db));
-app.use("/login", loginRoutes(db, iconsKey));
-app.use("/logout", logoutRoute());
-app.use("/checkout", checkoutRoutes(db, iconsKey));
+app.use("/api/users", usersRoutes(db));
+
+// APP
+app.use("/checkout",  checkoutRoutes(db, iconsKey));
+app.use("/login",     loginRoutes(db, iconsKey));
+app.use("/logout",    logoutRoute());
 // Note: mount other resources here, using the same pattern above
 
 
@@ -114,12 +109,6 @@ app.get("/", (req, res) => {
         .json({ error: err.message });
     });
 
-});
-
-// Logout user (removes cookie)
-app.post('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
 });
 
 app.get("/list-orders", (req, res) => {
