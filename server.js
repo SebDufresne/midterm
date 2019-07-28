@@ -27,6 +27,9 @@ app.use(cookieSession({
 // Key for Font Awesome
 const iconsKey = process.env.FONT_AWESOME;
 
+// Helper Functions
+const { getUserInfo } = require('./bin/helpers');
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -81,12 +84,11 @@ app.get("/", (req, res) => {
       // console.log("foods:",foods)
 
       if (userId) {
-        const queryUsers = `SELECT * FROM users WHERE id = '${userId}'`;
-        console.log(queryUsers);
-        db.query(queryUsers)
+        getUserInfo(db, userId)
           .then(usersData => {
+            console.log(usersData);
             console.log(foods);
-            const user = usersData.rows[0]; // Implies there's ONLY one
+            const user = usersData; // Implies there's ONLY one
             const params = {user, foods, iconsKey};
             res.render("index", params);
 
