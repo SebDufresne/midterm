@@ -17,33 +17,8 @@
 
   <body>
     <% include ./partials/_header %>
-    <main>
-      <h1>Menu</h1>
-      <section id="food-list">
-        <% for (let food in foods) { %>
-          <div class="food-item">
-            <img src="<%= foods[food].picture_url %>" alt="">
-            <h1><%= foods[food].name %></h1>
-            <p class="description"><%= foods[food].description %></p>
-            <p class="price"><%= foods[food].price %>$</p>
-            <div class="dietary-restrictions">
-              <% if(foods[food].vegan) { %></li>
-                <i class="fas fa-carrot"></i>
-              <% } %>
-
-              <% if(foods[food].vegetarian) { %></li>
-                <i class="fas fa-seedling"></i>
-              <% } %>
-
-              <% if(foods[food].gluten_free) { %></li>
-                <i class="fas fa-bread-slice"></i>
-              <% } %>
-            </div>
-            <button type="submit" value="<%= foods[food].id %>" class="add-food-btn">Add</button>
-          </div>
-        <% } %>
-      </section>
-    </main>
+    <h1>CHECKOUT!!!!!!!</h1>
+    <input type="text"><br>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

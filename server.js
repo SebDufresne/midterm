@@ -89,10 +89,13 @@ app.get("/", (req, res) => {
 
 });
 
-app.post("/checkout", (req, res) => {
 
-  console.log("res:", res)
-  res.render("checkout");
+app.post("/checkout", (req, res) => {
+  const user = '';
+  const cart = req.body;
+  const params = {user, cart, iconsKey};
+  console.log("And I'm here");
+  res.render("checkout",params);
 });
 
 app.get("/login", (req, res) => {

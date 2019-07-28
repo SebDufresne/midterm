@@ -2,7 +2,7 @@ const cart = {};
 
 $(() => {
 
-  $("button").click(function() {
+  $(".add-food-btn").click(function() {
     const foodId = $(this).val();
 
     if (!cart[foodId]) {
@@ -15,5 +15,10 @@ $(() => {
     counter.text('Test');
 
     console.log(cart);
+  });
+
+  $("#checkout-btn").click(function() {
+    console.log("I'm here");
+    $.post("/checkout",cart);
   });
 });
