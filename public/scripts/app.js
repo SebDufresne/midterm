@@ -17,7 +17,6 @@ $(() => {
     console.log(cart);
   });
 
-
   $('button').click(function(event) {
     event.preventDefault();
     const $form = $(this).closest('form');
