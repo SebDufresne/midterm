@@ -10,7 +10,8 @@
         <a href="Login" alt="login">Login</a>
       <% }%>
     <h1>SUPER DOGS!</h1>
-    <form method='POST' action='/checkout'>
+    <form method='POST' action='/' data-cart="">
+      <input name="cart" type="hidden" value="">
       <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
     </form>
   </nav>

@@ -111,6 +111,10 @@ app.get("/", (req, res) => {
 
 });
 
+app.post("/", (req, res) => {
+
+});
+
 app.get("/list-orders", (req, res) => {
   res.render("list-orders");
 });
