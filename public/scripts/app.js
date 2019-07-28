@@ -1,10 +1,19 @@
+const cart = {};
+
 $(() => {
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((users) => {
-    for (const user of users) {
-      $("<div>").text(user.name).appendTo($("body"));
+
+  $("button").click(function() {
+    const foodId = $(this).val();
+
+    if (!cart[foodId]) {
+      cart[foodId] = 0;
     }
+    cart[foodId] += 1;
+
+    const counter = $("nav>h1");
+
+    counter.text('Test');
+
+    console.log(cart);
   });
 });

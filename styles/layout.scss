@@ -1,5 +1,8 @@
 // See: https://sass-lang.com/
 
+$header-height: 80px;
+$nav-color: yellow;
+
 body {
   background-color: #EEE;
 
@@ -8,8 +11,62 @@ body {
   }
 }
 
+header {
+  position: fixed;
+  width: 100%;
+  height: $header-height;
+
+  background-color: $nav-color;
+}
+
 nav {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+
   h1 {
     display: inline-block;
+  }
+}
+
+main {
+  padding-top: $header-height;
+}
+
+div.food-item {
+  display: grid;
+  grid-template-areas:
+    "photo title title"
+    "photo description description"
+    "photo . price"
+    "restriction . button";
+  grid-template-columns: 33% auto 33%;
+  grid-template-rows: 25% 25% 25% 25%;
+
+  img {
+    grid-area: photo;
+    height: 300px;
+  }
+
+  h1 {
+    grid-area: title;
+  }
+
+  p.description {
+    grid-area: description;
+  }
+  p.price {
+    grid-area: price;
+  }
+
+  div.dietary-restrictions {
+    grid-area: restriction;
+  }
+
+  button {
+    grid-area: button;
   }
 }

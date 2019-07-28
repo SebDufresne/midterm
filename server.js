@@ -89,6 +89,12 @@ app.get("/", (req, res) => {
 
 });
 
+app.post("/checkout", (req, res) => {
+
+  console.log("res:", res)
+  res.render("checkout");
+});
+
 app.get("/login", (req, res) => {
   res.render("login");
 });
@@ -113,10 +119,6 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
   req.session = null;
   res.redirect('/');
-});
-
-app.get("/checkout", (req, res) => {
-  res.render("checkout");
 });
 
 app.get("/list-orders", (req, res) => {
