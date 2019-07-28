@@ -24,9 +24,6 @@ app.use(cookieSession({
   keys: [KEY_ONE, KEY_TWO]
 }));
 
-// Secure authentication
-const bcrypt = require('bcrypt');
-
 const iconsKey = process.env.FONT_AWESOME;
 
 // Initial users database
@@ -61,12 +58,14 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const foodsRoutes = require("./routes/foods");
 const checkoutRoutes = require("./routes/checkout");
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/foods", foodsRoutes(db));
-app.use("/checkout/:cart", checkoutRoutes(iconsKey));
+app.use("/login", loginRoutes(db, iconsKey));
+app.use("/checkout", checkoutRoutes(db, iconsKey));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -75,40 +74,39 @@ app.use("/checkout/:cart", checkoutRoutes(iconsKey));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-
-  // const user = users[req.session.userId] || '';
-  // const user = users[0];
-  const user = '';
-
-  db.query(`SELECT * FROM foods`)
-    .then(response => {
-      const foods = response.rows;
-      // res.json(response);
-      // console.log("foods:",foods)
-      const params = {user, foods, iconsKey};
-      res.render("index", params);
-    });
-
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-// Submits Login Page
-app.post('/login', (req, res) => {
   const userId = req.session.userId || '';
 
-  // should get user by email
-  const user = users[0].email = req.body.email ? users[0] : '';
-  if (!userId) {
-    res.status(403);
-  } else if (!bcrypt.compareSync(req.body.password,user.password)) {
-    res.status(403);
-  } else {
-    req.session.userId = user.id;
-    res.redirect('/');
-  }
+  const queryFoods = `SELECT * FROM foods;`;
+  db.query(queryFoods)
+    .then(foodData => {
+      const foods = foodData.rows;
+      // res.json(response);
+      // console.log("foods:",foods)
+
+      if (userId) {
+        const queryUsers = `SELECT * FROM users WHERE id = '${userId}'`;
+        console.log(queryUsers);
+        db.query(queryUsers)
+          .then(usersData => {
+            console.log(foods);
+            const user = usersData.rows[0]; // Implies there's ONLY one
+            const params = {user, foods, iconsKey};
+            res.render("index", params);
+
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
+      } else {
+        const user = {};
+        user.id = '';
+        const params = {user, foods, iconsKey};
+        res.render("index", params);
+      }
+    });
+
 });
 
 // Logout user (removes cookie)
