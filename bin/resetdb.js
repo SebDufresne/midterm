@@ -23,11 +23,24 @@ const runSchemaFiles = function() {
   }
 };
 
+// Loads the view files from db/view
+const runViewFiles = function() {
+  console.log(chalk.cyan(`-> Loading Views ...`));
+  const viewFilenames = fs.readdirSync('./db/view');
+
+  for (const fn of viewFilenames) {
+    const sql = fs.readFileSync(`./db/view/${fn}`, 'utf8');
+    console.log(`\t-> Running ${chalk.green(fn)}`);
+    client.querySync(sql);
+  }
+};
+
+// Loads the seeds files from db/seeds
 const runSeedFiles = function() {
   console.log(chalk.cyan(`-> Loading Seeds ...`));
-  const schemaFilenames = fs.readdirSync('./db/seeds');
+  const seedsFilenames = fs.readdirSync('./db/seeds');
 
-  for (const fn of schemaFilenames) {
+  for (const fn of seedsFilenames) {
     const sql = fs.readFileSync(`./db/seeds/${fn}`, 'utf8');
     console.log(`\t-> Running ${chalk.green(fn)}`);
     client.querySync(sql);
@@ -38,6 +51,7 @@ try {
   console.log(`-> Connecting to PG using ${connectionString} ...`);
   client.connectSync(connectionString);
   runSchemaFiles();
+  runViewFiles();
   runSeedFiles();
   client.end();
 } catch (err) {
