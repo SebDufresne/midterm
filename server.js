@@ -112,11 +112,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-
-});
-
-app.get("/list-orders", (req, res) => {
-  res.render("list-orders");
+  const cartStr = req.body.cart;
+  // console.log("SEB - I'm here now!!!", cartStr);
+  req.session.cart = cartStr;
+  res.redirect('checkout');
 });
 
 app.listen(PORT, () => {

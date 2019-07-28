@@ -8,8 +8,14 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (iconsKey) => {
-  console.log("Test");
+module.exports = (db, iconsKey) => {
+  router.get("/", (req, res) => {
+    const order = JSON.parse(req.session.cart);
+
+    const params = {user, cart, iconsKey};
+    res.render("checkout", params);
+
+  });
   router.post("/", (req, res) => {
     console.log("req", req);
     console.log("res", res);

@@ -18,16 +18,17 @@ $(() => {
   });
 
   $("#checkout-btn").click(function(event) {
+    event.preventDefault();
+
     const $button = $(this);
     const $form = $button.closest("form");
-    const $inputField = $form.find("input[name='cart']");
+    const $cartField = $form.find("input[name='cart']");
 
     const cartStr = JSON.stringify(cart);
 
-    $inputField.val(cartStr);
+    $cartField.val(cartStr);
 
-    console.log('I WAS CLICKED!!!!', $inputField.val());
-    event.preventDefault();
+    console.log('I WAS CLICKED!!!!', $cartField.val());
     $form.submit();
   });
 
