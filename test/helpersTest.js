@@ -1,7 +1,8 @@
 const assert = require('chai').assert;
-const extractFoodObj = require('../bin/helpers').extractFoodObj;
+const extractFoodObj = require('../lib/helpers').extractFoodObj;
+const findOrderIndex = require('../lib/helpers').findOrderIndex;
 
-const orderDate = [
+const orderData = [
   {
     order_id: 1,
     ordered_at: "2019-07-26T10:02:20.000Z",
@@ -73,5 +74,31 @@ describe('#extractFoodObj', function() {
       picture_url: "src/images/foods/dog_tubbydog.jpg"
     };
     assert.deepEqual(extractFoodObj(input),output);
+  });
+});
+
+describe('#findOrderIndex', function() {
+  it(`return undefined if order isn't found`, function() {
+    const orderId = 4;
+    const ordersArray = [
+      {order_id: 1, ordered_at: "2019-07-26T10:01:20.000Z"},
+      {order_id: 2, ordered_at: "2019-07-26T10:01:20.000Z"},
+      {order_id: 3, ordered_at: "2019-07-26T10:01:20.000Z"},
+    ];
+    const output = undefined;
+    assert.strictEqual(findOrderIndex(orderId,ordersArray),output);
+  });
+});
+
+describe('#findOrderIndex', function() {
+  it(`return index of order in array if found`, function() {
+    const orderId = 2;
+    const ordersArray = [
+      {order_id: 1, ordered_at: "2019-07-26T10:01:20.000Z"},
+      {order_id: 2, ordered_at: "2019-07-26T10:01:20.000Z"},
+      {order_id: 3, ordered_at: "2019-07-26T10:01:20.000Z"},
+    ];
+    const output = 1;
+    assert.strictEqual(findOrderIndex(orderId,ordersArray),output);
   });
 });

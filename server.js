@@ -28,7 +28,7 @@ app.use(cookieSession({
 const iconsKey = process.env.FONT_AWESOME;
 
 // Helper Functions
-const { getUserInfo } = require('./bin/helpers');
+const { getUserInfo } = require('./lib/helpers');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
