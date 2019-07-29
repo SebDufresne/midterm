@@ -14,9 +14,10 @@ module.exports = (db, iconsKey) => {
 
     console.log('In the checkout GET', order);
 
-    const params = {user, cart, iconsKey};
-    res.render("checkout", params);
+    // const params = {user, cart, iconsKey};
+    // res.render("checkout", params);
 
+    res.json({ order });
   });
   router.post("/", (req, res) => {
     console.log("req", req);
