@@ -1,50 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>Home Page</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/food_menu.css" type="text/css" />
 
-    <!-- Font Awesome External JS-->
-    <script src="https://kit.fontawesome.com/<%= iconsKey %>.js"></script>
-  </head>
+  <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
 
-  <body>
-    <% include ./partials/_header %>
-    <main>
+  <!-- Font Awesome External JS-->
+  <script src="https://kit.fontawesome.com/<%= iconsKey %>.js"></script>
+</head>
+
+<body>
+  <% include ./partials/_header %>
+  <main>
+    <div class="menu-params">
       <h1>Menu</h1>
-      <section id="food-list">
-        <% for (let food in foods) { %>
-          <div class="food-item">
-            <img src="<%= foods[food].picture_url %>" alt="">
-            <h1><%= foods[food].name %></h1>
-            <p class="description"><%= foods[food].description %></p>
-            <p class="price"><%= foods[food].price %>$</p>
-            <div class="dietary-restrictions">
-              <% if(foods[food].vegan) { %></li>
-                <i class="fas fa-carrot"></i>
-              <% } %>
+      <div>
+      <i id="vegan" class="fas fa-carrot"> vegan</i>
+      <i class="fas fa-seedling"> vegetarian</i>
+      <i class="fas fa-bread-slice"> gluten-free</i>
+    </div>
+    </div>
+    <section id="food-list">
+      <% for (let food in foods) { %>
+      <div class="food-item">
 
-              <% if(foods[food].vegetarian) { %></li>
-                <i class="fas fa-seedling"></i>
+        <div class="photos">
+        <img src="<%= foods[food].picture_url %>" alt="">
+        </div>
+
+        <div class="namePriceIcons">
+        <h1><%= foods[food].name %></h1>
+        <p class="description"><%= foods[food].description %></p>
+        <div class="dietary-restrictions">
+          <% if(foods[food].vegan) { %></li>
+            <i class="fas fa-carrot"></i>
+            <% } %>
+
+            <% if(foods[food].vegetarian) { %></li>
+              <i class="fas fa-seedling"></i>
               <% } %>
 
               <% if(foods[food].gluten_free) { %></li>
                 <i class="fas fa-bread-slice"></i>
-              <% } %>
+                <% } %>
+              </div>
             </div>
-            <button type="submit" value="<%= foods[food].id %>" class="add-food-btn">Add</button>
-          </div>
-        <% } %>
-      </section>
-    </main>
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+          <div class="priceAndBuy">
+        <p class="price"><%= foods[food].price /100 %>$</p>
+        <button id="buy-button" type="submit" value="<%= foods[food].id %>" class="add-food-btn">Dog-me!</button>
+      </div>
+
+      </div>
+      <% } %>
+    </section>
+  </main>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </html>
