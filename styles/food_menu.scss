@@ -39,16 +39,34 @@ body {
 }
 
 .food-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   border-style: solid;
   border-color: black;
   width: 90%;
-  padding-bottom: 1rem;
+  // padding-bottom: 1rem;
   margin: auto;
   margin-bottom: 1rem;
-  h1 {
-    color: $logo-color;
+  padding: .5rem;
 
+  .namePriceIcons{
+    max-width: 33%;
+
+    h1 {
+      color: $logo-color;
+    }
+  }
+  .photos {
+    // padding: .5rem;
+    max-width: 33%;
 
   }
-
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .priceAndBuy {
+    max-width: 33%;
+  }
 }
