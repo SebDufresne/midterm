@@ -52,9 +52,10 @@ const foodsRoutes = require("./routes/foods");
 const usersRoutes = require("./routes/users");
 
 // APP
-const checkoutRoutes = require("./routes/checkout");
-const loginRoutes    = require("./routes/login");
-const logoutRoute    = require("./routes/logout");
+const checkoutRoutes      = require("./routes/checkout");
+const loginRoutes         = require("./routes/login");
+const logoutRoute         = require("./routes/logout");
+const orderSummaryRoutes  = require("./routes/order-summary");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -63,9 +64,10 @@ app.use("/api/foods", foodsRoutes(db));
 app.use("/api/users", usersRoutes(db));
 
 // APP
-app.use("/checkout",  checkoutRoutes(db, iconsKey));
-app.use("/login",     loginRoutes(db, iconsKey));
-app.use("/logout",    logoutRoute());
+app.use("/checkout",      checkoutRoutes(db, iconsKey));
+app.use("/login",         loginRoutes(db, iconsKey));
+app.use("/logout",        logoutRoute());
+app.use("/order-summary", orderSummaryRoutes(db, iconsKey));
 // Note: mount other resources here, using the same pattern above
 
 
