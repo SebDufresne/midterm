@@ -23,9 +23,11 @@
   <main>
     <div class="menu-params">
       <h1>Menu</h1>
-      <i class="fas fa-carrot">vegan</i>
-      <i class="fas fa-seedling">vegetarian</i>
-      <i class="fas fa-bread-slice">gluten-free</i>
+      <div>
+      <i id="vegan" class="fas fa-carrot"> vegan</i>
+      <i class="fas fa-seedling"> vegetarian</i>
+      <i class="fas fa-bread-slice"> gluten-free</i>
+    </div>
     </div>
     <section id="food-list">
       <% for (let food in foods) { %>
@@ -55,7 +57,7 @@
 
           <div class="priceAndBuy">
         <p class="price"><%= foods[food].price /100 %>$</p>
-        <button type="submit" value="<%= foods[food].id %>" class="add-food-btn">Add</button>
+        <button type="submit" value="<%= foods[food].id %>" class="add-food-btn">Dog-me!</button>
       </div>
 
       </div>

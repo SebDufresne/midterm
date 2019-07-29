@@ -14,27 +14,37 @@ body {
     flex-direction: column;
     justify-content: center;
 
-    h1 {
-      color: $secondary-text-color;
-      font-family: $logo-font;
-      margin-left: 5rem;
-      padding-bottom: 1rem;
+    // h1 {
+    //   color: $secondary-text-color;
+    //   font-family: $logo-font;
+    //   margin-left: 5rem;
+    //   padding-bottom: 1rem;
 
-    }
+    // }
 
   }
 }
 
 .menu-params {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-start;
 
   color: $secondary-text-color;
   font-family: $logo-font;
   margin-left: 5rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
+  div {
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   h1 {
-    font-family: $logo-font;
+    color: $secondary-text-color;
+      font-family: $logo-font;
+      margin-left: 5rem;
+      padding-bottom: 1rem;
   }
 }
 
@@ -43,23 +53,34 @@ body {
   flex-direction: row;
   justify-content: space-between;
   border-style: solid;
+  border-radius: 10px;
   border-color: black;
   width: 90%;
   // padding-bottom: 1rem;
   margin: auto;
   margin-bottom: 1rem;
   padding: .5rem;
+  font-family: $secondary-font;
+  color: $secondary-text-color;
 
   .namePriceIcons{
-    max-width: 33%;
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: left;
+    // text-align: left;
+
+
 
     h1 {
       color: $logo-color;
+      font-family: $logo-font;
+      padding-bottom: 3px;
     }
   }
   .photos {
     // padding: .5rem;
-    max-width: 33%;
+    max-width: 25%;
 
   }
   img {
@@ -67,6 +88,18 @@ body {
     height: auto;
   }
   .priceAndBuy {
-    max-width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 15%;
+
+    button {
+      font-family: $logo-font;
+      background-color: $text-shadow-color;
+      padding: .25rem;
+      border: .5px solid $secondary-text-color;
+      border-radius: 1px;
+      color: $secondary-text-color;
+    }
   }
 }
