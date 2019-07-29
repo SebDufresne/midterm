@@ -1,0 +1,54 @@
+$header-height: 80px;
+$nav-color: #F2CE16;
+$logo-font: 'Pacifico', cursive;
+$secondary-font: 'Quicksand', sans-serif;
+$logo-color: #BF2315;
+$text-shadow-color: #FFF5E6;
+$secondary-text-color: #1F1E5E;
+$flare-color: #127334;
+
+body {
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      color: $secondary-text-color;
+      font-family: $logo-font;
+      margin-left: 5rem;
+      padding-bottom: 1rem;
+
+    }
+
+  }
+}
+
+.menu-params {
+  display: flex;
+  flex-direction: column;
+
+  color: $secondary-text-color;
+  font-family: $logo-font;
+  margin-left: 5rem;
+  padding-bottom: 1rem;
+  h1 {
+    font-family: $logo-font;
+  }
+}
+
+.food-item {
+  border-style: solid;
+  border-color: black;
+  width: 90%;
+  padding-bottom: 1rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  h1 {
+    color: $logo-color;
+
+
+  }
+
+}

@@ -7,9 +7,9 @@ $background-color: #FFF5E6;
 body {
   background-color: $background-color;
 
-  h1 {
-    color: #244751;
-  }
+  // h1 {
+  //   color: #244751;
+  // }
 }
 
 main {
@@ -43,7 +43,7 @@ div.food-item {
   }
 
   div.dietary-restrictions {
-    grid-area: restriction;
+    grid-area: description;
   }
 
   button {
