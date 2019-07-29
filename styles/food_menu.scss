@@ -1,0 +1,107 @@
+$header-height: 80px;
+$nav-color: #F2CE16;
+$logo-font: 'Pacifico', cursive;
+$secondary-font: 'Quicksand', sans-serif;
+$logo-color: #BF2315;
+$text-shadow-color: #FFF5E6;
+$secondary-text-color: #1F1E5E;
+$flare-color: #362A21;
+
+body {
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    // h1 {
+    //   color: $secondary-text-color;
+    //   font-family: $logo-font;
+    //   margin-left: 5rem;
+    //   padding-bottom: 1rem;
+
+    // }
+
+  }
+}
+
+.menu-params {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  color: $secondary-text-color;
+  font-family: $logo-font;
+  margin-left: 5rem;
+  padding: 1rem;
+  div {
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  h1 {
+    color: $secondary-text-color;
+      font-family: $logo-font;
+      margin-left: 5rem;
+      padding-bottom: 1rem;
+  }
+}
+
+.food-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: $flare-color;
+  width: 90%;
+  // padding-bottom: 1rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  padding: .5rem;
+  font-family: $secondary-font;
+  color: $secondary-text-color;
+
+  .namePriceIcons{
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: left;
+    // text-align: left;
+
+
+
+    h1 {
+      color: $logo-color;
+      font-family: $logo-font;
+      padding-bottom: 3px;
+    }
+  }
+  .photos {
+    // padding: .5rem;
+    max-width: 25%;
+
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .priceAndBuy {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 15%;
+
+    #buy-button {
+      font-family: $logo-font;
+      color: $text-shadow-color;
+      background-color: $logo-color;
+      padding: .25rem .40rem, .35rem .40rem;
+      // padding-top: .25rem;
+      // padding:
+      border: .5px solid $logo-color;
+      border-radius: 3px;
+    }
+  }
+}
