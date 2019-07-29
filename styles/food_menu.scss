@@ -5,7 +5,7 @@ $secondary-font: 'Quicksand', sans-serif;
 $logo-color: #BF2315;
 $text-shadow-color: #FFF5E6;
 $secondary-text-color: #1F1E5E;
-$flare-color: #127334;
+$flare-color: #362A21;
 
 body {
 
@@ -54,7 +54,7 @@ body {
   justify-content: space-between;
   border-style: solid;
   border-radius: 10px;
-  border-color: black;
+  border-color: $flare-color;
   width: 90%;
   // padding-bottom: 1rem;
   margin: auto;
@@ -93,13 +93,15 @@ body {
     justify-content: flex-end;
     max-width: 15%;
 
-    button {
+    #buy-button {
       font-family: $logo-font;
-      background-color: $text-shadow-color;
-      padding: .25rem;
-      border: .5px solid $secondary-text-color;
-      border-radius: 1px;
-      color: $secondary-text-color;
+      color: $text-shadow-color;
+      background-color: $logo-color;
+      padding: .25rem .40rem, .35rem .40rem;
+      // padding-top: .25rem;
+      // padding:
+      border: .5px solid $logo-color;
+      border-radius: 3px;
     }
   }
 }
