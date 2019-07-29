@@ -15,11 +15,10 @@ module.exports = (db, iconsKey) => {
     const order = JSON.parse(req.session.cart);
 
     // Selected food items, based on their IDs
-    const gatheredIds = Object.keys(order);
-    const orderIdsStr = gatheredIds.join(', ');
+    const gatheredIds = Object.keys(order).join(', ');
 
     // Query based on the user's selected food items
-    const queryFoods = `SELECT id, name, price, picture_url FROM foods WHERE id IN (${orderIdsStr})`;
+    const queryFoods = `SELECT id, name, price, picture_url FROM foods WHERE id IN (${gatheredIds})`;
 
     db.query(queryFoods)
       .then(foodData => {
@@ -33,9 +32,9 @@ module.exports = (db, iconsKey) => {
 
           const eachFood = {id, name, count};
           gatheredFoods.push(eachFood);
-        };
+        }
         console.log(gatheredFoods);
-    });
+      });
   });
   router.post("/", (req, res) => {
     console.log("req", req);
