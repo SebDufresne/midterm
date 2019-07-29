@@ -8,17 +8,78 @@
 const express = require('express');
 const router  = express.Router();
 
+const { getUserInfo } = require('../bin/helpers');
+
 module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
+    const userId = req.session.userId || '';
+
     const order = JSON.parse(req.session.cart);
 
-    console.log('In the checkout GET', order);
+    // Selected food items, based on their IDs
+    const gatheredIds = Object.keys(order).join(', ');
 
-    // const params = {user, cart, iconsKey};
-    // res.render("checkout", params);
+    // Query based on the user's selected food items
+    const queryFoods = `SELECT id, name, price, picture_url FROM foods WHERE id IN (${gatheredIds})`;
 
-    res.json({ order });
+    // Empty cart
+    const emptyCart = Object.keys(order).length === 0;
+
+    // User is not logged in
+    if (!userId) {
+      const user = {};
+      user.id = '';
+      res.redirect('/login');
+
+      // User is logged in. Cart is empty.
+    } else if (userId && emptyCart) {
+      getUserInfo(db, userId)
+        .then(usersData => {
+          const user = usersData; // Implies there's ONLY one
+          const params = {user, cart:[], iconsKey};
+          res.render("checkout", params);
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    }
+
+    // User is logged in. Food items were selected.
+    if (userId && !emptyCart) {
+      db.query(queryFoods)
+        .then(foodData => {
+          const foods = foodData.rows;
+          const cart = [];
+
+          for (const foodItem of foods) {
+            const id = foodItem.id;
+            const name = foodItem.name;
+            const price = foodItem.price;
+            const qty = order[foodItem.id];
+
+            const eachFood = {id, name, price, qty};
+            cart.push(eachFood);
+          }
+
+          getUserInfo(db, userId)
+          .then(usersData => {
+            const user = usersData; // Implies there's ONLY one
+            const params = {user, cart, iconsKey};
+            res.render("checkout", params);
+          })
+
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    }
   });
+
+
   router.post("/", (req, res) => {
     console.log("req", req);
     console.log("res", res);
@@ -33,6 +94,3 @@ module.exports = (db, iconsKey) => {
   });
   return router;
 };
-
-
-

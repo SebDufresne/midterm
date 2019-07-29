@@ -11,13 +11,14 @@
           <button type='submit' >Logout</button>
         </div>
         </form>
+        <h1>Top Dogs!</h1>
+        <form method='POST' action='/' data-cart="">
+          <input name="cart" type="hidden" value="">
+          <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
+        </form>
       <% } else { %>
-        <a id="login" href="Login" alt="login">Login</a>
-      <% }%>
-    <h1>Super Dogs!</h1>
-    <form method='POST' action='/' data-cart="">
-      <input name="cart" type="hidden" value="">
-      <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
-    </form>
+        <a href="Login" alt="login">Login</a>
+        <h1>Top Dogs!</h1>
+      <% } %>
   </nav>
 </header>
