@@ -11,6 +11,21 @@ const getUserInfo = function(db, userId) {
     .catch(err => err);
 };
 
+/*
+* Order Object PartialMockup:
+* [
+*  {order_id: 1, ..., food_list: [], ...},
+*  {order_id: 2, ..., food_list: [], ...},
+*  {order_id: 3, ..., food_list: [], ...},
+* ]
+*/
+
+// F1 - Takes an order from DB and restructure it in a nicer way
+
+// F2 - In an "object array", returns index of corresponding food item
+
+// F3 - Create food item object from food Order Object
+
 module.exports = {
   getUserInfo
 };
