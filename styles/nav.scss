@@ -1,16 +1,30 @@
 $header-height: 80px;
-$nav-color: yellow;
+$nav-color: #F2CE16;
+$logo-font: 'Pacifico', cursive;
+$secondary-font: 'Quicksand', sans-serif;
+$logo-color: #BF2315;
+$text-shadow-color: #FFF5E6;
+$secondary-text-color: #1F1E5E;
+
 
 nav {
   display: flex;
   flex-flow: row;
   justify-content: space-around;
   align-items: center;
-
   width: 100%;
-
+  height: auto;
+  font-family: $secondary-font;
   h1 {
     display: inline-block;
+    padding-top: 7px;
+    font-family: $logo-font;
+    color: $logo-color;
+    text-shadow: 1px 1px $text-shadow-color;
+  }
+  span {
+    color: $secondary-text-color;
+    font-weight: 700;
   }
 }
 
