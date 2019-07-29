@@ -83,14 +83,19 @@ module.exports = (db, iconsKey) => {
   router.post("/", (req, res) => {
     console.log("req", req);
     console.log("res", res);
-    const cartURL = req.params.cart;
+    // const cartURL = req.params.cart;
 
-    const cart = JSON.parse(cartURL);
+    console.log("req.body--------------------------------------------------: ", req.body)
+    // console.log("cartURL: ", cartURL);
 
-    const user = '';
-    const params = {user, cart, iconsKey};
+    // const cart = JSON.parse(cartURL);
 
-    res.render("checkout", params);
+    // console.log("Cart within POST:", cart)
+
+    // const user = '';
+    // const params = {user, cart, iconsKey};
+
+    // res.render("checkout", params);
   });
   return router;
 };
