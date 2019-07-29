@@ -5,6 +5,7 @@ $secondary-font: 'Quicksand', sans-serif;
 $logo-color: #BF2315;
 $text-shadow-color: #FFF5E6;
 $secondary-text-color: #1F1E5E;
+$flare-color: #127334;
 
 
 nav {
@@ -52,6 +53,9 @@ header {
   position: fixed;
   width: 100%;
   height: $header-height;
-
   background-color: $nav-color;
+  // border-bottom: 5px $flare-color solid;
+
 }
+
+
