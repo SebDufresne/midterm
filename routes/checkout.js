@@ -8,7 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 
-const { getUserInfo } = require('../bin/helpers');
+const { getUserInfo } = require('../lib/helpers');
 
 module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
