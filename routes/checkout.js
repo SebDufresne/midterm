@@ -23,7 +23,7 @@ module.exports = (db, iconsKey) => {
     db.query(queryFoods)
       .then(foodData => {
         const foods = foodData.rows;
-        const gatheredFoods = [];
+        const cart = [];
 
         for (const foodItem of foods) {
           const id = foodItem.id;
@@ -31,10 +31,14 @@ module.exports = (db, iconsKey) => {
           const count = order[foodItem.id];
 
           const eachFood = {id, name, count};
-          gatheredFoods.push(eachFood);
+          cart.push(eachFood);
         }
-        console.log(gatheredFoods);
+        const params = {user, cart, iconsKey};
+        res.render("checkout", params);
       });
+    console.log('In the checkout GET', order);
+
+    res.json({ order });
   });
   router.post("/", (req, res) => {
     console.log("req", req);

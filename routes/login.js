@@ -36,14 +36,13 @@ module.exports = (db, iconsKey) => {
     if (!formEmail || !formPassword) {
       // User didn't enter both informations
     } else {
-      let query = `SELECT * FROM users WHERE email = '${formEmail}'`;
+      let query = `SELECT id, password FROM users WHERE email = '${formEmail}'`;
       console.log(query);
       db.query(query)
         .then(data => {
           const userData = data.rows[0]; // Imply that only the FIRST returned entry will be stored.
           console.log(userData);
           if (bcrypt.compareSync(formPassword, userData.password)) {
-            console.log("YEAAAHHHH IT MATCHED!!!!");
             req.session.userId = userData.id;
             res.redirect('/');
           } else {
