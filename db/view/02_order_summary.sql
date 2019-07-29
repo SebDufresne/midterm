@@ -1,12 +1,10 @@
-DROP VIEW IF EXISTS order_summary;
-
 CREATE VIEW order_summary AS
   SELECT orders.id AS order_id,
     ordered_at,
     status AS order_status,
     customer_comments,
     foods.name AS food_name,
-    count(food_orders.*) AS food_qty,
+    count(food_orders) AS food_qty,
     foods.picture_url,
     users.name AS customer_name,
     users.email,
