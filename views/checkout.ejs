@@ -18,6 +18,8 @@
   <body>
     <% include ./partials/_header %>
     <main>
+
+      <%= console.log('test') %>
       <% if (cart.length > 0) { %>
         <% for (const food of cart) { %>
         <h1><%= food.name %></h1>
@@ -25,13 +27,14 @@
         <p>Quantity: <%= food.qty %></p>
         <% } %>
         <form method='POST' action='/checkout'>
-          <button type="submit" value="<%= cart %>">Submit</button>
-          <%= console.log("something to send!", cart) %>
+          <input name="cart" type="hidden" value="<%= JSON.stringify(cart) %>">
+          <button type="submit" value="">Submit</button>
+          <!-- <%= console.log("something to send!", cart) %> -->
         </form>
       <% } else { %>
         <p>Your cart is empty!</p>
       <% } %>
-      <%= console.log(cart) %>
+      <!-- <%= console.log(cart) %> -->
     </main>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -81,11 +81,12 @@ module.exports = (db, iconsKey) => {
 
 
   router.post("/", (req, res) => {
-    console.log("req", req);
-    console.log("res", res);
+    // console.log("req", req);
+    // console.log("res", res);
     // const cartURL = req.params.cart;
+    console.log(req.body.cart);
 
-    console.log("req.body--------------------------------------------------: ", req.body)
+    // console.log("req.body--------------------------------------------------: ", req.body)
     // console.log("cartURL: ", cartURL);
 
     // const cart = JSON.parse(cartURL);
