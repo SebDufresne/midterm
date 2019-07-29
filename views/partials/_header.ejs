@@ -6,11 +6,13 @@
       <% if(user.id) { %>
         <!-- User Is Authenticated -->
         <form method='POST' action='/logout' class='form-inline my-2 my-lg-0'>
+          <div>
           <span class='mr-2'><%= user.name %></span>
-          <button type='submit' class='btn btn-outline-dark my-2 my-sm-0'>Logout</button>
+          <button type='submit' >Logout</button>
+        </div>
         </form>
       <% } else { %>
-        <a href="Login" alt="login">Login</a>
+        <a id="login" href="Login" alt="login">Login</a>
       <% }%>
     <h1>Super Dogs!</h1>
     <form method='POST' action='/' data-cart="">

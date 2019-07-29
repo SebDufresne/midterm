@@ -1,10 +1,11 @@
 // See: https://sass-lang.com/
 
 $header-height: 80px;
-$nav-color: yellow;
+$nav-color:#F2CE16;
+$background-color: #FFF5E6;
 
 body {
-  background-color: #EEE;
+  background-color: $background-color;
 
   h1 {
     color: #244751;

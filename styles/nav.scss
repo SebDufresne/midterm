@@ -10,11 +10,12 @@ $secondary-text-color: #1F1E5E;
 nav {
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: auto;
   font-family: $secondary-font;
+
   h1 {
     display: inline-block;
     padding-top: 7px;
@@ -25,6 +26,25 @@ nav {
   span {
     color: $secondary-text-color;
     font-weight: 700;
+  }
+  button {
+    color: $secondary-text-color;
+    background-color: $nav-color;
+    border-style: none;
+    margin-top: 1rem;
+  }
+  #checkout-btn {
+    margin-right: 1.5rem;
+
+  }
+  div {
+    margin-left: 1.5rem;
+  }
+  #login {
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    color: $secondary-text-color;
+
   }
 }
 
