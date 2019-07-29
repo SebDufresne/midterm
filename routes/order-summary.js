@@ -1,5 +1,5 @@
 /*
- * All routes for Users are defined here
+ * All routes for Oder-Summary are defined here
  * Since this file is loaded in server.js into api/users,
  *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
@@ -15,8 +15,17 @@ module.exports = (db, iconsKey) => {
     const orderSummQuery = `SELECT * FROM order_summary;`;
     db.query(orderSummQuery)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const orderData = data.rows;
+
+        const orderSummary = [];
+
+        orderData.forEach((e) => {
+            const order_id = e.order_id;
+            const ordered_at = e.ordered_at;
+            const newOrder = {order_id, ordered_at};
+            orderSummary.push(newOrder);
+        });
+        res.json({ orderSummary });
       })
       .catch(err => {
         res
