@@ -26,6 +26,13 @@ const getUserInfo = function(db, userId) {
 
 // F3 - Create food item object from food Order Object
 
+
+// Just for test chai & Mocha installation (TO BE REMOVED)
+const aTest = () => {
+  return 'aTest';
+};
+
 module.exports = {
+  aTest,
   getUserInfo
 };
