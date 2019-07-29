@@ -14,6 +14,9 @@ module.exports = (db, iconsKey) => {
 
     const order = JSON.parse(req.session.cart);
 
+    console.log('In the checkout GET', order);
+    res.json({ order });
+
     // Selected food items, based on their IDs
     const gatheredIds = Object.keys(order).join(', ');
 
@@ -33,13 +36,37 @@ module.exports = (db, iconsKey) => {
           const eachFood = {id, name, count};
           cart.push(eachFood);
         }
-        const params = {user, cart, iconsKey};
-        res.render("checkout", params);
-      });
-    console.log('In the checkout GET', order);
 
-    res.json({ order });
+        if (userId) {
+          getUserInfo(db, userId)
+            .then(usersData => {
+              const user = usersData; // Implies there's ONLY one
+              const params = {user, cart, iconsKey};
+              res.render("checkout", params);
+
+            })
+            .catch(err => {
+              res
+                .status(500)
+                .json({ error: err.message });
+            });
+        } else {
+          const user = {};
+          user.id = '';
+          const params = {user, cart, iconsKey};
+          res.render("checkout", params);
+        }
+      })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   });
+
+
+
+
   router.post("/", (req, res) => {
     console.log("req", req);
     console.log("res", res);
