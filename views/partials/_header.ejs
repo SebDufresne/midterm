@@ -8,13 +8,14 @@
           <span class='mr-2'><%= user.name %></span>
           <button type='submit' class='btn btn-outline-dark my-2 my-sm-0'>Logout</button>
         </form>
+        <h1>SUPER DOGS!</h1>
+        <form method='POST' action='/' data-cart="">
+          <input name="cart" type="hidden" value="">
+          <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
+        </form>
       <% } else { %>
         <a href="Login" alt="login">Login</a>
+        <h1>SUPER DOGS!</h1>
       <% }%>
-    <h1>SUPER DOGS!</h1>
-    <form method='POST' action='/' data-cart="">
-      <input name="cart" type="hidden" value="">
-      <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
-    </form>
   </nav>
 </header>
