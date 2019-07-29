@@ -8,6 +8,6 @@ VALUES
 ('Harlo', 'bacon, cheese, mustard, relish',799,'src/images/foods/dog_harlo.jpg',FALSE,FALSE,FALSE),
 ('A-Bomb', 'cheese, bacon, mayo, mustard, ketchup, potato chips',799,'src/images/foods/dog_abomb.jpg',TRUE,FALSE,FALSE),
 ('Sumo', 'Japanese mayo, wasabi, pickled ginger, lightly toasted sesame seeds, seaweed salad',799,'src/images/foods/dog_sumo.jpg',FALSE,FALSE,FALSE),
-('Slaw Dog', 'coleslaw, jpmemade chili, mustard, cheese, pickles',799,'src/images/foods/dog_slawdog.jpg',FALSE,FALSE,FALSE),
+('Slaw Dog', 'coleslaw, homemade chili, mustard, cheese, pickles',799,'src/images/foods/dog_slawdog.jpg',FALSE,FALSE,FALSE),
 ('PBJ', 'peanut butter & jelly',799,'src/images/foods/dog_pbj.jpg',FALSE,TRUE,FALSE),
 ('Sherm''s Ultimate Gripper', 'dog is bacon wrapped then deep-fried! topped with ham, homemade chili, cheese, mustard, bacon, hot peppers, onions, and a friend egg',799,'src/images/foods/dog_gripper.jpg',FALSE,FALSE,FALSE);
