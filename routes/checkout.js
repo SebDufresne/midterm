@@ -10,11 +10,32 @@ const router  = express.Router();
 
 module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
+    const userId = req.session.userId || '';
+
     const order = JSON.parse(req.session.cart);
 
-    const params = {user, cart, iconsKey};
-    res.render("checkout", params);
+    // Selected food items, based on their IDs
+    const gatheredIds = Object.keys(order);
+    const orderIdsStr = gatheredIds.join(', ');
 
+    // Query based on the user's selected food items
+    const queryFoods = `SELECT id, name, price, picture_url FROM foods WHERE id IN (${orderIdsStr})`;
+
+    db.query(queryFoods)
+      .then(foodData => {
+        const foods = foodData.rows;
+        const gatheredFoods = [];
+
+        for (const foodItem of foods) {
+          const id = foodItem.id;
+          const name = foodItem.name;
+          const count = order[foodItem.id];
+
+          const eachFood = {id, name, count};
+          gatheredFoods.push(eachFood);
+        };
+        console.log(gatheredFoods);
+    });
   });
   router.post("/", (req, res) => {
     console.log("req", req);
@@ -30,6 +51,3 @@ module.exports = (db, iconsKey) => {
   });
   return router;
 };
-
-
-
