@@ -8,9 +8,12 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    const userId = req.session.userId || '';
+
+    const orderSummQuery = `SELECT * FROM order_summary;`;
+    db.query(orderSummQuery)
       .then(data => {
         const users = data.rows;
         res.json({ users });
