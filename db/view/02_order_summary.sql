@@ -3,6 +3,7 @@ CREATE VIEW order_summary AS
     ordered_at,
     status AS order_status,
     customer_comments,
+    foods.id AS food_id,
     foods.name AS food_name,
     count(food_orders) AS food_qty,
     foods.picture_url,

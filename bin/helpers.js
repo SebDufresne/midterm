@@ -32,7 +32,16 @@ const aTest = () => {
   return 'aTest';
 };
 
+const extractFoodObj = order => {
+  if (order) {
+    const {food_id, food_name, food_qty, picture_url} = order;
+    const food = {food_id, food_name, food_qty, picture_url};
+    return food;
+  }
+  return {};
+};
+
 module.exports = {
-  aTest,
+  extractFoodObj,
   getUserInfo
 };

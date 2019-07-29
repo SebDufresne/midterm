@@ -17,6 +17,9 @@ module.exports = (db, iconsKey) => {
       .then(data => {
         const orderData = data.rows;
 
+
+        res.json({ orderData });
+
         const orderSummary = [];
 
         orderData.forEach((e) => {
