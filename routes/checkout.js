@@ -31,9 +31,10 @@ module.exports = (db, iconsKey) => {
         for (const foodItem of foods) {
           const id = foodItem.id;
           const name = foodItem.name;
-          const count = order[foodItem.id];
+          const price = foodItem.price;
+          const qty = order[foodItem.id];
 
-          const eachFood = {id, name, count};
+          const eachFood = {id, name, price, qty};
           cart.push(eachFood);
         }
 
