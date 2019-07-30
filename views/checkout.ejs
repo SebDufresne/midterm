@@ -1,54 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/checkout.css" type="text/css" />
+<head>
+  <title>Home Page</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/checkout.css" type="text/css" />
 
-    <!-- Font Awesome External JS-->
-    <script src="https://kit.fontawesome.com/<%= iconsKey %>.js"></script>
-  </head>
+  <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
 
-  <body>
-    <% include ./partials/_header %>
-    <main>
+  <!-- Font Awesome External JS-->
+  <script src="https://kit.fontawesome.com/<%= iconsKey %>.js"></script>
+</head>
 
-      <% if (cart.length > 0) { %>
-        <h1>Order Summary</h1>
-        <table>
-          <tr>
+<body>
+  <% include ./partials/_header %>
+  <main>
+
+    <% if (cart.length > 0) { %>
+    <div class="order-summary-containter">
+      <form method='POST' action='/checkout'>
+      <h1>Order Summary</h1>
+      <table>
+        <tr>
+          <th class="qnty">qty</th>
           <th>item</th>
-          <th>qty</th>
           <th>price</th>
         </tr>
         <!-- </table> -->
-          <% for (const food of cart) { %>
-            <!-- <table> -->
-              <tr>
-        <td><%= food.name %></td>
-        <td><%= food.qty %></td>
-        <td><%= food.price * food.qty /100 %></td>
-      </tr>
+        <% let total = 0 %>
+        <% for (const food of cart) { %>
+        <!-- <table> -->
+        <tr>
+          <td><%= food.qty %></td>
+          <td><%= food.name %></td>
+          <td><%= (food.price * food.qty /100).toFixed(2) %></td>
+        </tr>
+        <% total += food.price * food.qty %>
         <% } %>
-        <form method='POST' action='/checkout'>
+        <tr>
+            <td></td>
+            <td class="subtotal">subtotal</td>
+            <td><%= (total/100).toFixed(2) %></td>
+
+          </tr>
+        <tr>
+          <td></td>
+          <td class="tax">tax</td>
+          <% let tax = (total /100 * 0.15).toFixed(2) %>
+          <td><%= tax %></td>
+
+        </tr>
+        <tr>
+          <td></td>
+          <td class="total">total</td>
+          <td><%= (total * 1.15 /100).toFixed(2) %></td>
+        </tr>
           <input name="cart" type="hidden" value="<%= JSON.stringify(cart) %>">
-        </table>
-        <button type="submit" value="">Submit</button>
-          <!-- <%= console.log("something to send!", cart) %> -->
-        </form>
-      <% } else { %>
-        <p>Your cart is empty!</p>
-      <% } %>
-      <!-- <%= console.log(cart) %> -->
-    </main>
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      </table>
+      <button type="submit" value="">Submit</button>
+      <!-- <%= console.log("something to send!", cart) %> -->
+      </form>
+    </div>
+    <% } else { %>
+    <p>Your cart is empty!</p>
+    <% } %>
+    <!-- <%= console.log(cart) %> -->
+  </main>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </html>
