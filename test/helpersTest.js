@@ -1,5 +1,4 @@
-const assert = require('chai').assert;
-const expect = require('chai').expect;
+const { assert, expect } = require('chai');
 const { extractCustomerObj, extractFoodObj, findOrderIndex, refactorOrder} = require('../lib/helpers');
 
 describe('#extractCustomerObj', function() {
