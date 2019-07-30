@@ -7,6 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
+const { sms } = require('../public/scripts/sms');
 
 const { getUserInfo } = require('../lib/helpers');
 
@@ -86,16 +87,11 @@ module.exports = (db, iconsKey) => {
     // const cartURL = req.params.cart;
 
 
-
-
     console.log(req.body.cart);
+    sms('', 'A new Tub Dogs order has been placed.');
 
 
-
-
-
-
-    // console.log("req.body--------------------------------------------------: ", req.body)
+    // console.log("req.body: ", req.body)
     // console.log("cartURL: ", cartURL);
 
     // const cart = JSON.parse(cartURL);
