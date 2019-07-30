@@ -1,12 +1,3 @@
-$header-height: 80px;
-$nav-color: #F2CE16;
-$logo-font: 'Pacifico', cursive;
-$secondary-font: 'Quicksand', sans-serif;
-$logo-color: #BF2315;
-$text-shadow-color: #FFF5E6;
-$secondary-text-color: #1F1E5E;
-$flare-color: #362A21;
-
 body {
 
   main {
@@ -15,7 +6,7 @@ body {
     justify-content: center;
 
     // h1 {
-    //   color: $secondary-text-color;
+    //   color: $color-dark-blue;
     //   font-family: $logo-font;
     //   margin-left: 5rem;
     //   padding-bottom: 1rem;
@@ -31,7 +22,7 @@ body {
   justify-content: flex-start;
   align-items: baseline;
 
-  color: $secondary-text-color;
+  color: $color-dark-blue;
   font-family: $logo-font;
   margin-left: 5rem;
   padding: 1rem;
@@ -46,7 +37,7 @@ body {
     }
   }
   h1 {
-    color: $secondary-text-color;
+    color: $color-dark-blue;
       font-family: $logo-font;
       margin-left: 5rem;
       padding-bottom: 1rem;
@@ -59,14 +50,14 @@ body {
   justify-content: space-between;
   border-style: solid;
   border-radius: 10px;
-  border-color: $flare-color;
+  border-color: $color-dark;
   width: 90%;
   // padding-bottom: 1rem;
   margin: auto;
   margin-bottom: 1rem;
   padding: .5rem;
   font-family: $secondary-font;
-  color: $secondary-text-color;
+  color: $color-dark-blue;
 
   .namePriceIcons{
     max-width: 60%;
@@ -79,7 +70,7 @@ body {
 
 
     h1 {
-      color: $logo-color;
+      color: $color-red;
       font-family: $logo-font;
       padding-bottom: 3px;
     }
@@ -101,12 +92,12 @@ body {
 
     #buy-button {
       font-family: $logo-font;
-      color: $nav-color;
-      background-color: $logo-color;
+      color: $color-yellow;
+      background-color: $color-red;
       padding: .25rem .40rem, .35rem .40rem;
       // padding-top: .25rem;
       // padding:
-      border: .5px solid $logo-color;
+      border: .5px solid $color-red;
       border-radius: 10px;
     }
   }

@@ -1,0 +1,51 @@
+header {
+  position: fixed;
+  width: 100%;
+  height: $nav-height;
+  // background-color: $color-yellow; // Seb
+  // border-bottom: 5px $color-dark solid;
+}
+
+nav {
+  display: flex;
+  flex-flow: row;
+  // justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  font-family: $secondary-font;
+  background-color: $color-yellow;
+
+  h1 {
+    // display: inline-block;
+    align-content: center; // Added to replace space-between approach (trial) // Seb
+    display: inline-block;
+    padding-top: 7px;
+    font-family: $logo-font;
+    color: $color-red;
+    text-shadow: 1px 1px $color-off-white;
+  }
+  span {
+    color: $color-dark-blue;
+    font-weight: 700;
+  }
+  button {
+    color: $color-dark-blue;
+    background-color: $color-yellow;
+    border-style: none;
+    margin-top: 1rem;
+  }
+  #checkout-btn {
+    margin-right: 1.5rem;
+
+  }
+  div {
+    margin-left: 1.5rem;
+  }
+  #login {
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    color: $color-dark-blue;
+
+  }
+}

@@ -1,7 +1,7 @@
 // See: https://sass-lang.com/
 
-$header-height: 80px;
-$nav-color:#F2CE16;
+$nav-height: 80px;
+$color-yellow:#F2CE16;
 $background-color: #FFF5E6;
 
 body {
@@ -17,6 +17,5 @@ body {
 }
 
 main {
-  padding-top: $header-height;
+  padding-top: $nav-height;
 }
-
