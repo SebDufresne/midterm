@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: baseline;
 
   color: $secondary-text-color;
   font-family: $logo-font;
@@ -101,13 +101,13 @@ body {
 
     #buy-button {
       font-family: $logo-font;
-      color: $text-shadow-color;
+      color: $nav-color;
       background-color: $logo-color;
       padding: .25rem .40rem, .35rem .40rem;
       // padding-top: .25rem;
       // padding:
       border: .5px solid $logo-color;
-      border-radius: 3px;
+      border-radius: 10px;
     }
   }
 }
