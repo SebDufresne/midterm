@@ -7,6 +7,7 @@ CREATE VIEW order_summary AS
     foods.name AS food_name,
     count(food_orders) AS food_qty,
     foods.picture_url,
+    users.id AS user_id,
     users.name AS customer_name,
     users.email,
     users.phone_number

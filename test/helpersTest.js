@@ -20,11 +20,13 @@ describe('#extractCustomerObj', function() {
       food_name: "Tubby Dog",
       food_qty: "1",
       picture_url: "src/images/foods/dog_tubbydog.jpg",
+      user_id: 4,
       customer_name: "robin",
       email: "robin@test.com",
       phone_number: "514-555-5555"
     };
     const output =   {
+      user_id: 4,
       customer_name: "robin",
       email: "robin@test.com",
       phone_number: "514-555-5555"
@@ -112,6 +114,7 @@ describe('#refactorOrder', function() {
         food_name: "Yogi Bear",
         food_qty: "1",
         picture_url: "src/images/foods/dog_yogi.jpg",
+        user_id: 3,
         customer_name: "jess",
         email: "jess@test.com",
         phone_number: "514-555-5555"
@@ -125,6 +128,7 @@ describe('#refactorOrder', function() {
         food_name: "Harlo",
         food_qty: "3",
         picture_url: "src/images/foods/dog_harlo.jpg",
+        user_id: 3,
         customer_name: "jess",
         email: "jess@test.com",
         phone_number: "514-555-5555"
@@ -138,6 +142,7 @@ describe('#refactorOrder', function() {
         food_name: "Tubby Dog",
         food_qty: "1",
         picture_url: "src/images/foods/dog_tubbydog.jpg",
+        user_id: 7,
         customer_name: "robin",
         email: "robin@test.com",
         phone_number: "514-555-5555"
@@ -151,6 +156,7 @@ describe('#refactorOrder', function() {
         food_name: "Yogi Bear",
         food_qty: "3",
         picture_url: "src/images/foods/dog_yogi.jpg",
+        user_id: 7,
         customer_name: "robin",
         email: "robin@test.com",
         phone_number: "514-555-5555"
@@ -175,6 +181,7 @@ describe('#refactorOrder', function() {
           picture_url: "src/images/foods/dog_harlo.jpg",
         }],
         user: {
+          user_id: 3,
           customer_name: "jess",
           email: "jess@test.com",
           phone_number: "514-555-5555"
@@ -197,6 +204,7 @@ describe('#refactorOrder', function() {
           picture_url: "src/images/foods/dog_yogi.jpg",
         }],
         user: {
+          user_id: 7,
           customer_name: "robin",
           email: "robin@test.com",
           phone_number: "514-555-5555"

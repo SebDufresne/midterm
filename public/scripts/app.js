@@ -21,7 +21,8 @@ $(() => {
     }
 
     const newCartStr = JSON.stringify(cartObj);
-    console.log(newCartStr);
+
+    console.log('newCartStr', newCartStr); // Seb
 
     $cartField.val(newCartStr);
   });

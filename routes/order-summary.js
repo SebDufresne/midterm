@@ -8,6 +8,8 @@
 const express = require('express');
 const router  = express.Router();
 
+const { refactorOrder } = require('../lib/helpers');
+
 module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId || '';
@@ -17,18 +19,14 @@ module.exports = (db, iconsKey) => {
       .then(data => {
         const orderData = data.rows;
 
+        const structuredOrders = refactorOrder(orderData);
 
-        res.json({ orderData });
-
-        const orderSummary = [];
-
-        orderData.forEach((e) => {
-          const order_id = e.order_id;
-          const ordered_at = e.ordered_at;
-          const newOrder = {order_id, ordered_at};
-          orderSummary.push(newOrder);
-        });
-        res.json({ orderSummary });
+        const user = {};
+        if (!userId) {
+          user.id = '';
+        }
+        const params = {user, structuredOrders, iconsKey};
+        res.render("order-summary", params);
       })
       .catch(err => {
         res
