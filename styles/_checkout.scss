@@ -32,6 +32,10 @@ table, tr, td {
 }
 }
 
+.centered-handwriting {
+  text-align: center;
+}
+
 div.order-summary-containter {
   form {
     width: 65%;
@@ -71,5 +75,9 @@ div.order-summary-containter {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start;
+}
+
+.empty-cart {
+  width: 100%;
 }
 

@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
 
 
-    <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap" rel="stylesheet"> -->
 
   <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -28,7 +28,7 @@
     <% if (cart.length > 0) { %>
     <div class="order-summary-containter">
       <form method='POST' action='/checkout'>
-        <h1>Order Summary</h1>
+        <h1>Cart</h1>
         <table>
           <tr>
             <th class="table-heads" id="qnty">qty</th>
@@ -40,9 +40,9 @@
           <% for (const food of cart) { %>
           <!-- <table> -->
           <tr>
-            <td><%= food.qty %></td>
+            <td class="centered-handwriting"><%= food.qty %></td>
             <td><%= food.name %></td>
-            <td><%= (food.price * food.qty /100).toFixed(2) %></td>
+            <td class="centered-handwriting"><%= (food.price * food.qty /100).toFixed(2) %></td>
           </tr>
           <% total += food.price * food.qty %>
           <% } %>
@@ -54,20 +54,20 @@
           <tr>
             <td></td>
             <td class="subtotal">subtotal</td>
-            <td><%= (total/100).toFixed(2) %></td>
+            <td class="centered-handwriting"><%= (total/100).toFixed(2) %></td>
 
           </tr>
           <tr>
             <td></td>
             <td class="tax">tax</td>
             <% let tax = (total /100 * 0.15).toFixed(2) %>
-            <td><%= tax %></td>
+            <td class="centered-handwriting"><%= tax %></td>
 
           </tr>
           <tr>
             <td></td>
             <td class="total">total</td>
-            <td><%= (total * 1.15 /100).toFixed(2) %></td>
+            <td class="centered-handwriting"><%= (total * 1.15 /100).toFixed(2) %></td>
           </tr>
           <input name="cart" type="hidden" value="<%= JSON.stringify(cart) %>">
         </table>
@@ -78,12 +78,18 @@
       </form>
     </div>
     <% } else { %>
-    <p>Your cart is empty!</p>
+    <div class="empty-cart">
+      <p>Your cart is empty!</p>
+      <img class="crying-dog" src='src/images/misc/crying_hotdog.png'>
+    </div>
     <% } %>
     <!-- <%= console.log(cart) %> -->
   </main>
   <% include ./partials/_footer %>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </html>
