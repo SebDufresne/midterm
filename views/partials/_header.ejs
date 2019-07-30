@@ -3,23 +3,27 @@
 
 <header>
   <nav>
-      <% if(user.id) { %>
-        <!-- User Is Authenticated -->
-        <form method='POST' action='/logout' class='form-inline my-2 my-lg-0'>
-          <div>
+    <% if(user.id) { %>
+      <!-- User Is Authenticated -->
+      <form method='POST' action='/logout' class='form-inline my-2 my-lg-0'>
+        <div>
           <span class='mr-2'><%= user.name %></span>
           <button type='submit' >Logout</button>
         </div>
-        </form>
-        <h1>Top Dogs!</h1>
+      </form>
+    <% } else { %>
+      <a id="login" href="Login" alt="login">Login</a>
+    <% } %>
+
+    <h1>Top Dogs!</h1>
+
+    <div>
+      <% if(user.id && !user.admin) { %>
         <form method='POST' action='/' data-cart="">
           <input id="cart" name="cart" type="hidden" value="">
           <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
         </form>
-      <% } else { %>
-        <a id="login" href="Login" alt="login">Login</a>
-        <h1>Top Dogs!</h1>
-        <div></div>
       <% } %>
+    </div>
   </nav>
 </header>
