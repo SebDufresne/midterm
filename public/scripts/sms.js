@@ -7,11 +7,11 @@ const sendSMS = function(phone, message, PHONE_TWILIO = process.env.PHONE_TWILIO
 
   client.messages
     .create({
-       body: message,
-       from: PHONE_TWILIO,
-       to: phone
-     })
+      body: message,
+      from: PHONE_TWILIO,
+      to: phone
+    })
     .then(message => console.log(message.sid));
-}
+};
 
 module.exports = { sendSMS };
