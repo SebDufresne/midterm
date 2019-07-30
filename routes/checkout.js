@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const { sms } = require('../public/scripts/sms');
+const { sendSMS } = require('../public/scripts/sms');
 
 const { getUserInfo } = require('../lib/helpers');
 
