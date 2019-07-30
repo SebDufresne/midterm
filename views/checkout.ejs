@@ -22,14 +22,20 @@
 
       <% if (cart.length > 0) { %>
         <h1>Order Summary</h1>
-        <tr>item</tr>
-        <tr>qty</tr>
-        <tr>price</tr>
-        <% for (const food of cart) { %>
-          <table>
+        <table>
+          <tr>
+          <th>item</th>
+          <th>qty</th>
+          <th>price</th>
+        </tr>
+        <!-- </table> -->
+          <% for (const food of cart) { %>
+            <!-- <table> -->
+              <tr>
         <td><%= food.name %></td>
         <td><%= food.qty %></td>
-        <td><%= food.price /100 %></td>
+        <td><%= food.price * food.qty /100 %></td>
+      </tr>
         <% } %>
         <form method='POST' action='/checkout'>
           <input name="cart" type="hidden" value="<%= JSON.stringify(cart) %>">

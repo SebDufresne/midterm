@@ -7,7 +7,7 @@ $text-shadow-color: #FFF5E6;
 $secondary-text-color: #1F1E5E;
 $flare-color: #362A21;
 
-table {
+table, tr, td {
   width: 60%;
   border: 1px solid $flare-color;
 };
