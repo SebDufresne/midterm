@@ -1,58 +1,57 @@
+// Returns a cart string, based on the current foodId and cart value
+const addFoodToCart = (foodId, cartValueAsString) => {
+  const cartObj = cartValueAsString ?
+    JSON.parse(cartValueAsString) :
+    {};
+
+  if (cartObj[foodId]) {
+    cartObj[foodId] += 1;
+  } else {
+    cartObj[foodId] = 1;
+  }
+
+  cartValueAsString = JSON.stringify(cartObj);
+
+  return cartValueAsString;
+};
+
+// Price is like 0.00$, let's change it to a number:
+const priceStringToNumber = priceAsString => {
+  return Number(priceAsString.replace(/[.$\s]/g, ''));
+};
+
+// Takes current total and adds food item price to it
+const updatePrice = (foodPrice, currentTotal) => {
+  currentTotal = priceStringToNumber(currentTotal);
+
+  if (currentTotal) { // If it's not a number, will return NaN which is false
+    currentTotal += foodPrice;
+  } else {
+    currentTotal = foodPrice;
+  }
+
+  return (currentTotal / 100).toFixed(2) + '$';
+};
+
 $(() => {
 
+  // Handles events related to "Dog-Me button on the index
   $(".add-food-btn").click(function() {
+    // Updates Cart Input Value
     const foodId = $(this).val();
+    const $cartField = $("#cart");
+    const cartValue = $cartField.val();
 
-    let priceStr = $(this).closest("div").find(".price").text();
-    const $cartField = $("input[name='cart']");
+    $cartField.val(addFoodToCart(foodId,cartValue));
 
-    const cartStr = $cartField.val();
+    // Updates current total
+    const priceAsString = $(this).closest("div").find(".price").text();
+    const $priceField = $("nav>h1");
+    const currentTotal = $priceField.text();
 
-    let cartObj;
-    if (cartStr) {
-      cartObj = JSON.parse(cartStr);
-    } else {
-      cartObj = {};
-    }
+    const foodPrice = priceStringToNumber(priceAsString);
 
-    if (!cartObj[foodId]) {
-      cartObj[foodId] = 1;
-    } else {
-      cartObj[foodId] += 1;
-    }
-
-    const newCartStr = JSON.stringify(cartObj);
-
-    console.log('newCartStr', newCartStr); // Seb
-
-
-    // Price is like 0.00$, let's change it to a number:
-    priceStr = priceStr.replace(/[.$]/g, '');
-    const price = Number(priceStr);
-
-    console.log('price', priceStr); // Seb
-
-
-    $cartField.val(newCartStr);
-
-    const $headerField = $("nav>h1");
-
-    let headerValue = $headerField.text();
-
-    headerValue = headerValue.replace(/[.$]/g, '');
-
-    if (Number(headerValue)) { // If it's not a number, will return NaN which is false
-      headerValue = Number(headerValue);
-      headerValue += price;
-    } else {
-      headerValue = price;
-    }
-
-    headerValue = (headerValue / 100).toFixed(2) + '$';
-
-
-
-    $headerField.text(headerValue);
-
+    $priceField.text(updatePrice(foodPrice, currentTotal));
   });
+
 });
