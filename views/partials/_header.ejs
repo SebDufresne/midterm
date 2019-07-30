@@ -5,49 +5,48 @@
   <nav  class="navbar navbar-light light-blue lighten-4">
     <!-- User Is Authenticated -->
     <% if(user.id) { %>
-
-
-  <!-- Collapse button -->
-  <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
-    aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="dark-blue-text">
-      <i class="fas fa-hotdog fa-1x"></i>
-    </span>
-  </button>
-  <h1>Top Dogs!</h1>
-
-  <div>
-    <!-- User Is Authenticated AND is NOT an admin-->
-    <% if(user.id && !user.admin) { %>
-      <form method='POST' action='/' data-cart="">
-        <input id="cart" name="cart" type="hidden" value="">
-        <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
-      </form>
-    <% } %>
-  </div>
-  <!-- Collapsible content -->
-  <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <span class='mr-2'><%= user.name %></span>
-      </li>
-      <li class="nav-item">
-        <form method='POST' action='/logout' class='form-inline my-2 my-lg-0'>
-          <button type='submit' >Logout</button>
-      </form>
-      </li>
-    </ul>
-    <!-- Links -->
-
-  </div>
-  <!-- Collapsible content -->
-
-  <% } else { %>
+      <!-- Collapse button -->
+      <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+        aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="dark-blue-text">
+          <i class="fas fa-hotdog fa-1x"></i>
+        </span>
+      </button>
+    <% } else { %>
       <a id="login" href="Login" alt="login">Login</a>
     <% } %>
 
+    <h1>Top Dogs!</h1>
 
+    <div>
+      <!-- User Is Authenticated AND is NOT an admin-->
+      <% if(user.id && !user.admin) { %>
+        <form method='POST' action='/' data-cart="">
+          <input id="cart" name="cart" type="hidden" value="">
+          <button type="submit" id="checkout-btn"><i class="fas fa-shopping-cart"></i></button>
+        </form>
+      <% } %>
+    </div>
+
+    <% if(user.id) { %>
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <span class='mr-2'><%= user.name %></span>
+          </li>
+          <li class="nav-item">
+            <form method='POST' action='/logout' class='form-inline my-2 my-lg-0'>
+              <button type='submit' >Logout</button>
+            </form>
+          </li>
+        </ul>
+        <!-- Links -->
+
+      </div>
+      <!-- Collapsible content -->
+    <% } %>
   </nav>
 </header>
