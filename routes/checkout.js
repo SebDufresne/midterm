@@ -88,7 +88,7 @@ module.exports = (db, iconsKey) => {
 
 
     console.log(req.body.cart);
-    sms('', 'A new Tub Dogs order has been placed.');
+    sendSMS('', 'A new Tub Dogs order has been placed.');
 
 
     // console.log("req.body: ", req.body)
