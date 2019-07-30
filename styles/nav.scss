@@ -16,6 +16,7 @@ nav {
   width: 100%;
   height: auto;
   font-family: $secondary-font;
+  background-color: $nav-color;
 
   h1 {
     // display: inline-block;
@@ -53,7 +54,7 @@ header {
   position: fixed;
   width: 100%;
   height: $header-height;
-  background-color: $nav-color;
+  // background-color: $nav-color; // Seb
   // border-bottom: 5px $flare-color solid;
 
 }
