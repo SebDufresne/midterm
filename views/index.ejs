@@ -34,31 +34,31 @@
       <div class="food-item">
 
         <div class="photos">
-        <img src="<%= foods[food].picture_url %>" alt="">
+          <img src="<%= foods[food].picture_url %>" alt="">
         </div>
 
         <div class="namePriceIcons">
-        <h1><%= foods[food].name %></h1>
-        <p class="description"><%= foods[food].description %></p>
-        <div class="dietary-restrictions">
-          <% if(foods[food].vegan) { %></li>
-            <i class="fas fa-carrot"></i>
+          <h1><%= foods[food].name %></h1>
+          <p class="description"><%= foods[food].description %></p>
+          <div class="dietary-restrictions">
+            <% if(foods[food].vegan) { %></li>
+              <i class="fas fa-carrot"></i>
             <% } %>
 
             <% if(foods[food].vegetarian) { %></li>
               <i class="fas fa-seedling"></i>
-              <% } %>
+            <% } %>
 
-              <% if(foods[food].gluten_free) { %></li>
-                <i class="fas fa-bread-slice"></i>
-                <% } %>
-              </div>
-            </div>
+            <% if(foods[food].gluten_free) { %></li>
+              <i class="fas fa-bread-slice"></i>
+            <% } %>
+          </div>
+        </div>
 
-          <div class="priceAndBuy">
-        <p class="price"><%= foods[food].price /100 %>$</p>
-        <button id="buy-button" type="submit" value="<%= foods[food].id %>" class="add-food-btn">Dog-me!</button>
-      </div>
+        <div class="priceAndBuy">
+          <p class="price"><%= foods[food].price /100 %>$</p>
+          <button id="buy-button" type="submit" value="<%= foods[food].id %>" class="add-food-btn">Dog-me!</button>
+        </div>
 
       </div>
       <% } %>
