@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/checkout.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -18,15 +19,22 @@
   <body>
     <% include ./partials/_header %>
     <main>
+
       <% if (cart.length > 0) { %>
+        <h1>Order Summary</h1>
+        <tr>item</tr>
+        <tr>qty</tr>
+        <tr>price</tr>
         <% for (const food of cart) { %>
-        <h1><%= food.name %></h1>
-        <p>Price: <%= food.price %></p>
-        <p>Quantity: <%= food.qty %></p>
+          <table>
+        <td><%= food.name %></td>
+        <td><%= food.qty %></td>
+        <td><%= food.price /100 %></td>
         <% } %>
         <form method='POST' action='/checkout'>
           <input name="cart" type="hidden" value="<%= JSON.stringify(cart) %>">
-          <button type="submit" value="">Submit</button>
+        </table>
+        <button type="submit" value="">Submit</button>
           <!-- <%= console.log("something to send!", cart) %> -->
         </form>
       <% } else { %>
