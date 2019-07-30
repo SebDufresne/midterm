@@ -10,6 +10,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/checkout.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap" rel="stylesheet">
 
   <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -25,46 +26,53 @@
     <% if (cart.length > 0) { %>
     <div class="order-summary-containter">
       <form method='POST' action='/checkout'>
-      <h1>Order Summary</h1>
-      <table>
-        <tr>
-          <th class="qnty">qty</th>
-          <th>item</th>
-          <th>price</th>
-        </tr>
-        <!-- </table> -->
-        <% let total = 0 %>
-        <% for (const food of cart) { %>
-        <!-- <table> -->
-        <tr>
-          <td><%= food.qty %></td>
-          <td><%= food.name %></td>
-          <td><%= (food.price * food.qty /100).toFixed(2) %></td>
-        </tr>
-        <% total += food.price * food.qty %>
-        <% } %>
-        <tr>
+        <h1>Order Summary</h1>
+        <table>
+          <tr>
+            <th class="table-heads" id="qnty">qty</th>
+            <th class="table-heads">item</th>
+            <th class="table-heads">price</th>
+          </tr>
+          <!-- </table> -->
+          <% let total = 0 %>
+          <% for (const food of cart) { %>
+          <!-- <table> -->
+          <tr>
+            <td><%= food.qty %></td>
+            <td><%= food.name %></td>
+            <td><%= (food.price * food.qty /100).toFixed(2) %></td>
+          </tr>
+          <% total += food.price * food.qty %>
+          <% } %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
             <td></td>
             <td class="subtotal">subtotal</td>
             <td><%= (total/100).toFixed(2) %></td>
 
           </tr>
-        <tr>
-          <td></td>
-          <td class="tax">tax</td>
-          <% let tax = (total /100 * 0.15).toFixed(2) %>
-          <td><%= tax %></td>
+          <tr>
+            <td></td>
+            <td class="tax">tax</td>
+            <% let tax = (total /100 * 0.15).toFixed(2) %>
+            <td><%= tax %></td>
 
-        </tr>
-        <tr>
-          <td></td>
-          <td class="total">total</td>
-          <td><%= (total * 1.15 /100).toFixed(2) %></td>
-        </tr>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="total">total</td>
+            <td><%= (total * 1.15 /100).toFixed(2) %></td>
+          </tr>
           <input name="cart" type="hidden" value="<%= JSON.stringify(cart) %>">
-      </table>
-      <button type="submit" value="">Submit</button>
-      <!-- <%= console.log("something to send!", cart) %> -->
+        </table>
+        <div id="button-box">
+          <button type="submit" value="">Confirm</button>
+        </div>
+        <!-- <%= console.log("something to send!", cart) %> -->
       </form>
     </div>
     <% } else { %>

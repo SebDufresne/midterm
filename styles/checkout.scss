@@ -6,31 +6,63 @@ $logo-color: #BF2315;
 $text-shadow-color: #FFF5E6;
 $secondary-text-color: #1F1E5E;
 $flare-color: #362A21;
+$table-color: #FFEBCD;
+$table-border-color: #0F114C;
 
 
 .order-summary-containter {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  font-family: $logo-font;
+  color: $secondary-text-color;
+}
 .qnty {
   width: 10%;
 }
 
 table {
-  width: 60%;
+  width: 90%;
   // border: 1px solid $flare-color;
 }
 
 table, tr, td {
-  border: 1px solid $flare-color;
+  border: 1px solid $table-border-color;
 }
 
 .tax, .subtotal, .total {
   text-align: right;
+  font-family: Arial, Helvetica, sans-serif;
+  color: $secondary-text-color;
 }
 
 
+div {
+  form {
+    width: 65%;
+    font-family: 'Cedarville Cursive', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $table-color;
+    background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
+    margin-top: 5rem;
+    border: 1px solid black;
+    box-shadow: 0 2px 2px #362A21;
+    .table-heads {
+      font-family: Arial, Helvetica, sans-serif;
+      color: $secondary-text-color;
+    }
 
+    button {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+}
+}
 
