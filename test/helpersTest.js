@@ -1,7 +1,5 @@
 const assert = require('chai').assert;
-const extractCustomerObj = require('../lib/helpers').extractCustomerObj;
-const extractFoodObj = require('../lib/helpers').extractFoodObj;
-const findOrderIndex = require('../lib/helpers').findOrderIndex;
+const { extractCustomerObj, extractFoodObj, findOrderIndex, refactorOrder} = require('../lib/helpers');
 
 const orderData = [
   {
