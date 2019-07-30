@@ -9,7 +9,7 @@ const express = require('express');
 const router  = express.Router();
 const { sendSMS } = require('../public/scripts/sms');
 
-const { getUserInfo } = require('../lib/helpers');
+const { getUserInfo, getPhoneNumber } = require('../lib/helpers');
 
 module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
@@ -88,7 +88,8 @@ module.exports = (db, iconsKey) => {
 
 
     console.log(req.body.cart);
-    sendSMS('', 'A new Tub Dogs order has been placed.');
+
+    sendSMS(getPhoneNumber(2), `A new 🌭 order has been placed.`);
 
 
     // console.log("req.body: ", req.body)
