@@ -16,37 +16,3 @@ main {
   padding-top: $header-height;
 }
 
-// div.food-item {
-//   display: grid;
-//   grid-template-areas:
-//     "photo title title"
-//     "photo description description"
-//     "photo . price"
-//     "restriction . button";
-//   grid-template-columns: 33% auto 33%;
-//   grid-template-rows: 25% 25% 25% 25%;
-
-//   img {
-//     grid-area: photo;
-//     height: 300px;
-//   }
-
-//   h1 {
-//     grid-area: title;
-//   }
-
-//   p.description {
-//     grid-area: description;
-//   }
-//   p.price {
-//     grid-area: price;
-//   }
-
-//   div.dietary-restrictions {
-//     grid-area: description;
-//   }
-
-//   button {
-//     grid-area: button;
-//   }
-// }

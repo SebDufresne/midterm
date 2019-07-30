@@ -1,0 +1,34 @@
+$header-height: 80px;
+$nav-color: #F2CE16;
+$logo-font: 'Pacifico', cursive;
+$secondary-font: 'Quicksand', sans-serif;
+$logo-color: #BF2315;
+$text-shadow-color: #FFF5E6;
+$secondary-text-color: #1F1E5E;
+$flare-color: #362A21;
+
+.container {
+  width: 30%;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: pink;
+  font-family: $secondary-font;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    color: $secondary-text-color;
+    font-family: $logo-font;
+  }
+  input {
+    color: $flare-color;
+    border-style: none;
+    background-color: $text-shadow-color;
+    border-bottom: 1px solid $flare-color;
+    margin: 1rem;
+  }
+}
