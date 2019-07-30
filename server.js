@@ -124,6 +124,31 @@ app.post("/", (req, res) => {
   res.redirect('checkout');
 });
 
+
+// Default error page, when all else fails
+app.use((req, res) => {
+  const userId = req.session.userId || '';
+
+  if (userId) {
+    getUserInfo(userId, db)
+      .then(usersData => {
+        const user = usersData;
+        const params = {user, iconsKey};
+        res.render("404", params);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  } else {
+    const user = {};
+    user.id = '';
+    const params = {user, iconsKey};
+    res.render("404", params);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
