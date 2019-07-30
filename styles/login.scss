@@ -23,12 +23,29 @@ $flare-color: #362A21;
   h1 {
     color: $secondary-text-color;
     font-family: $logo-font;
+    margin-bottom: 1.5rem;
   }
   input {
     color: $flare-color;
     border-style: none;
     background-color: $text-shadow-color;
-    border-bottom: 1px solid $flare-color;
+    border-bottom: 2px solid $flare-color;
     margin: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  ::-webkit-input-placeholder {
+    color: $flare-color;
+    text-align: center;
+
+  }
+
+  button {
+    background-color: $logo-color;
+    color: $text-shadow-color;
+    font-family: $logo-font;
+    border-radius: 5px;
+    border-style: none;
+    padding-bottom: .25rem;
   }
 }
