@@ -33,7 +33,7 @@ module.exports = (db, iconsKey) => {
 
       // User is logged in. Cart is empty.
     } else if (userId && emptyCart) {
-      getUserInfo(db, userId)
+      getUserInfo(userId, db)
         .then(usersData => {
           const user = usersData; // Implies there's ONLY one
           const params = {user, cart:[], iconsKey};
@@ -63,7 +63,7 @@ module.exports = (db, iconsKey) => {
             cart.push(eachFood);
           }
 
-          getUserInfo(db, userId)
+          getUserInfo(userId, db)
           .then(usersData => {
             const user = usersData; // Implies there's ONLY one
             const params = {user, cart, iconsKey};

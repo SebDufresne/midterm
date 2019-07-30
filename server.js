@@ -49,6 +49,7 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 // API
 const foodsRoutes = require("./routes/foods");
+const ordersRoutes = require("./routes/orders");
 const usersRoutes = require("./routes/users");
 
 // APP
@@ -60,8 +61,9 @@ const orderSummaryRoutes  = require("./routes/order-summary");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // API
-app.use("/api/foods", foodsRoutes(db));
-app.use("/api/users", usersRoutes(db));
+app.use("/api/foods",  foodsRoutes(db));
+app.use("/api/orders", ordersRoutes(db));
+app.use("/api/users",  usersRoutes(db));
 
 // APP
 app.use("/checkout",      checkoutRoutes(db, iconsKey));
@@ -86,7 +88,7 @@ app.get("/", (req, res) => {
       // console.log("foods:",foods)
 
       if (userId) {
-        getUserInfo(db, userId)
+        getUserInfo(userId, db)
           .then(usersData => {
             console.log(usersData);
             console.log(foods);
