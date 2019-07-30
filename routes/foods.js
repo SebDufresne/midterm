@@ -11,7 +11,7 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     let query = `SELECT * FROM foods`;
-    console.log(query);
+    // console.log(query);  // SEB: Temporarily removed
     db.query(query)
       .then(data => {
         const foods = data.rows;

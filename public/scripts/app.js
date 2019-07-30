@@ -1,35 +1,28 @@
-const cart = {};
-
 $(() => {
 
   $(".add-food-btn").click(function() {
     const foodId = $(this).val();
 
-    if (!cart[foodId]) {
-      cart[foodId] = 0;
+    const $cartField = $("input[name='cart']");
+
+    const cartStr = $cartField.val();
+
+    let cartObj;
+    if (cartStr) {
+      cartObj = JSON.parse(cartStr);
+    } else {
+      cartObj = {};
     }
-    cart[foodId] += 1;
 
-    const counter = $("nav>h1");
+    if (!cartObj[foodId]) {
+      cartObj[foodId] = 1;
+    } else {
+      cartObj[foodId] += 1;
+    }
 
-    counter.text('Test');
+    const newCartStr = JSON.stringify(cartObj);
+    console.log(newCartStr);
 
-    console.log(cart);
+    $cartField.val(newCartStr);
   });
-
-  $("#checkout-btn").click(function(event) {
-    event.preventDefault();
-
-    const $button = $(this);
-    const $form = $button.closest("form");
-    const $cartField = $form.find("input[name='cart']");
-
-    const cartStr = JSON.stringify(cart);
-
-    $cartField.val(cartStr);
-
-    console.log('I WAS CLICKED!!!!', $cartField.val());
-    $form.submit();
-  });
-
 });

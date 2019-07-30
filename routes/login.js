@@ -37,11 +37,11 @@ module.exports = (db, iconsKey) => {
       // User didn't enter both informations
     } else {
       let query = `SELECT id, password FROM users WHERE email = '${formEmail}'`;
-      console.log(query);
+      // console.log(query);  // SEB: Temporarily removed
       db.query(query)
         .then(data => {
           const userData = data.rows[0]; // Imply that only the FIRST returned entry will be stored.
-          console.log(userData);
+          // console.log(userData);  // SEB: Temporarily removed
           if (bcrypt.compareSync(formPassword, userData.password)) {
             req.session.userId = userData.id;
             res.redirect('/');

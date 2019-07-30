@@ -15,16 +15,23 @@ module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId || '';
 
-    const order = JSON.parse(req.session.cart);
+    const cartContentStr = req.session.cart;
+
+    let cartContentObj;
+    if (cartContentStr) {
+      cartContentObj = JSON.parse(cartContentStr);
+    } else {
+      cartContentObj = {};
+    }
 
     // Selected food items, based on their IDs
-    const gatheredIds = Object.keys(order).join(', ');
+    const gatheredIds = Object.keys(cartContentObj).join(', ');
 
     // Query based on the user's selected food items
     const queryFoods = `SELECT id, name, price, picture_url FROM foods WHERE id IN (${gatheredIds})`;
 
     // Empty cart
-    const emptyCart = Object.keys(order).length === 0;
+    const emptyCart = Object.keys(cartContentObj).length === 0;
 
     // User is not logged in
     if (!userId) {
@@ -58,19 +65,18 @@ module.exports = (db, iconsKey) => {
             const id = foodItem.id;
             const name = foodItem.name;
             const price = foodItem.price;
-            const qty = order[foodItem.id];
+            const qty = cartContentObj[foodItem.id];
 
             const eachFood = {id, name, price, qty};
             cart.push(eachFood);
           }
 
           getUserInfo(userId, db)
-          .then(usersData => {
-            const user = usersData; // Implies there's ONLY one
-            const params = {user, cart, iconsKey};
-            res.render("checkout", params);
-          })
-
+            .then(usersData => {
+              const user = usersData; // Implies there's ONLY one
+              const params = {user, cart, iconsKey};
+              res.render("checkout", params);
+            });
         })
         .catch(err => {
           res
@@ -87,7 +93,7 @@ module.exports = (db, iconsKey) => {
     // const cartURL = req.params.cart;
 
 
-    console.log(req.body.cart);
+    // console.log(req.body.cart); // SEB: Temporarily removed
 
     sendSMS(getPhoneNumber(2), `A new 🌭 order has been placed.`);
 

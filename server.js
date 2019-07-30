@@ -90,8 +90,8 @@ app.get("/", (req, res) => {
       if (userId) {
         getUserInfo(userId, db)
           .then(usersData => {
-            console.log(usersData);
-            console.log(foods);
+            // console.log(usersData); // SEB: Temporarily removed
+            // console.log(foods); // SEB: Temporarily removed
             const user = usersData; // Implies there's ONLY one
             const params = {user, foods, iconsKey};
             res.render("index", params);

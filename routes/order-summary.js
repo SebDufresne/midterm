@@ -23,10 +23,10 @@ module.exports = (db, iconsKey) => {
         const orderSummary = [];
 
         orderData.forEach((e) => {
-            const order_id = e.order_id;
-            const ordered_at = e.ordered_at;
-            const newOrder = {order_id, ordered_at};
-            orderSummary.push(newOrder);
+          const order_id = e.order_id;
+          const ordered_at = e.ordered_at;
+          const newOrder = {order_id, ordered_at};
+          orderSummary.push(newOrder);
         });
         res.json({ orderSummary });
       })
