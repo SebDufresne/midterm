@@ -50,7 +50,6 @@ app.use(express.static("public"));
 // API
 const foodsRoutes = require("./routes/foods");
 const ordersRoutes = require("./routes/orders");
-const usersRoutes = require("./routes/users");
 
 // APP
 const checkoutRoutes      = require("./routes/checkout");
@@ -63,7 +62,6 @@ const orderSummaryRoutes  = require("./routes/order-summary");
 // API
 app.use("/api/foods",  foodsRoutes(db));
 app.use("/api/orders", ordersRoutes(db));
-app.use("/api/users",  usersRoutes(db));
 
 // APP
 app.use("/checkout",      checkoutRoutes(db, iconsKey));
