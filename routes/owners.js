@@ -1,7 +1,7 @@
 /*
- * All routes for Oder-Summary are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
+ * All routes for Owners are defined here
+ * Since this file is loaded in server.js into /owners,
+ *   these routes are mounted onto /owners
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -26,7 +26,7 @@ module.exports = (db, iconsKey) => {
           user.id = '';
         }
         const params = {user, structuredOrders, iconsKey};
-        res.render("order-summary", params);
+        res.render("owner-summary", params);
       })
       .catch(err => {
         res
