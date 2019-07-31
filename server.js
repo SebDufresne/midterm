@@ -78,7 +78,7 @@ app.get("/", (req, res) => {
       const foods = foodData.rows;
       getUserInfo(userId, db)
         .then(usersData => {
-          const user = usersData; // Implies there's ONLY one
+          const user = usersData;
           const params = {user, foods, iconsKey};
           res.render("index", params);
 
@@ -99,8 +99,10 @@ app.get("/", (req, res) => {
 
 // We'll set the cookie to the cart value
 app.post("/", (req, res) => {
-  const cartStr = req.body.cart;
-  req.session.cart = cartStr;
+  const cartValue = req.body.cart;
+
+  req.session.cart = cartValue;
+
   res.redirect('cart');
 });
 

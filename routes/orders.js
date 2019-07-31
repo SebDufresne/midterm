@@ -41,6 +41,8 @@ module.exports = (db) => {
     // const params = {user, cart, iconsKey};
 
     // res.render("cart", params);
+
+    req.session.cart = null; // Empty Cart Cookie
   });
   return router;
 };
