@@ -17,6 +17,9 @@
   text-align: center;
   font-family: $printer-font;
   background-color: $color-paper;
+  color: $color-retro-receipt;
+  background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
+  box-shadow: 0 2px 2px #362A21;
 }
 
 .expanded-order {
