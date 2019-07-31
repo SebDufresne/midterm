@@ -71,7 +71,7 @@ module.exports = (db, iconsKey) => {
 
           getUserInfo(userId, db)
             .then(usersData => {
-              const user = usersData; // Implies there's ONLY one
+              const user = usersData;
               const params = {user, cart, iconsKey};
               res.render("cart", params);
             });

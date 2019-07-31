@@ -1,7 +1,7 @@
 /*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
+ * All routes for Login are defined here
+ * Since this file is loaded in server.js into /login,
+ *   these routes are mounted onto /login
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -50,8 +50,7 @@ module.exports = (db, iconsKey) => {
 
       db.query(getPasswordQuery)
         .then(data => {
-          // email IS unique in DB
-          const userData = data.rows[0];
+          const userData = data.rows[0]; // email IS unique in DB
 
           if (bcrypt.compareSync(formPassword, userData.password)) {
             req.session.userId = userData.id;

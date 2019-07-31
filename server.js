@@ -97,7 +97,7 @@ app.get("/", (req, res) => {
 
 });
 
-// We'll set the cookie to the cart value
+// Sets the cookie to the cart value
 app.post("/", (req, res) => {
   const cartValue = req.body.cart;
 
