@@ -27,8 +27,11 @@ app.use(cookieSession({
 // Key for Font Awesome
 const iconsKey = process.env.FONT_AWESOME;
 
+
+const saltRounds = process.env.SALT_ROUNDS;
+
 // Helper Functions
-const { getUserInfo } = require('./lib/helpers');
+const { generateEmptyUser, getUserInfo } = require('./lib/helpers');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -47,21 +50,23 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const cartRoutes    = require("./routes/cart");
-const loginRoutes   = require("./routes/login");
-const logoutRoute   = require("./routes/logout");
-const ordersRoutes  = require("./routes/orders");
-const ownersRoutes  = require("./routes/owners");
+const cartRoutes      = require("./routes/cart");
+const loginRoutes     = require("./routes/login");
+const logoutRoute     = require("./routes/logout");
+const ordersRoutes    = require("./routes/orders");
+const ownersRoutes    = require("./routes/owners");
+const registerRoutes  = require("./routes/register");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
 // APP
-app.use("/cart",   cartRoutes(db, iconsKey));
-app.use("/login",  loginRoutes(db, iconsKey));
-app.use("/logout", logoutRoute());
-app.use("/orders", ordersRoutes(db));
-app.use("/owners", ownersRoutes(db, iconsKey));
+app.use("/cart",     cartRoutes(db, iconsKey));
+app.use("/login",    loginRoutes(db, iconsKey));
+app.use("/logout",   logoutRoute());
+app.use("/orders",   ordersRoutes(db, iconsKey));
+app.use("/owners",   ownersRoutes(db, iconsKey));
+app.use("/register", registerRoutes(db, iconsKey, saltRounds));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -77,8 +82,8 @@ app.get("/", (req, res) => {
     .then(foodData => {
       const foods = foodData.rows;
       getUserInfo(userId, db)
-        .then(usersData => {
-          const user = usersData;
+        .then(userInfo => {
+          const user = userInfo;
           const params = {user, foods, iconsKey};
           res.render("index", params);
 
@@ -99,11 +104,18 @@ app.get("/", (req, res) => {
 
 // Sets the cookie to the cart value
 app.post("/", (req, res) => {
-  const cartValue = req.body.cart;
+  const userId = req.session.userId || '';
 
-  req.session.cart = cartValue;
+  if (userId) {
+    const cartValue = req.body.cart;
+    req.session.cart = cartValue;
+    res.redirect('/cart');
 
-  res.redirect('cart');
+  } else {
+    const user = generateEmptyUser();
+    const params = {user, iconsKey};
+    res.render("404", params);
+  }
 });
 
 
@@ -112,8 +124,8 @@ app.use((req, res) => {
   const userId = req.session.userId || '';
 
   getUserInfo(userId, db)
-    .then(usersData => {
-      const user = usersData;
+    .then(userInfo => {
+      const user = userInfo;
       const params = {user, iconsKey};
       res.render("404", params);
     })

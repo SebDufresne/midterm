@@ -11,10 +11,49 @@ const router  = express.Router();
 
 const { sendSMS } = require('../public/scripts/sms');
 
-const { getPhoneNumber } = require('../lib/helpers');
+const { getUserInfo, getPhoneNumber, refactorOrder } = require('../lib/helpers');
 
-module.exports = (db) => {
+module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
+    const userId = req.session.userId || '';
+
+    if (userId) {
+      getUserInfo(userId, db)
+        .then(userInfo => {
+
+          if (!userInfo.admin) {
+            const queryOrders = `SELECT * FROM order_summary WHERE user_id = ${userId}`;
+            db.query(queryOrders)
+              .then(data => {
+                const orderData = data.rows;
+
+                const structuredOrders = refactorOrder(orderData);
+
+                const user = userInfo;
+                const params = {user, structuredOrders, iconsKey};
+
+                console.log(structuredOrders);
+                res.render("orders", params);
+              })
+              .catch(err => {
+                res
+                  .status(500)
+                  .json({ error: err.message });
+              });
+          } else {
+            const user = userInfo;
+            const params = {user, iconsKey};
+            res.render("404", params);
+          }
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    } else {
+      res.redirect('/');
+    }
   });
 
   router.post("/", (req, res) => {

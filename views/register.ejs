@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Top Dogs! - Login</title>
+    <title>Top Dogs! - Register</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -23,15 +23,18 @@
       <% } %>
       <div class="container">
         <h1>Dog-in</h1>
-          <form method='POST' action='/login'>
+          <form method='POST' action='/register'>
+
+            <input type='text' name='name' placeholder='Name'>
+
+            <input type='tel' name='phoneNumber' placeholder='Phone'>
 
             <input type='email' name='email' placeholder='Email'>
 
             <input type='password' name='password' placeholder='Password'>
 
-            <button type='submit'>Login</button>
+            <button type='submit'>Register</button>
           </form>
-          <p>If you don't have an account, please <a href="/register">register</a>.</p>
         </div>
 
       </main>
