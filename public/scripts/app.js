@@ -54,4 +54,15 @@ $(() => {
     $priceField.text(updatePrice(foodPrice, currentTotal));
   });
 
+  $(".expanded-order").hide();
+
+  $('.brief-summary').css('cursor', 'pointer');
+
+  $(".brief-summary").click(function(){
+    console.log($(this).next(".expanded-order"));
+    $(this).next(".expanded-order").slideToggle('slow', () => {
+      $(this).toggleClass('unfolded');
+      // $(this).next('.expanded-order').addClass('unfolded');
+    });
+  });
 });
