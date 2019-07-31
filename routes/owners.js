@@ -8,6 +8,9 @@
 const express = require('express');
 const router  = express.Router();
 
+// Allows time manipulation
+const moment = require('moment-timezone');
+
 const { getUserInfo, refactorOrder } = require('../lib/helpers');
 
 module.exports = (db, iconsKey) => {
