@@ -40,7 +40,8 @@ module.exports = (db, iconsKey) => {
                 const structuredOrders = refactorOrder(currentOrder);
 
                 const user = userInfo;
-                const params = { user, structuredOrders, iconsKey };
+                const fct = { moment };
+                const params = { user, structuredOrders, fct, iconsKey };
 
                 console.log(structuredOrders);
                 res.render("orders", params);
