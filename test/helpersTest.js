@@ -124,7 +124,8 @@ describe('#refactorOrder', function() {
         user_id: 3,
         customer_name: "jess",
         email: "jess@test.com",
-        phone_number: "514-555-5555"
+        phone_number: "514-555-5555",
+        total_cost: 1799
       },
       {
         order_id: 1,
@@ -138,7 +139,8 @@ describe('#refactorOrder', function() {
         user_id: 3,
         customer_name: "jess",
         email: "jess@test.com",
-        phone_number: "514-555-5555"
+        phone_number: "514-555-5555",
+        total_cost: 1799
       },
       {
         order_id: 2,
@@ -152,7 +154,8 @@ describe('#refactorOrder', function() {
         user_id: 7,
         customer_name: "robin",
         email: "robin@test.com",
-        phone_number: "514-555-5555"
+        phone_number: "514-555-5555",
+        total_cost: null
       },
       {
         order_id: 2,
@@ -166,7 +169,8 @@ describe('#refactorOrder', function() {
         user_id: 7,
         customer_name: "robin",
         email: "robin@test.com",
-        phone_number: "514-555-5555"
+        phone_number: "514-555-5555",
+        total_cost: null
       }
     ];
 
@@ -176,6 +180,7 @@ describe('#refactorOrder', function() {
         ordered_at: "2019-07-26T10:02:20.000Z",
         order_status: "new",
         customer_comments: null,
+        total_cost: 1799,
         foods: [{
           food_id: 3,
           food_name: "Yogi Bear",
@@ -199,6 +204,7 @@ describe('#refactorOrder', function() {
         ordered_at: "2019-07-26T10:01:20.000Z",
         order_status: "new",
         customer_comments: null,
+        total_cost: null,
         foods: [{
           food_id: 1,
           food_name: "Tubby Dog",
