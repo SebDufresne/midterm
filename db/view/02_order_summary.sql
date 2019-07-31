@@ -10,7 +10,8 @@ CREATE VIEW order_summary AS
     users.id AS user_id,
     users.name AS customer_name,
     users.email,
-    users.phone_number
+    users.phone_number,
+    total_cost
   FROM orders
   JOIN users ON users.id = user_id
   JOIN food_orders ON orders.id = order_id
