@@ -13,6 +13,7 @@
   margin-top: 1rem;
   width:65%;
   border: 1px solid black;
+  border-bottom: none;
   font-family: $secondary-font;
   text-align: center;
   font-family: $printer-font;
@@ -42,6 +43,7 @@ h1 {
 
 table {
   width: 90%;
+  margin-bottom: 1rem;
   // border: 1px solid $color-dark;
 }
 
@@ -71,6 +73,7 @@ div.expanded-order {
     background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
     // margin-top: 5rem;
     border: 1px solid black;
+    border-top: none;
     box-shadow: 0 2px 2px #362A21;
     .table-heads {
       font-family: Arial, Helvetica, sans-serif;

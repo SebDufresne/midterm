@@ -60,6 +60,6 @@ $(() => {
 
   $(".brief-summary").click(function(){
     console.log($(this).next(".expanded-order"));
-    $(this).next(".expanded-order").toggle();
+    $(this).next(".expanded-order").slideToggle('slow');
   });
 });
