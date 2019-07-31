@@ -77,8 +77,9 @@ app.use("/register", registerRoutes(db, iconsKey, saltRounds));
 app.get("/", (req, res) => {
   const userId = req.session.userId || '';
 
-  const queryFoods = `SELECT * FROM foods;`;
-  db.query(queryFoods)
+  const foodListQuery = `SELECT * FROM foods;`;
+
+  db.query(foodListQuery)
     .then(foodData => {
       const foods = foodData.rows;
       getUserInfo(userId, db)
@@ -117,7 +118,6 @@ app.post("/", (req, res) => {
     res.render("404", params);
   }
 });
-
 
 // Default error page, when all else fails
 app.use((req, res) => {

@@ -18,7 +18,9 @@ module.exports = (db, iconsKey) => {
       .then(userInfo => {
 
         if (userInfo.admin) {
+
           const orderSummQuery = `SELECT * FROM order_summary;`;
+
           db.query(orderSummQuery)
             .then(data => {
               const orderData = data.rows;

@@ -51,17 +51,24 @@ module.exports = (db, iconsKey, saltRounds) => {
       res.render('register', params);
     }
 
-    const queryOrders = `SELECT id FROM users WHERE email = '${email}'`;
-    db.query(queryOrders)
+    const getUserIdQuery = {
+      text: `SELECT id FROM users WHERE email = '$1'`,
+      values: [email],
+    };
+
+    db.query(getUserIdQuery)
       .then(data => {
         const existUser = data.rows[0];
-        console.log("I'm here!!!");
 
         if (!existUser) {
-          console.log("I'm here!!!");
-          const insertUserQuery = `INSERT INTO users (name,email,phone_number,password)
-          VALUES ('${name}','${email}','${phoneNumber}','${password}')
-          RETURNING *;`;
+
+          const insertUserQuery = {
+            text: `INSERT INTO users (name,email,phone_number,password)
+              VALUES ('$1','$2','$3','$4')
+              RETURNING id;`,
+            values: [name, email, phoneNumber, password],
+          };
+
           db.query(insertUserQuery)
             .then(userInfo => {
               const newUserId = userInfo.rows[0].id;

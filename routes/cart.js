@@ -32,7 +32,10 @@ module.exports = (db, iconsKey) => {
     const gatheredIds = Object.keys(cartContentObj).join(', ');
 
     // Query based on the user's selected food items
-    const queryFoods = `SELECT id, name, price, picture_url FROM foods WHERE id IN (${gatheredIds})`;
+    const foodListQuery = {
+      text: `SELECT id, name, price, picture_url FROM foods WHERE id IN ($1)`,
+      values: [gatheredIds],
+    };
 
     // Empty cart
     const emptyCart = Object.keys(cartContentObj).length === 0;
@@ -54,7 +57,7 @@ module.exports = (db, iconsKey) => {
 
     // User is logged in. Food items were selected.
     if (userId && !emptyCart) {
-      db.query(queryFoods)
+      db.query(foodListQuery)
         .then(foodData => {
           const foods = foodData.rows;
           const cart = [];
