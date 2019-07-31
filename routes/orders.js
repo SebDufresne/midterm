@@ -69,50 +69,49 @@ module.exports = (db, iconsKey) => {
     getUserInfo(userId, db)
       .then(usersData => {
         const user = usersData;
-
-        // Timestamp
-        const orderedTime = new Date();
-        const orderedTimeReformat = `${orderedTime.getFullYear()}-${(orderedTime.getMonth() + 1)}-${orderedTime.getDate()} ${orderedTime.getHours()}:${orderedTime.getMinutes()}:${orderedTime.getSeconds()}`;
-
-        const insertOrders = (`INSERT INTO orders (user_id, ordered_at, status) VALUES ($1, $2, $3) RETURNING *;`,
-        [userId, orderedTimeReformat, 'new']);
-
-        console.log("insertOrders:", insertOrders);
+        let totalCost = 0;
 
         for (let item of cart) {
-          // name = item.name;
-
-          const {id, name, price, qty} = item;
-          console.log('name in for of:', name);
-          console.log('id in for of:', id);
-
-          for (let i = 0; i < qty; i++) {
-            const insertFoods = (`INSERT INTO foods (name, price) VALUES ($1, $2);`,
-            [name, price]);
-            console.log("insertFoods in for of:", insertFoods);
-          }
-
-          const queryFoodOrders = function(id) {
-            return pool.query(`
-            SELECT id, orders.id as order_id, foods.id as food_id
-            FROM food_orders
-            JOIN orders ON orders.id = order_id
-            JOIN foods ON foods.id = food_id
-            GROUP BY orders.name
-            ORDER BY foods.id;
-            `, [id])
-            .then(res => res.rows[0]);
-          }
-          exports.queryFoodOrders = queryFoodOrders;
-
-
+          let numItem = item.price * item.qty;
+          totalCost += numItem;
         }
 
-        const ownerId = 1; // Seb: Just did it like that for the moment
-        sendSMS(getPhoneNumber(ownerId), `A new 🌭 order has been placed.`);
-        const params = {user, cart, iconsKey};
-        req.session.cart = null; // Empty Cart Cookie
-        res.redirect('/orders:id');
+        const insertOrders = {
+          text: 'INSERT INTO orders (user_id, total_cost) VALUES ($1, $2) RETURNING id',
+          values: [userId, totalCost],
+        }
+
+        console.log(">>>insertOrders<<<", insertOrders);
+
+        db.query(insertOrders)
+        .then(data => {
+          orderId = data.rows[0].id;
+
+          for (let item of cart) {
+            const {id, name, price, qty} = item;
+
+            for (let i = 0; i < qty; i++) {
+              const insertFoodOrders = {
+                text: 'INSERT INTO food_orders (order_id, food_id) VALUES ($1, $2)',
+                values: [orderId, item.id],
+              }
+              console.log(">>>>>>>>>insertFoodOrders<<<<<<<<<", insertFoodOrders);
+            }
+          }
+
+          const ownerId = 3;
+          sendSMS(getPhoneNumber(ownerId), `A new 🌭 order has been placed. The order number is ${orderId}.`);
+
+          req.session.cart = null;
+          const params = {user, cart, iconsKey};
+          res.redirect('/orders/:id');
+
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
 
       })
       .catch(err => {
@@ -121,6 +120,22 @@ module.exports = (db, iconsKey) => {
           .json({ error: err.message });
       });
   });
+
+  router.get("/:id", (req, res) => {
+    const userId = req.session.userId || '';
+
+    if (userId) {
+      const user = userInfo;
+      const params = {user, iconsKey};
+      res.render("/", params);
+    }
+
+    if (!userId) {
+      res.redirect('/login');
+    }
+
+  });
+
   return router;
 
 };
