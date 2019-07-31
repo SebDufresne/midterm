@@ -84,30 +84,18 @@ app.get("/", (req, res) => {
   db.query(queryFoods)
     .then(foodData => {
       const foods = foodData.rows;
-      // res.json(response);
-      // console.log("foods:",foods)
+      getUserInfo(userId, db)
+        .then(usersData => {
+          const user = usersData; // Implies there's ONLY one
+          const params = {user, foods, iconsKey};
+          res.render("index", params);
 
-      if (userId) {
-        getUserInfo(userId, db)
-          .then(usersData => {
-            // console.log(usersData); // SEB: Temporarily removed
-            // console.log(foods); // SEB: Temporarily removed
-            const user = usersData; // Implies there's ONLY one
-            const params = {user, foods, iconsKey};
-            res.render("index", params);
-
-          })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
-          });
-      } else {
-        const user = {};
-        user.id = '';
-        const params = {user, foods, iconsKey};
-        res.render("index", params);
-      }
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
     })
     .catch(err => {
       res
@@ -117,9 +105,9 @@ app.get("/", (req, res) => {
 
 });
 
+// We'll set the cookie to the cart value
 app.post("/", (req, res) => {
   const cartStr = req.body.cart;
-  // console.log("SEB - I'm here now!!!", cartStr);
   req.session.cart = cartStr;
   res.redirect('checkout');
 });
@@ -129,24 +117,17 @@ app.post("/", (req, res) => {
 app.use((req, res) => {
   const userId = req.session.userId || '';
 
-  if (userId) {
-    getUserInfo(userId, db)
-      .then(usersData => {
-        const user = usersData;
-        const params = {user, iconsKey};
-        res.render("404", params);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  } else {
-    const user = {};
-    user.id = '';
-    const params = {user, iconsKey};
-    res.render("404", params);
-  }
+  getUserInfo(userId, db)
+    .then(usersData => {
+      const user = usersData;
+      const params = {user, iconsKey};
+      res.render("404", params);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 app.listen(PORT, () => {
