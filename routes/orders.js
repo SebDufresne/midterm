@@ -10,18 +10,6 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM order_summary;`;
-    // console.log(query);  // SEB: Temporarily removed
-    db.query(query)
-      .then(data => {
-        const foods = data.rows;
-        res.json({ foods });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
   });
   return router;
 };

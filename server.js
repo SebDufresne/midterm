@@ -57,13 +57,13 @@ const orderSummaryRoutes  = require("./routes/order-summary");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/orders", ordersRoutes(db));
 
 // APP
 app.use("/checkout",      checkoutRoutes(db, iconsKey));
 app.use("/login",         loginRoutes(db, iconsKey));
 app.use("/logout",        logoutRoute());
 app.use("/order-summary", orderSummaryRoutes(db, iconsKey));
+app.use("/orders",        ordersRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
