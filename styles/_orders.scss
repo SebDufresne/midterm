@@ -6,6 +6,8 @@
   h1 {
     margin-top: 2rem;
     margin-bottom: 2rem;
+    font-family: $logo-font;
+    color: $color-dark-blue;
   }
 }
 
@@ -19,7 +21,7 @@
   font-family: $printer-font;
   background-color: $color-paper;
   color: $color-retro-receipt;
-  background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
+  background-image: $crimpled-texture;
   box-shadow: 0 2px 2px #362A21;
 }
 
@@ -70,31 +72,36 @@ div.expanded-order {
     flex-direction: column;
     align-items: center;
     background-color: $color-paper;
-    background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
+    background-image: $paper-texture;
     // margin-top: 5rem;
     border: 1px solid black;
     border-top: none;
     box-shadow: 0 2px 2px #362A21;
+
     .table-heads {
       font-family: Arial, Helvetica, sans-serif;
       color: $color-dark-blue;
     // }
 
-    button {
-      // font-family: Arial, Helvetica, sans-serif;
-      margin-right: 3rem;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      font-family: $logo-font;
-      color: $color-yellow;
-      background-color: $color-red;
-      padding: .25rem .40rem, .35rem .40rem;
-      // padding-top: .25rem;
-      // padding:
-      border: .5px solid $color-red;
-      border-radius: 10px;
+    // button {
+    //   // font-family: Arial, Helvetica, sans-serif;
+    //   margin-right: 3rem;
+    //   margin-top: 1rem;
+    //   margin-bottom: 1rem;
+    //   font-family: $logo-font;
+    //   color: $color-yellow;
+    //   background-color: $color-red;
+    //   padding: .25rem .40rem, .35rem .40rem;
+    //   // padding-top: .25rem;
+    //   // padding:
+    //   border: .5px solid $color-red;
+    //   border-radius: 10px;
+    // }
     }
 }
+
+.unfolded, div.expanded-order.unfolded {
+  background-image: $paper-texture;
 }
 
 
