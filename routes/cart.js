@@ -1,7 +1,7 @@
 /*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
+ * All routes for Cart are defined here
+ * Since this file is loaded in server.js into /cart,
+ *   these routes are mounted onto /cart
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
