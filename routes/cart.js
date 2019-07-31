@@ -45,7 +45,7 @@ module.exports = (db, iconsKey) => {
         .then(usersData => {
           const user = usersData; // Implies there's ONLY one
           const params = {user, cart:[], iconsKey};
-          res.render("checkout", params);
+          res.render("cart", params);
         })
         .catch(err => {
           res
@@ -75,7 +75,7 @@ module.exports = (db, iconsKey) => {
             .then(usersData => {
               const user = usersData; // Implies there's ONLY one
               const params = {user, cart, iconsKey};
-              res.render("checkout", params);
+              res.render("cart", params);
             });
         })
         .catch(err => {
@@ -108,7 +108,7 @@ module.exports = (db, iconsKey) => {
     // const user = '';
     // const params = {user, cart, iconsKey};
 
-    // res.render("checkout", params);
+    // res.render("cart", params);
   });
   return router;
 };

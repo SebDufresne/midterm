@@ -47,19 +47,17 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const ordersRoutes = require("./routes/orders");
-
-// APP
-const checkoutRoutes      = require("./routes/checkout");
+const cartRoutes      = require("./routes/cart");
 const loginRoutes         = require("./routes/login");
 const logoutRoute         = require("./routes/logout");
+const ordersRoutes = require("./routes/orders");
 const orderSummaryRoutes  = require("./routes/order-summary");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
 // APP
-app.use("/checkout",      checkoutRoutes(db, iconsKey));
+app.use("/cart",          cartRoutes(db, iconsKey));
 app.use("/login",         loginRoutes(db, iconsKey));
 app.use("/logout",        logoutRoute());
 app.use("/order-summary", orderSummaryRoutes(db, iconsKey));
@@ -103,7 +101,7 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   const cartStr = req.body.cart;
   req.session.cart = cartStr;
-  res.redirect('checkout');
+  res.redirect('cart');
 });
 
 
