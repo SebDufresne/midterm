@@ -57,31 +57,65 @@ module.exports = (db, iconsKey) => {
   });
 
   router.post("/", (req, res) => {
-    // console.log("req", req);
-    // console.log("res", res);
-    // const cartURL = req.params.cart;
+    const userId = req.session.userId || '';
+    const processedOrder = req.body.cart;
+    const cart = JSON.parse(processedOrder);
+
+    getUserInfo(userId, db)
+      .then(usersData => {
+        const user = usersData;
+
+        // Timestamp
+        const orderedTime = new Date();
+        const orderedTimeReformat = `${orderedTime.getFullYear()}-${(orderedTime.getMonth() + 1)}-${orderedTime.getDate()} ${orderedTime.getHours()}:${orderedTime.getMinutes()}:${orderedTime.getSeconds()}`;
+
+        const insertOrders = (`INSERT INTO orders (user_id, ordered_at, status) VALUES ($1, $2, $3) RETURNING *;`,
+        [userId, orderedTimeReformat, 'new']);
+
+        console.log("insertOrders:", insertOrders);
+
+        for (let item of cart) {
+          // name = item.name;
+
+          const {id, name, price, qty} = item;
+          console.log('name in for of:', name);
+          console.log('id in for of:', id);
+
+          for (let i = 0; i < qty; i++) {
+            const insertFoods = (`INSERT INTO foods (name, price) VALUES ($1, $2);`,
+            [name, price]);
+            console.log("insertFoods in for of:", insertFoods);
+          }
+
+          const queryFoodOrders = function(id) {
+            return pool.query(`
+            SELECT id, orders.id as order_id, foods.id as food_id
+            FROM food_orders
+            JOIN orders ON orders.id = order_id
+            JOIN foods ON foods.id = food_id
+            GROUP BY orders.name
+            ORDER BY foods.id;
+            `, [id])
+            .then(res => res.rows[0]);
+          }
+          exports.queryFoodOrders = queryFoodOrders;
 
 
-    // console.log(req.body.cart); // SEB: Temporarily removed
+        }
 
-    const ownerId = 1; // Seb: Just did it like that for the moment
+        const ownerId = 1; // Seb: Just did it like that for the moment
+        sendSMS(getPhoneNumber(ownerId), `A new 🌭 order has been placed.`);
+        const params = {user, cart, iconsKey};
+        req.session.cart = null; // Empty Cart Cookie
+        res.redirect('/orders:id');
 
-    sendSMS(getPhoneNumber(ownerId), `A new 🌭 order has been placed.`);
-
-
-    // console.log("req.body: ", req.body)
-    // console.log("cartURL: ", cartURL);
-
-    // const cart = JSON.parse(cartURL);
-
-    // console.log("Cart within POST:", cart)
-
-    // const user = '';
-    // const params = {user, cart, iconsKey};
-
-    // res.render("cart", params);
-
-    req.session.cart = null; // Empty Cart Cookie
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
   return router;
+
 };
