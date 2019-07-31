@@ -21,9 +21,12 @@
 <body>
   <% include ./partials/_header %>
   <main>
-    <h1>orders</h1>
+    <h1>Your orders</h1>
     <!-- Fields are displayed for information purposes only -->
     <% for (const order of structuredOrders) { %>
+      <div class ="brief-summary">
+        <p><%= order.ordered_at %></p>
+      </div>
     <div class="order-box">
       <div class="order-essentials">
         <p>Status: <%= order.order_status %></p>
