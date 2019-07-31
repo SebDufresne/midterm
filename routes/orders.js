@@ -22,8 +22,13 @@ module.exports = (db, iconsKey) => {
         .then(userInfo => {
 
           if (!userInfo.admin) {
-            const queryOrders = `SELECT * FROM order_summary WHERE user_id = ${userId}`;
-            db.query(queryOrders)
+
+            const getOrdersQuery = {
+              text: `SELECT * FROM order_summary WHERE user_id = $1`,
+              values: [userId],
+            };
+
+            db.query(getOrdersQuery)
               .then(data => {
                 const orderData = data.rows;
 

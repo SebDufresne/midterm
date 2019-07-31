@@ -46,7 +46,11 @@ module.exports = (db, iconsKey) => {
 
       res.render('login', params);
     } else {
-      const getPasswordQuery = `SELECT id, password FROM users WHERE email = '${formEmail}'`;
+
+      const getPasswordQuery = {
+        text: `SELECT id, password FROM users WHERE email = $1`,
+        values: [formEmail],
+      };
 
       db.query(getPasswordQuery)
         .then(data => {
