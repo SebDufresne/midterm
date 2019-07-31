@@ -52,7 +52,7 @@ module.exports = (db, iconsKey, saltRounds) => {
     }
 
     const getUserIdQuery = {
-      text: `SELECT id FROM users WHERE email = '$1'`,
+      text: `SELECT id FROM users WHERE email = $1`,
       values: [email],
     };
 
@@ -64,7 +64,7 @@ module.exports = (db, iconsKey, saltRounds) => {
 
           const insertUserQuery = {
             text: `INSERT INTO users (name,email,phone_number,password)
-              VALUES ('$1','$2','$3','$4')
+              VALUES ($1, $2, $3, $4)
               RETURNING id;`,
             values: [name, email, phoneNumber, password],
           };

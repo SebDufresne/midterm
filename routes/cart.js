@@ -29,11 +29,11 @@ module.exports = (db, iconsKey) => {
     }
 
     // Selected food items, based on their IDs
-    const gatheredIds = Object.keys(cartContentObj).join(', ');
+    const gatheredIds = Object.keys(cartContentObj);
 
     // Query based on the user's selected food items
     const foodListQuery = {
-      text: `SELECT id, name, price, picture_url FROM foods WHERE id IN ($1)`,
+      text: `SELECT id, name, price, picture_url FROM foods WHERE id = ANY($1)`,
       values: [gatheredIds],
     };
 
