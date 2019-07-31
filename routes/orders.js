@@ -20,7 +20,7 @@ const {
   refactorOrder
 } = require("../lib/helpers");
 
-module.exports = (db, iconsKey) => {
+module.exports = (db, iconsKey, PHONE_OWNER) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId || "";
 
@@ -97,9 +97,8 @@ module.exports = (db, iconsKey) => {
             }
           }
 
-          const ownerId = 3;
           sendSMS(
-            getPhoneNumber(ownerId),
+            getPhoneNumber(PHONE_OWNER),
             `A new 🌭 order has been placed. The order number is ${orderId}.`
           );
 

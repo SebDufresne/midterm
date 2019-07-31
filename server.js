@@ -4,6 +4,7 @@ require('dotenv').config();
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
+const PHONE_OWNER = process.env.PHONE_OWNER || '+15555555555';
 const express    = require("express");
 const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
@@ -64,7 +65,7 @@ const registerRoutes  = require("./routes/register");
 app.use("/cart",     cartRoutes(db, iconsKey));
 app.use("/login",    loginRoutes(db, iconsKey));
 app.use("/logout",   logoutRoute());
-app.use("/orders",   ordersRoutes(db, iconsKey));
+app.use("/orders",   ordersRoutes(db, iconsKey, PHONE_OWNER));
 app.use("/owners",   ownersRoutes(db, iconsKey));
 app.use("/register", registerRoutes(db, iconsKey, saltRounds));
 // Note: mount other resources here, using the same pattern above
