@@ -19,6 +19,9 @@
   <body>
     <% include ./partials/_header %>
     <main>
+      <% if (errorMessage) { %>
+        <% include ./partials/_error %>
+      <% } %>
       <div class="container">
         <h1>Dog-in</h1>
         <form method='POST' action='/login'>
