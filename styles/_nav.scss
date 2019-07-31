@@ -16,6 +16,13 @@ nav {
   font-family: $secondary-font;
   background-color: $color-yellow;
 
+  .cart-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
   h1 {
     // display: inline-block;
     align-content: center; // Added to replace space-between approach (trial) // Seb
@@ -39,13 +46,19 @@ nav {
     margin-right: 1.5rem;
 
   }
-  div {
-    margin-left: 1.5rem;
-  }
+  // div {
+  //   margin-left: 1.5rem;
+
+  // }
   #login {
     margin-left: 1.5rem;
     margin-top: 1rem;
     color: $color-dark-blue;
 
   }
+
 }
+.navbar-light .navbar-toggler {
+  border: none;
+}
+

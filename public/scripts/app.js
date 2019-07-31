@@ -46,7 +46,7 @@ $(() => {
 
     // Updates current total
     const priceAsString = $(this).closest("div").find(".price").text();
-    const $priceField = $("nav>h1");
+    const $priceField = $(".price-counter");
     const currentTotal = $priceField.text();
 
     const foodPrice = priceStringToNumber(priceAsString);
