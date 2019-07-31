@@ -5,34 +5,33 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
 // Secure authentication
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
-const { generateEmptyUser } = require('../lib/helpers');
+const { generateEmptyUser } = require("../lib/helpers");
 
 module.exports = (db, iconsKey) => {
-
   router.get("/", (req, res) => {
-    const userId = req.session.userId || '';
+    const userId = req.session.userId || "";
     if (userId) {
-      res.redirect('/');
+      res.redirect("/");
     } else {
       const user = generateEmptyUser();
-      const {statusCode} = 200;
-      const errorMessage = '';
-      const params = {user, statusCode, errorMessage, iconsKey};
-      res.render('login', params);
+      const { statusCode } = 200;
+      const errorMessage = "";
+      const params = { user, statusCode, errorMessage, iconsKey };
+      res.render("login", params);
     }
   });
 
   router.post("/", (req, res) => {
-    const userId = req.session.userId || '';
+    const userId = req.session.userId || "";
 
     if (userId) {
-      res.redirect('/');
+      res.redirect("/");
     }
 
     const formEmail = req.body.email;
@@ -41,15 +40,14 @@ module.exports = (db, iconsKey) => {
     if (!formEmail || !formPassword) {
       res.status(403);
       const user = generateEmptyUser();
-      const errorMessage = 'Please enter an email and a password';
-      const params = {user, errorMessage, iconsKey};
+      const errorMessage = "Please enter an email and a password";
+      const params = { user, errorMessage, iconsKey };
 
-      res.render('login', params);
+      res.render("login", params);
     } else {
-
       const getPasswordQuery = {
         text: `SELECT id, password FROM users WHERE email = $1`,
-        values: [formEmail],
+        values: [formEmail]
       };
 
       db.query(getPasswordQuery)
@@ -58,20 +56,18 @@ module.exports = (db, iconsKey) => {
 
           if (bcrypt.compareSync(formPassword, userInfo.password)) {
             req.session.userId = userInfo.id;
-            res.redirect('/');
+            res.redirect("/");
           } else {
             res.status(403);
             const user = generateEmptyUser();
             const errorMessage = "Password and email doesn't match";
-            const params = {user, errorMessage, iconsKey};
+            const params = { user, errorMessage, iconsKey };
 
-            res.render('login', params);
+            res.render("login", params);
           }
         })
         .catch(err => {
-          res
-            .status(500)
-            .json({ error: err.message });
+          res.status(500).json({ error: err.message });
         });
     }
   });
