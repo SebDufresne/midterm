@@ -50,10 +50,10 @@ module.exports = (db, iconsKey) => {
 
       db.query(getPasswordQuery)
         .then(data => {
-          const userData = data.rows[0]; // email IS unique in DB
+          const userInfo = data.rows[0]; // email IS unique in DB
 
-          if (bcrypt.compareSync(formPassword, userData.password)) {
-            req.session.userId = userData.id;
+          if (bcrypt.compareSync(formPassword, userInfo.password)) {
+            req.session.userId = userInfo.id;
             res.redirect('/');
           } else {
             res.status(403);

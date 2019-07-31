@@ -40,8 +40,8 @@ module.exports = (db, iconsKey) => {
     // User is logged in. Cart is empty.
     if (userId && emptyCart) {
       getUserInfo(userId, db)
-        .then(usersData => {
-          const user = usersData;
+        .then(userInfo => {
+          const user = userInfo;
           const params = {user, cart:[], iconsKey};
           res.render("cart", params);
         })
@@ -70,8 +70,8 @@ module.exports = (db, iconsKey) => {
           }
 
           getUserInfo(userId, db)
-            .then(usersData => {
-              const user = usersData;
+            .then(userInfo => {
+              const user = userInfo;
               const params = {user, cart, iconsKey};
               res.render("cart", params);
             });

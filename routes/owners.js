@@ -8,25 +8,37 @@
 const express = require('express');
 const router  = express.Router();
 
-const { refactorOrder } = require('../lib/helpers');
+const { getUserInfo, refactorOrder } = require('../lib/helpers');
 
 module.exports = (db, iconsKey) => {
-  router.get("/", (req, res) => {
+  router.get("/:id/orders", (req, res) => {
     const userId = req.session.userId || '';
 
-    const orderSummQuery = `SELECT * FROM order_summary;`;
-    db.query(orderSummQuery)
-      .then(data => {
-        const orderData = data.rows;
+    getUserInfo(userId, db)
+      .then(userInfo => {
 
-        const structuredOrders = refactorOrder(orderData);
+        if (userInfo.admin) {
+          const orderSummQuery = `SELECT * FROM order_summary;`;
+          db.query(orderSummQuery)
+            .then(data => {
+              const orderData = data.rows;
 
-        const user = {};
-        if (!userId) {
-          user.id = '';
+              const structuredOrders = refactorOrder(orderData);
+
+              const user = userInfo;
+              const params = {user, structuredOrders, iconsKey};
+              res.render("owner-summary", params);
+            })
+            .catch(err => {
+              res
+                .status(500)
+                .json({ error: err.message });
+            });
+        } else {
+          const user = userInfo;
+          const params = {user, iconsKey};
+          res.render("404", params);
         }
-        const params = {user, structuredOrders, iconsKey};
-        res.render("owner-summary", params);
       })
       .catch(err => {
         res
