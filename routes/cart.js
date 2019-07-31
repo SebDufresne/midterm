@@ -74,13 +74,18 @@ module.exports = (db, iconsKey) => {
               const user = userInfo;
               const params = {user, cart, iconsKey};
               res.render("cart", params);
+            })
+            .catch(err => {
+              res
+                .status(500)
+                .json({ error: err.message });
             });
-          })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
-          });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
     }
   });
 
