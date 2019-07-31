@@ -47,8 +47,6 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-// API
-const foodsRoutes = require("./routes/foods");
 const ordersRoutes = require("./routes/orders");
 
 // APP
@@ -59,8 +57,6 @@ const orderSummaryRoutes  = require("./routes/order-summary");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-// API
-app.use("/api/foods",  foodsRoutes(db));
 app.use("/api/orders", ordersRoutes(db));
 
 // APP
