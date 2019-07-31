@@ -14,6 +14,11 @@ module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId || '';
 
+    // User is not logged in
+    if (!userId) {
+      res.redirect('/login');
+    }
+
     const cartContentStr = req.session.cart;
 
     let cartContentObj;
@@ -32,17 +37,11 @@ module.exports = (db, iconsKey) => {
     // Empty cart
     const emptyCart = Object.keys(cartContentObj).length === 0;
 
-    // User is not logged in
-    if (!userId) {
-      const user = {};
-      user.id = '';
-      res.redirect('/login');
-
-      // User is logged in. Cart is empty.
-    } else if (userId && emptyCart) {
+    // User is logged in. Cart is empty.
+    if (userId && emptyCart) {
       getUserInfo(userId, db)
         .then(usersData => {
-          const user = usersData; // Implies there's ONLY one
+          const user = usersData;
           const params = {user, cart:[], iconsKey};
           res.render("cart", params);
         })
