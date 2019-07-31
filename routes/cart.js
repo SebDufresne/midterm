@@ -7,9 +7,8 @@
 
 const express = require('express');
 const router  = express.Router();
-const { sendSMS } = require('../public/scripts/sms');
 
-const { getUserInfo, getPhoneNumber } = require('../lib/helpers');
+const { getUserInfo } = require('../lib/helpers');
 
 module.exports = (db, iconsKey) => {
   router.get("/", (req, res) => {
@@ -86,29 +85,5 @@ module.exports = (db, iconsKey) => {
     }
   });
 
-
-  router.post("/", (req, res) => {
-    // console.log("req", req);
-    // console.log("res", res);
-    // const cartURL = req.params.cart;
-
-
-    // console.log(req.body.cart); // SEB: Temporarily removed
-
-    sendSMS(getPhoneNumber(2), `A new 🌭 order has been placed.`);
-
-
-    // console.log("req.body: ", req.body)
-    // console.log("cartURL: ", cartURL);
-
-    // const cart = JSON.parse(cartURL);
-
-    // console.log("Cart within POST:", cart)
-
-    // const user = '';
-    // const params = {user, cart, iconsKey};
-
-    // res.render("cart", params);
-  });
   return router;
 };
