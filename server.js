@@ -27,8 +27,11 @@ app.use(cookieSession({
 // Key for Font Awesome
 const iconsKey = process.env.FONT_AWESOME;
 
+
+const saltRounds = process.env.SALT_ROUNDS;
+
 // Helper Functions
-const { getUserInfo } = require('./lib/helpers');
+const { generateEmptyUser, getUserInfo } = require('./lib/helpers');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -47,29 +50,23 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-// API
-const foodsRoutes = require("./routes/foods");
-const ordersRoutes = require("./routes/orders");
-const usersRoutes = require("./routes/users");
-
-// APP
-const checkoutRoutes      = require("./routes/checkout");
-const loginRoutes         = require("./routes/login");
-const logoutRoute         = require("./routes/logout");
-const orderSummaryRoutes  = require("./routes/order-summary");
+const cartRoutes      = require("./routes/cart");
+const loginRoutes     = require("./routes/login");
+const logoutRoute     = require("./routes/logout");
+const ordersRoutes    = require("./routes/orders");
+const ownersRoutes    = require("./routes/owners");
+const registerRoutes  = require("./routes/register");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-// API
-app.use("/api/foods",  foodsRoutes(db));
-app.use("/api/orders", ordersRoutes(db));
-app.use("/api/users",  usersRoutes(db));
 
 // APP
-app.use("/checkout",      checkoutRoutes(db, iconsKey));
-app.use("/login",         loginRoutes(db, iconsKey));
-app.use("/logout",        logoutRoute());
-app.use("/order-summary", orderSummaryRoutes(db, iconsKey));
+app.use("/cart",     cartRoutes(db, iconsKey));
+app.use("/login",    loginRoutes(db, iconsKey));
+app.use("/logout",   logoutRoute());
+app.use("/orders",   ordersRoutes(db, iconsKey));
+app.use("/owners",   ownersRoutes(db, iconsKey));
+app.use("/register", registerRoutes(db, iconsKey, saltRounds));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -84,30 +81,18 @@ app.get("/", (req, res) => {
   db.query(queryFoods)
     .then(foodData => {
       const foods = foodData.rows;
-      // res.json(response);
-      // console.log("foods:",foods)
+      getUserInfo(userId, db)
+        .then(userInfo => {
+          const user = userInfo;
+          const params = {user, foods, iconsKey};
+          res.render("index", params);
 
-      if (userId) {
-        getUserInfo(userId, db)
-          .then(usersData => {
-            // console.log(usersData); // SEB: Temporarily removed
-            // console.log(foods); // SEB: Temporarily removed
-            const user = usersData; // Implies there's ONLY one
-            const params = {user, foods, iconsKey};
-            res.render("index", params);
-
-          })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
-          });
-      } else {
-        const user = {};
-        user.id = '';
-        const params = {user, foods, iconsKey};
-        res.render("index", params);
-      }
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
     })
     .catch(err => {
       res
@@ -117,11 +102,20 @@ app.get("/", (req, res) => {
 
 });
 
+// Sets the cookie to the cart value
 app.post("/", (req, res) => {
-  const cartStr = req.body.cart;
-  // console.log("SEB - I'm here now!!!", cartStr);
-  req.session.cart = cartStr;
-  res.redirect('checkout');
+  const userId = req.session.userId || '';
+
+  if (userId) {
+    const cartValue = req.body.cart;
+    req.session.cart = cartValue;
+    res.redirect('/cart');
+
+  } else {
+    const user = generateEmptyUser();
+    const params = {user, iconsKey};
+    res.render("404", params);
+  }
 });
 
 
@@ -129,24 +123,17 @@ app.post("/", (req, res) => {
 app.use((req, res) => {
   const userId = req.session.userId || '';
 
-  if (userId) {
-    getUserInfo(userId, db)
-      .then(usersData => {
-        const user = usersData;
-        const params = {user, iconsKey};
-        res.render("404", params);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  } else {
-    const user = {};
-    user.id = '';
-    const params = {user, iconsKey};
-    res.render("404", params);
-  }
+  getUserInfo(userId, db)
+    .then(userInfo => {
+      const user = userInfo;
+      const params = {user, iconsKey};
+      res.render("404", params);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 app.listen(PORT, () => {

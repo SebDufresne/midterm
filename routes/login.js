@@ -1,7 +1,7 @@
 /*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
+ * All routes for Login are defined here
+ * Since this file is loaded in server.js into /login,
+ *   these routes are mounted onto /login
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -11,6 +11,8 @@ const router  = express.Router();
 // Secure authentication
 const bcrypt = require('bcrypt');
 
+const { generateEmptyUser } = require('../lib/helpers');
+
 module.exports = (db, iconsKey) => {
 
   router.get("/", (req, res) => {
@@ -18,9 +20,10 @@ module.exports = (db, iconsKey) => {
     if (userId) {
       res.redirect('/');
     } else {
-      const user = '';
+      const user = generateEmptyUser();
       const {statusCode} = 200;
-      const params = {user, statusCode, iconsKey};
+      const errorMessage = '';
+      const params = {user, statusCode, errorMessage, iconsKey};
       res.render('login', params);
     }
   });
@@ -28,25 +31,37 @@ module.exports = (db, iconsKey) => {
   router.post("/", (req, res) => {
     const userId = req.session.userId || '';
 
-    // Missing Logic IF user is already logged in
+    if (userId) {
+      res.redirect('/');
+    }
 
     const formEmail = req.body.email;
     const formPassword = req.body.password;
 
     if (!formEmail || !formPassword) {
-      // User didn't enter both informations
+      res.status(403);
+      const user = generateEmptyUser();
+      const errorMessage = 'Please enter an email and a password';
+      const params = {user, errorMessage, iconsKey};
+
+      res.render('login', params);
     } else {
-      let query = `SELECT id, password FROM users WHERE email = '${formEmail}'`;
-      // console.log(query);  // SEB: Temporarily removed
-      db.query(query)
+      const getPasswordQuery = `SELECT id, password FROM users WHERE email = '${formEmail}'`;
+
+      db.query(getPasswordQuery)
         .then(data => {
-          const userData = data.rows[0]; // Imply that only the FIRST returned entry will be stored.
-          // console.log(userData);  // SEB: Temporarily removed
-          if (bcrypt.compareSync(formPassword, userData.password)) {
-            req.session.userId = userData.id;
+          const userInfo = data.rows[0]; // email IS unique in DB
+
+          if (bcrypt.compareSync(formPassword, userInfo.password)) {
+            req.session.userId = userInfo.id;
             res.redirect('/');
           } else {
-            // It didn't match :-(
+            res.status(403);
+            const user = generateEmptyUser();
+            const errorMessage = "Password and email doesn't match";
+            const params = {user, errorMessage, iconsKey};
+
+            res.render('login', params);
           }
         })
         .catch(err => {

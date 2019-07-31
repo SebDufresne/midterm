@@ -1,5 +1,5 @@
 const { assert, expect } = require('chai');
-const { extractCustomerObj, extractFoodObj, findOrderIndex, refactorOrder} = require('../lib/helpers');
+const { extractCustomerObj, extractFoodObj, findOrderIndex, generateEmptyUser, refactorOrder} = require('../lib/helpers');
 
 describe('#extractCustomerObj', function() {
   it(`Expect an empty object when submitted an empty value`, function() {
@@ -91,6 +91,13 @@ describe('#findOrderIndex', function() {
     ];
     const output = 1;
     assert.strictEqual(findOrderIndex(orderId,ordersArray),output);
+  });
+});
+
+describe('#generateEmptyUser', function() {
+  it(`return index of order in array if found`, function() {
+    const output = {id: '', name: '', phone_number: '', email: '', admin: ''};
+    assert.deepEqual(generateEmptyUser(),output);
   });
 });
 

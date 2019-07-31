@@ -4,7 +4,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   phone_number TEXT NOT NULL,
-  email TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   admin BOOLEAN DEFAULT FALSE,
   active BOOLEAN DEFAULT TRUE
