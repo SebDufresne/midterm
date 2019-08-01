@@ -55,6 +55,7 @@ const loginRoutes     = require("./routes/login");
 const logoutRoute     = require("./routes/logout");
 const ordersRoutes    = require("./routes/orders");
 const ownersRoutes    = require("./routes/owners");
+const profileRoutes    = require("./routes/profile");
 const registerRoutes  = require("./routes/register");
 
 // Mount all resource routes
@@ -66,6 +67,7 @@ app.use("/login",    loginRoutes(db, iconsKey));
 app.use("/logout",   logoutRoute());
 app.use("/orders",   ordersRoutes(db, iconsKey));
 app.use("/owners",   ownersRoutes(db, iconsKey));
+app.use("/profile",   profileRoutes(db, iconsKey));
 app.use("/register", registerRoutes(db, iconsKey, saltRounds));
 // Note: mount other resources here, using the same pattern above
 
