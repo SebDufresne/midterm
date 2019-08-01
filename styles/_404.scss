@@ -1,4 +1,4 @@
-.order-confirmed {
+.fourohfourbox {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,8 +6,7 @@
   font-family: $secondary-font;
   padding-top: 3rem;
 
-  .unicorn-dog {
-    max-width: 15rem;
+  .lost-dog {
     height: auto;
   }
 }
@@ -15,17 +14,18 @@
 
 @media only screen and (max-width: 720px) {
 
-.order-confirmed {
+  .fourohfourbox{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 80%;
   text-align: center;
   font-family: $secondary-font;
   padding-top: 3rem;
 
-  .unicorn-dog {
-    max-width: 90%;
+  .lost-dog {
+    max-width: 100%;
     height: auto;
   }
 }

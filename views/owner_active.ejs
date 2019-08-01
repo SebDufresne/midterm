@@ -23,58 +23,65 @@
   <% include ./partials/_header %>
   <main>
     <div class="active-orders">
-    <h1>Active Orders</h1>
-    <!-- Fields are displayed for information purposes only -->
-    <% for (const order of structuredOrders) { %>
-    <div class="order-box">
-      <div class="order-essentials">
-        <!-- <p>Status: <%= order.order_status %></p> -->
+      <h1>Active Orders</h1>
+      <!-- Fields are displayed for information purposes only -->
+      <% for (const order of structuredOrders) { %>
+      <div class="order-box">
+        <div class="order-essentials">
+          <!-- <p>Status: <%= order.order_status %></p> -->
 
-        <p>Order: <%= order.order_id %></p>
-        <p>customer: <%= order.user.customer_name %> <%= order.user.phone_number %></p>
-      </div>
-      <!-- <p>User id: <%= order.user.user_id %></p> -->
-      <!-- <p>User email: <%= order.user.email %></p> -->
-      <!-- <div class="customer-essentials"> -->
+          <p>Order: <%= order.order_id %></p>
+          <p>customer: <%= order.user.customer_name %> <%= order.user.phone_number %></p>
+        </div>
+        <!-- <p>User id: <%= order.user.user_id %></p> -->
+        <!-- <p>User email: <%= order.user.email %></p> -->
+        <!-- <div class="customer-essentials"> -->
         <p></p>
+<<<<<<< HEAD
       <!-- </div> -->
       <div class="order-items">
           <p>Ordered at: <time class="timeago" datetime="<%= order.ordered_at %>"></time></p>
+=======
+        <!-- </div> -->
+        <div class="order-items">
+          <p>Ordered at: <%= order.ordered_at %></p>
+>>>>>>> responsive
           <p class="order-status"><%= order.order_status %></p>
-        <div class="comments">
-          <p class="must-see"><%= order.customer_comments %></p>
-        </div>
-        <table class="order-table">
-          <tr class="status-<%= order.order_status %>">
-            <th>item</th>
-            <th>qty</th>
-          </tr>
-          <% for (const food of order.foods) { %>
-          <!-- <p>Food id: <%= food.food_id %></p> -->
-          <tr>
-            <td class="must-see"><%= food.food_name %></td>
-            <td class="must-see"><%= food.food_qty %></td>
-          </tr>
-          <!-- <p>Food URL: <%= food.picture_url %></p> -->
-          <% } %>
-        </table>
-        <form class="kitchen-buttons" action="/owners/<%= user.id %>/orders/<%= order.order_id %>" method="post">
-          <% if (order.order_status === 'new') {%>
+          <div class="comments">
+            <p class="must-see"><%= order.customer_comments %></p>
+          </div>
+          <table class="order-table">
+            <tr class="status-<%= order.order_status %>">
+              <th>item</th>
+              <th>qty</th>
+            </tr>
+            <% for (const food of order.foods) { %>
+            <!-- <p>Food id: <%= food.food_id %></p> -->
+            <tr>
+              <td class="must-see"><%= food.food_name %></td>
+              <td class="must-see"><%= food.food_qty %></td>
+            </tr>
+            <!-- <p>Food URL: <%= food.picture_url %></p> -->
+            <% } %>
+          </table>
+          <form class="kitchen-buttons" action="/owners/<%= user.id %>/orders/<%= order.order_id %>" method="post">
+            <% if (order.order_status === 'new') {%>
             <div class="timebox">
-            <p>Time to fulfill</p>
-          <input type="number" class="timer-input" name="timer" min="5" max="45">
-        </div>
-          <button name="state" class="status-processing accept-btn" value="processing">Accept</button>
-          <% } else if (order.order_status === 'processing')  { %>
-          <button name="state" class="status-fulfilled fulfill-btn" value="fulfilled">DONE</button>
-          <% } %>
-          <button name="state" class="status-cancel cancel-btn" value="declined">Cancel</button>
-        </form>
+              <p>Time to fulfill</p>
+              <input type="number" class="timer-input" name="timer" min="5" max="45">
+            </div>
 
+            <button name="state" class="status-processing accept-btn" value="processing">Accept</button>
+            <% } else if (order.order_status === 'processing')  { %>
+            <button name="state" class="status-fulfilled fulfill-btn" value="fulfilled">DONE</button>
+            <% } %>
+            <button name="state" class="status-cancel cancel-btn" value="declined">Cancel</button>
+          </form>
+
+        </div>
       </div>
+      <% } %>
     </div>
-    <% } %>
-  </div>
   </main>
   <% include ./partials/_footer %>
 </body>
