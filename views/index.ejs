@@ -24,10 +24,13 @@
     <div class="menu-params">
       <h1>Menu</h1>
       <div>
-      <i id="vegan" class="fas fa-carrot"> vegan</i>
-      <i class="fas fa-seedling"> vegetarian</i>
-      <i class="fas fa-bread-slice"> gluten-free</i>
-    </div>
+        <i id="vegan" class="fas fa-carrot"> vegan</i>
+        <i class="fas fa-seedling"> vegetarian</i>
+        <i class="fas fa-bread-slice"> gluten-free</i>
+      </div>
+      <% if(!user.id) { %>
+        <p>Please log-in to order.</p>
+      <% } %>
     </div>
     <section id="food-list">
       <% for (let food in foods) { %>
@@ -57,7 +60,10 @@
 
         <div class="priceAndBuy">
           <p class="price"><%= foods[food].price /100 %>$</p>
-          <button id="buy-button" type="submit" value="<%= foods[food].id %>" class="add-food-btn">Dog-me!</button>
+
+          <% if(user.id && !user.admin) { %>
+            <button id="buy-button" type="submit" value="<%= foods[food].id %>" class="add-food-btn">Dog-me!</button>
+          <% } %>
         </div>
 
       </div>
