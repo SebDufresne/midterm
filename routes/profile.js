@@ -15,7 +15,6 @@ const {
 } = require("../lib/helpers");
 
 module.exports = (db, iconsKey) => {
-
   router.get("/", (req, res) => {
     const userId = req.session.userId || "";
 
@@ -23,26 +22,13 @@ module.exports = (db, iconsKey) => {
       res.redirect("/login");
     }
 
-    const selectUser = {
-      text: `SELECT name, phone_number, email FROM users WHERE id = $1`,
-      values: [userId]
-    };
-
     if (userId) {
       getUserInfo(userId, db)
         .then(userInfo => {
-          db.query(selectUser)
-            .then(data => {
-              const userData = data.rows[0];
-              const user = userInfo;
-              console.log("userData:", userData);
+          const user = userInfo;
 
-              const params = { user, userData, iconsKey };
-              res.render("profile", params);
-            })
-            .catch(err => {
-              res.status(500).json({ error: err.message });
-            });
+          const params = { user, iconsKey };
+          res.render("profile", params);
         })
         .catch(err => {
           res.status(500).json({ error: err.message });
