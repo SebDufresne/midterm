@@ -30,9 +30,6 @@
         <p>Ordered at: <%= order.ordered_at %></p>
         <p>Id: <%= order.order_id %></p>
       </div>
-      <div class="comments">
-        <p>Comments: <%= order.customer_comments %></p>
-      </div>
       <!-- <p>User id: <%= order.user.user_id %></p> -->
       <!-- <p>User email: <%= order.user.email %></p> -->
       <div class="customer-essentials">
@@ -40,31 +37,34 @@
         <p></p>
       </div>
       <div class="order-items">
-      <table class="order-table">
-        <tr>
-          <th>item</th>
-          <th>qty</th>
-        </tr>
-      <% for (const food of order.foods) { %>
-      <!-- <p>Food id: <%= food.food_id %></p> -->
-      <tr>
-      <td><%= food.food_name %></td>
-      <td><%= food.food_qty %></td>
-    </tr>
-      <!-- <p>Food URL: <%= food.picture_url %></p> -->
-      <% } %>
-    </table>
-      <form action="/owners/<%= user.id %>/orders/<%= order.order_id %>" method="post">
-        <% if (order.order_status === 'new') {%>
-        <input type="number" name="timer" min="5" max="45">
-        <button name="state" class="status-processing" value="processing" >Accept</button>
-        <% } else if (order.order_status === 'processing')  { %>
-        <button name="state" class="status-fulfilled" value="fulfilled">Fullfill Me!</button>
-        <% } %>
-        <button name="state" class="status-cancel" value="declined">Cancel</button>
-      </form>
+        <div class="comments">
+          <p>Comments: <%= order.customer_comments %></p>
+        </div>
+        <table class="order-table">
+          <tr>
+            <th>item</th>
+            <th>qty</th>
+          </tr>
+          <% for (const food of order.foods) { %>
+          <!-- <p>Food id: <%= food.food_id %></p> -->
+          <tr>
+            <td class="must-see"><%= food.food_name %></td>
+            <td class="must-see"><%= food.food_qty %></td>
+          </tr>
+          <!-- <p>Food URL: <%= food.picture_url %></p> -->
+          <% } %>
+        </table>
+        <form action="/owners/<%= user.id %>/orders/<%= order.order_id %>" method="post">
+          <% if (order.order_status === 'new') {%>
+          <input type="number" name="timer" min="5" max="45">
+          <button name="state" class="status-processing" value="processing">Accept</button>
+          <% } else if (order.order_status === 'processing')  { %>
+          <button name="state" class="status-fulfilled" value="fulfilled">Fullfill Me!</button>
+          <% } %>
+          <button name="state" class="status-cancel" value="declined">Cancel</button>
+        </form>
 
-  </div>
+      </div>
     </div>
     <% } %>
   </main>
