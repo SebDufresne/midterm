@@ -76,9 +76,6 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
         totalCost += numItem;
       }
 
-      console.log('userId', userId);
-      console.log('totalCost', totalCost);
-
       const insertOrders = {
         text:
           "INSERT INTO orders (user_id, total_cost) VALUES ($1, $2) RETURNING id",
@@ -92,10 +89,6 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
           const insertFoodOrdersQuery = generateQueryFromCart(orderId, cart);
 
           db.query(insertFoodOrdersQuery)
-            .then(res => {
-              console.log("I'M IN THE LOOP!!!");
-              return res;
-            })
             .catch(err => {
               res.status(500).json({ error: err.message });
             });
