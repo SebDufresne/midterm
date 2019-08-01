@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Top Dogs! - User Profile</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+
+  <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <!-- Font Awesome External JS-->
+  <script src="https://kit.fontawesome.com/<%= iconsKey %>.js"></script>
+</head>
+
+<body>
+  <% include ./partials/_header %>
+  <main>
+    <form method='POST' action='/profile'>
+      <img src="<%= user.picture_url %>" alt="">
+      <button type="submit">Upload</button>
+
+      <div class="name">
+        <p>Name: <%= user.name %></p>
+        <input type='name' name='name' placeholder='Name'>
+        <button type="submit">Update</button>
+      </div>
+
+      <br>
+      <br>
+      <div class="phone">
+        <p>Phone number: <%= user.phone_number %></p>
+        <input type='phone' name='phone' placeholder='Phone Number'>
+        <button type="submit">Update</button>
+      </div>
+
+      <br>
+      <br>
+      <p>Email: <%= user.email %></p>
+    </form>
+  </main>
+  <% include ./partials/_footer %>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+$( document ).ready(function() {
+  console.log( "Profile ready!" );
+
+  $('main form').on('submit', function(event) {
+    event.preventDefault();
+
+    let fieldName = $(event.target).find('.name input').val();
+    let fieldPhone = $(event.target).find('.phone input').val();
+    let $error = $('<p>');
+
+    console.log("fieldName:", fieldName);
+    console.log("fieldPhone:", fieldPhone);
+
+    if (!fieldName) {
+      $error.text("To update, please fill the empty fields.");
+      console.log("To update, please fill the empty fields.");
+    } else if (fieldName.length >= 25) {
+      $error.text("Maximum number of characters reached.");
+      console.log("Maximum number of characters reached.");
+    } else if (fieldName.indexOf(" ") !== -1) {
+      $error.text("Remove spaces.");
+      console.log("Remove spaces.");
+    } else {
+      $error.text("NEXT PART!");
+      console.log("NEXT PART!");
+
+      // const updateUserInfo = {
+      //   text: "UPDATE users SET (name, phone, picture_url) VALUES ($1, $2, $3)",
+      //   values: ['name!!!', 'phone!!!', 'picture_url!!!']
+      // };
+
+      // db.query(updateUserInfo)
+      //   .then(data => {
+      //     console.log(">>>>>>>>>updateUserInfo<<<<<<<<<", updateUserInfo);
+      //   })
+      //   .catch(err => {
+      //     res.status(500).json({ error: err.message });
+      //   });
+    }
+
+  })
+
+});
+</script>
+
+</html>

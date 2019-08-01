@@ -35,7 +35,7 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <span class='mr-2'><%= user.name %></span>
+            <a class='mr-2 user-profile' href="/profile"><%= user.name %></a>
           </li>
           <% if(user.admin) { %>
             <li class="nav-item active">
