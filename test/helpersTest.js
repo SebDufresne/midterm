@@ -1,5 +1,10 @@
 const { assert, expect } = require('chai');
-const { extractCustomerObj, extractFoodObj, findOrderIndex, generateEmptyUser, refactorOrder} = require('../lib/helpers');
+const { extractCustomerObj,
+  extractFoodObj,
+  findOrderIndex,
+  generateEmptyUser,
+  generateQueryFromCart,
+  refactorOrder} = require('../lib/helpers');
 
 describe('#extractCustomerObj', function() {
   it(`Expect an empty object when submitted an empty value`, function() {
@@ -100,6 +105,24 @@ describe('#generateEmptyUser', function() {
     assert.deepEqual(generateEmptyUser(),output);
   });
 });
+
+
+
+
+
+
+
+describe('#generateQueryFromCart', function() {
+  it(`return a query object from a cart`, function() {
+    const cartInput = [ { id: 1, name: 'Tubby Dog', price: 799, qty: 2 },
+      { id: 2, name: 'Cheetah', price: 899, qty: 3 } ];
+    const output = { text: "INSERT INTO food_orders (order_id, food_id) VALUES ($1, $2), ($1, $3), ($1, $4), ($1, $5), ($1, $6)", values: [1, 1, 1, 2, 2, 2] };
+    assert.deepEqual(generateQueryFromCart(1,cartInput),output);
+  });
+});
+
+
+
 
 describe('#refactorOrder', function() {
   it(`Takes an array of orders and return an empty array if the list is empty`, function() {
