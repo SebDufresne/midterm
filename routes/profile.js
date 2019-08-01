@@ -15,6 +15,7 @@ const {
 } = require("../lib/helpers");
 
 module.exports = (db, iconsKey) => {
+
   router.get("/", (req, res) => {
     const userId = req.session.userId || "";
 
@@ -48,6 +49,5 @@ module.exports = (db, iconsKey) => {
         });
     }
   });
-
   return router;
 };

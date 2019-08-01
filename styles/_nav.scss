@@ -32,7 +32,8 @@ nav {
     color: $color-red;
     text-shadow: 1px 1px $color-off-white;
   }
-  span {
+
+  span, a.user-profile {
     color: $color-dark-blue;
     font-weight: 700;
   }
