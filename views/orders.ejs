@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/vendor/jquery.timeago.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
   <!-- Font Awesome External JS-->
@@ -25,7 +26,7 @@
     <!-- Fields are displayed for information purposes only -->
     <% for (const order of structuredOrders) { %>
       <div class ="brief-summary">
-        <p><%= (order.ordered_at) %></p>
+        <p><time class="timeago" datetime="<%= order.ordered_at %>"></time></p>
       </div>
       <div class="expanded-order">
         <table>

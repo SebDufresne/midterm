@@ -29,7 +29,7 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
         .then(userInfo => {
           if (!userInfo.admin) {
             const getOrdersQuery = {
-              text: `SELECT * FROM order_summary WHERE user_id = $1`,
+              text: `SELECT * FROM order_summary WHERE user_id = $1 ORDER BY order_time DESC`,
               values: [userId]
             };
 

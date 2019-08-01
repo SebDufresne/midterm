@@ -35,6 +35,10 @@ const updatePrice = (foodPrice, currentTotal) => {
 
 $(() => {
 
+  $(document).ready(function() {
+    $("time.timeago").timeago();
+  });
+
   // Handles events related to "Dog-Me button on the index
   $(".add-food-btn").click(function() {
     // Updates Cart Input Value

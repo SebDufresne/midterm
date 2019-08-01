@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/vendor/jquery.timeago.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
   <!-- Font Awesome External JS-->
@@ -38,7 +39,7 @@
         <p></p>
       <!-- </div> -->
       <div class="order-items">
-          <p>Ordered at: <%= order.ordered_at %></p>
+          <p>Ordered at: <time class="timeago" datetime="<%= order.ordered_at %>"></time></p>
           <p class="order-status"><%= order.order_status %></p>
         <div class="comments">
           <p class="must-see"><%= order.customer_comments %></p>
