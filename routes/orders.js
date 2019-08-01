@@ -15,6 +15,7 @@ const { sendSMS } = require("../public/scripts/sms");
 
 const {
   generateEmptyUser,
+  generateQueryFromCart,
   getUserInfo,
   getPhoneNumber,
   refactorOrder
@@ -75,6 +76,9 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
         totalCost += numItem;
       }
 
+      console.log('userId', userId);
+      console.log('totalCost', totalCost);
+
       const insertOrders = {
         text:
           "INSERT INTO orders (user_id, total_cost) VALUES ($1, $2) RETURNING id",
@@ -85,20 +89,19 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
         .then(data => {
           const orderId = data.rows[0].id;
 
-          for (let item of cart) {
-            const qty = item.qty;
-            for (let i = 0; i < qty; i++) {
-              const insertFoodOrders = {
-                text: "INSERT INTO food_orders (order_id, food_id) VALUES ($1, $2)",
-                values: [orderId, item.id]
-              };
+          const insertFoodOrdersQuery = generateQueryFromCart(orderId, cart);
 
-              db.query(insertFoodOrders);
-            }
-          }
+          db.query(insertFoodOrdersQuery)
+            .then(res => {
+              console.log("I'M IN THE LOOP!!!");
+              return res;
+            })
+            .catch(err => {
+              res.status(500).json({ error: err.message });
+            });
 
           sendSMS(
-            getPhoneNumber(PHONE_OWNER),
+            PHONE_OWNER,
             `A new 🌭 order has been placed. The order number is ${orderId}.`
           );
 
