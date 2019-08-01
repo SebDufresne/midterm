@@ -46,17 +46,21 @@ module.exports = (db, iconsKey) => {
       res.render("login", params);
     } else {
       const getPasswordQuery = {
-        text: `SELECT id, password FROM users WHERE email = $1`,
+        text: `SELECT id, password, admin FROM users WHERE email = $1`,
         values: [formEmail]
       };
 
       db.query(getPasswordQuery)
         .then(data => {
-          const userInfo = data.rows[0]; // email IS unique in DB
+          const userInfo = data.rows[0];
 
           if (bcrypt.compareSync(formPassword, userInfo.password)) {
             req.session.userId = userInfo.id;
-            res.redirect("/");
+            if (userInfo.admin) {
+              res.redirect(`/owners/${userInfo.id}/orders`);
+            } else {
+              res.redirect("/");
+            }
           } else {
             res.status(403);
             const user = generateEmptyUser();
