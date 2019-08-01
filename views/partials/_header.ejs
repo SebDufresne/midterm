@@ -15,16 +15,18 @@
 
     <a href="/"><h1>Top Dogs!</h1></a>
 
+    <div>
     <!-- User Is Authenticated AND is NOT an admin-->
     <% if(user.id && !user.admin) { %>
       <form method='POST' action='/' data-cart="">
-          <div class="cart-icon">
+        <div class="cart-icon">
           <div class="price-counter"></div>
           <input id="cart" name="cart" type="hidden" value="">
           <button type="submit" id="cart-btn"><i class="fas fa-shopping-cart"></i></button>
         </div>
-        </form>
-      <% } %>
+      </form>
+    <% } %>
+  </div>
 
     <% if(user.id) { %>
       <!-- Collapsible content -->
