@@ -8,9 +8,6 @@
 const express = require("express");
 const router = express.Router();
 
-// Allows time manipulation
-const moment = require('moment-timezone');
-
 const { sendSMS } = require("../public/scripts/sms");
 
 const {
@@ -40,8 +37,7 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
                 const structuredOrders = refactorOrder(currentOrder);
 
                 const user = userInfo;
-                const fct = { moment };
-                const params = { user, structuredOrders, fct, iconsKey };
+                const params = { user, structuredOrders, iconsKey };
 
                 console.log(structuredOrders);
                 res.render("orders", params);
