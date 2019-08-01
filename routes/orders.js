@@ -101,7 +101,7 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
             });
 
           sendSMS(
-            getPhoneNumber(1), // 1 is linked to PHONE OWNER
+            PHONE_OWNER,
             `A new 🌭 order has been placed. The order number is ${orderId}.`
           );
 
