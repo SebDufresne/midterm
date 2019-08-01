@@ -17,7 +17,6 @@ const {
   generateEmptyUser,
   generateQueryFromCart,
   getUserInfo,
-  getPhoneNumber,
   refactorOrder
 } = require("../lib/helpers");
 
