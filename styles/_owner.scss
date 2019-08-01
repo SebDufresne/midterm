@@ -28,6 +28,7 @@
   align-items: right;
   // border-bottom: 1px solid black;
 }
+
  .order-items {
   width: 100%;
   display: flex;
@@ -36,6 +37,11 @@
   align-items: center;
   .comments {
     width: 75%;
+    text-align: center;
+  }
+  .must-see {
+    font-weight: bold;
+    font-size: 2rem;
   }
  }
 
@@ -50,10 +56,7 @@
    border-bottom: 1px solid black;
  }
 
- .must-see {
-   font-weight: bold;
-   font-size: 2rem;
- }
+
 }
 
 .kitchen-buttons {
