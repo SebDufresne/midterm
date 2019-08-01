@@ -8,15 +8,19 @@
 const express = require("express");
 const router = express.Router();
 
+// Allows time manipulation
+const moment = require('moment-timezone');
+
 const { sendSMS } = require("../public/scripts/sms");
 
 const {
+  generateEmptyUser,
   getUserInfo,
   getPhoneNumber,
   refactorOrder
 } = require("../lib/helpers");
 
-module.exports = (db, iconsKey) => {
+module.exports = (db, iconsKey, PHONE_OWNER) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId || "";
 
@@ -36,7 +40,8 @@ module.exports = (db, iconsKey) => {
                 const structuredOrders = refactorOrder(currentOrder);
 
                 const user = userInfo;
-                const params = { user, structuredOrders, iconsKey };
+                const fct = { moment };
+                const params = { user, structuredOrders, fct, iconsKey };
 
                 console.log(structuredOrders);
                 res.render("orders", params);
@@ -58,83 +63,64 @@ module.exports = (db, iconsKey) => {
     }
   });
 
-  let orderId = "";
-
   router.post("/", (req, res) => {
-    const userId = req.session.userId || "";
+    const userId = req.session.userId || '';
     const processedOrder = req.body.cart;
-    const cart = JSON.parse(processedOrder);
+    if (userId && processedOrder) {
+      const cart = JSON.parse(processedOrder);
+      let totalCost = 0;
 
-    getUserInfo(userId, db)
-      .then(usersData => {
-        const user = usersData;
-        let totalCost = 0;
+      for (let item of cart) {
+        let numItem = item.price * item.qty;
+        totalCost += numItem;
+      }
 
-        for (let item of cart) {
-          let numItem = item.price * item.qty;
-          totalCost += numItem;
-        }
+      const insertOrders = {
+        text:
+          "INSERT INTO orders (user_id, total_cost) VALUES ($1, $2) RETURNING id",
+        values: [userId, totalCost]
+      };
 
-        const insertOrders = {
-          text:
-            "INSERT INTO orders (user_id, total_cost) VALUES ($1, $2) RETURNING id",
-          values: [userId, totalCost]
-        };
+      db.query(insertOrders)
+        .then(data => {
+          const orderId = data.rows[0].id;
 
-        console.log(">>>insertOrders<<<", insertOrders);
+          for (let item of cart) {
+            const qty = item.qty;
+            for (let i = 0; i < qty; i++) {
+              const insertFoodOrders = {
+                text: "INSERT INTO food_orders (order_id, food_id) VALUES ($1, $2)",
+                values: [orderId, item.id]
+              };
 
-        db.query(insertOrders)
-          .then(data => {
-            orderId = data.rows[0].id;
-
-            for (let item of cart) {
-              const { id, name, price, qty } = item;
-
-              for (let i = 0; i < qty; i++) {
-                const insertFoodOrders = {
-                  text: "INSERT INTO food_orders (order_id, food_id) VALUES ($1, $2)",
-                  values: [orderId, item.id]
-                };
-
-                db.query(insertFoodOrders)
-                  .then(data => {
-                    console.log(
-                      ">>>>>>>>>insertFoodOrders<<<<<<<<<",
-                      insertFoodOrders
-                    );
-                  })
-                  .catch(err => {
-                    res.status(500).json({ error: err.message });
-                  });
-              }
+              db.query(insertFoodOrders);
             }
+          }
 
-            const ownerId = 3;
-            sendSMS(
-              getPhoneNumber(ownerId),
-              `A new 🌭 order has been placed. The order number is ${orderId}.`
-            );
+          sendSMS(
+            getPhoneNumber(PHONE_OWNER),
+            `A new 🌭 order has been placed. The order number is ${orderId}.`
+          );
 
-            req.session.cart = null;
-            const params = { user, cart, iconsKey };
-            res.redirect(`/orders/${orderId}`);
-          })
-          .catch(err => {
-            res.status(500).json({ error: err.message });
-          });
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
+          req.session.cart = null;
+
+          res.redirect(`/orders/${orderId}`);
+        })
+        .catch(err => {
+          res.status(500).json({ error: err.message });
+        });
+    } else {
+      res.redirect("/");
+    }
   });
 
   router.get('/:id', (req, res) => {
     const userId = req.session.userId || "";
     const orderIdForUser = req.params.id;
 
-    getUserInfo(userId, db)
-      .then(userInfo => {
-        if (userId) {
+    if (userId) {
+      getUserInfo(userId, db)
+        .then(userInfo => {
           const orderSummQuery = `SELECT * FROM order_summary WHERE order_id = ${orderIdForUser}`;
 
           db.query(orderSummQuery)
@@ -149,15 +135,16 @@ module.exports = (db, iconsKey) => {
             .catch(err => {
               res.status(500).json({ error: err.message });
             });
-        } else {
-          const user = userInfo;
-          const params = { user, iconsKey };
-          res.render("404", params);
-        }
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
+
+        })
+        .catch(err => {
+          res.status(500).json({ error: err.message });
+        });
+    } else {
+      const user = generateEmptyUser();
+      const params = { user, iconsKey };
+      res.render("404", params);
+    }
   });
   return router;
 };
