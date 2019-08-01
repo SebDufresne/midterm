@@ -21,7 +21,9 @@ module.exports = (db, iconsKey) => {
 
         if (userInfo.admin) {
 
-          const orderSummQuery = `SELECT * FROM order_summary WHERE order_status IN ('new', 'processing')`;
+          const orderSummQuery = `SELECT * FROM order_summary
+          WHERE order_status IN ('new', 'processing')
+          AND order_time >= now()::date - interval '1 day';`;
 
           db.query(orderSummQuery)
             .then(data => {
