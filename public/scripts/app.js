@@ -54,6 +54,7 @@ $(() => {
     $priceField.text(updatePrice(foodPrice, currentTotal));
   });
 
+
   $(".expanded-order").hide();
 
   $('.brief-summary').css('cursor', 'pointer');

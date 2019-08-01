@@ -21,11 +21,11 @@
 <body>
   <% include ./partials/_header %>
   <main>
-    <h1>orders</h1>
+    <h1>Active Orders</h1>
     <!-- Fields are displayed for information purposes only -->
     <% for (const order of structuredOrders) { %>
     <div class="order-box">
-      <div class="order-essentials">
+      <div class="order-essentials status-<%= order.order_status %>">
         <p>Status: <%= order.order_status %></p>
         <p>Ordered at: <%= order.ordered_at %></p>
         <p>Id: <%= order.order_id %></p>
@@ -54,6 +54,16 @@
       <!-- <p>Food URL: <%= food.picture_url %></p> -->
       <% } %>
     </table>
+      <form action="/owners/<%= user.id %>/orders/<%= order.order_id %>" method="post">
+        <% if (order.order_status === 'new') {%>
+        <input type="number" name="timer" min="5" max="45">
+        <button name="state" class="status-processing" value="processing" >Accept</button>
+        <% } else if (order.order_status === 'processing')  { %>
+        <button name="state" class="status-fulfilled" value="fulfilled">Fullfill Me!</button>
+        <% } %>
+        <button name="state" class="status-cancel" value="declined">Cancel</button>
+      </form>
+
   </div>
     </div>
     <% } %>
