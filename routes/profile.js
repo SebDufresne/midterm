@@ -35,5 +35,11 @@ module.exports = (db, iconsKey) => {
         });
     }
   });
+
+  router.post("/", (req, res) => {
+    const userId = req.session.userId || "";
+
+  });
+
   return router;
 };
