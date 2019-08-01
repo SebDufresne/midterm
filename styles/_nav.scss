@@ -7,6 +7,7 @@ header {
 }
 
 nav {
+  position: fixed;
   display: flex;
   flex-flow: row;
   // justify-content: space-between;
@@ -62,3 +63,6 @@ nav {
   border: none;
 }
 
+.navbar navbar-light light-blue lighten-4 {
+  position: fixed;
+}
