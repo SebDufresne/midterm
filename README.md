@@ -12,21 +12,19 @@ Users can register with their email and phone number. Users can then select menu
 
 Order history lists a users order history and can be clicked to show details of the order.
 
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/404.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/active_orders.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/cart.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/dropdown_navigation.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/empty_cart.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items_mobile.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/login.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/new_order.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/owner_order_history.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/registration.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/sms_owner.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_order_history.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_profile_edit.png)
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_profile.png)
+!["List of available offers"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items.png)
+
+!["Shopping cart"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/cart.png)
+
+!["Empty cart"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/empty_cart.png)
+
+!["Completed order page"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/new_order.png)
+
+!["Order history for user side"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_order_history.png)
+
+!["User profile"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_profile.png)
+
+!["User profile modifications"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_profile_edit.png)
 
 ### Admin Side
 
@@ -34,13 +32,27 @@ Admin users would typically be restaurants. Admins are notified when an order is
 
 Admins can see a history of their orders on order-history page, with drop down to show details.
 
-!["Screen capture of layout in tablet mode"](https://github.com/SebDufresne/tweeter/blob/master/docs/tablet_layout.png)
+!["List of active orders"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/active_orders.png)
+
+!["Order history for admin side"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/owner_order_history.png)
 
 ### Mobile Mode
 
 Food menu designed to be comfortable for both mobile and desktop views. Menu item pictures bigger on mobile.
 
-!["Screen capture of Back To Top Button in mobile mode"](https://github.com/SebDufresne/tweeter/blob/master/docs/mobile_backToTop_Button.png)
+!["Mobile integration"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items_mobile.png)
+
+### Extra features
+
+!["Registration page"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/registration.png)
+
+!["Login page"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/login.png)
+
+!["Dropdown navigation menu"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/dropdown_navigation.png)
+
+!["404 page"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/404.png)
+
+!["SMS notification"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/sms_owner.png)
 
 ## Dependencies
 
