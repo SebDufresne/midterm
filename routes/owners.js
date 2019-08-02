@@ -16,30 +16,36 @@ module.exports = (db, iconsKey) => {
   router.get("/:id/orders", (req, res) => {
     const userId = req.session.userId || '';
 
+    console.log('REQ!!!!!', req.query.tagId);
+
     getUserInfo(userId, db)
       .then(userInfo => {
 
         if (userInfo.admin) {
 
-          const orderSummQuery = `SELECT * FROM order_summary
-          WHERE order_status IN ('new', 'processing')
-          AND order_time >= now()::date - interval '1 day';`;
+          if (req.query.section === 'history') {
 
-          db.query(orderSummQuery)
-            .then(data => {
-              const orderData = data.rows;
+          } else {
+            const orderSummQuery = `SELECT * FROM order_summary
+            WHERE order_status IN ('new', 'processing')
+            AND order_time >= now()::date - interval '1 day';`;
 
-              const structuredOrders = refactorOrder(orderData);
+            db.query(orderSummQuery)
+              .then(data => {
+                const orderData = data.rows;
 
-              const user = userInfo;
-              const params = {user, structuredOrders, iconsKey};
-              res.render("owner_active", params);
-            })
-            .catch(err => {
-              res
-                .status(500)
-                .json({ error: err.message });
-            });
+                const structuredOrders = refactorOrder(orderData);
+
+                const user = userInfo;
+                const params = {user, structuredOrders, iconsKey};
+                res.render("owner_active", params);
+              })
+              .catch(err => {
+                res
+                  .status(500)
+                  .json({ error: err.message });
+              });
+          }
         } else {
           const user = userInfo;
           const params = {user, iconsKey};
