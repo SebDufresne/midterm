@@ -1,3 +1,5 @@
+// 404 page styling used in 404.ejs
+
 .fourohfourbox {
   display: flex;
   flex-direction: column;
@@ -6,6 +8,7 @@
   font-family: $secondary-font;
   padding-top: 3rem;
 
+  // Photo displayed on the page
   .lost-dog {
     height: auto;
   }

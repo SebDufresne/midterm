@@ -1,9 +1,9 @@
+// for _header.ejs
+
 header {
   position: fixed;
   width: 100%;
   height: $nav-height;
-  // background-color: $color-yellow; // Seb
-  // border-bottom: 5px $color-dark solid;
   z-index: 1;
   background-color: $color-yellow;
 
@@ -14,7 +14,6 @@ nav {
   position: fixed;
   display: flex;
   flex-flow: row;
-  // justify-content: space-between;
   align-items: center;
   width: 100%;
   height: auto;
@@ -41,18 +40,15 @@ nav {
     margin-right: 1.5rem;
 
   }
-  // div {
-  //   margin-left: 1.5rem;
 
-  // }
   #login {
     margin-left: 1.5rem;
     margin-top: 1rem;
     color: $color-dark-blue;
-
   }
-
 }
+
+// drop-down menu
 .navbar-light .navbar-toggler {
   border: none;
 }
@@ -61,6 +57,7 @@ nav {
   position: fixed;
 }
 
+// selector for items in drop-down menu
 a {
   color: $color-dark-blue;
 }
