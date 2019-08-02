@@ -28,7 +28,7 @@ app.use(cookieSession({
 // Key for Font Awesome
 const iconsKey = process.env.FONT_AWESOME;
 
-
+// bcrypt - used for hashing passwords - Not In Use (conflict with bcrypt 3.0.6 and Node prior to 12)
 const saltRounds = process.env.SALT_ROUNDS;
 
 // Helper Functions
@@ -71,7 +71,6 @@ app.use("/owners",   ownersRoutes(db, iconsKey));
 app.use("/profile",   profileRoutes(db, iconsKey));
 app.use("/register", registerRoutes(db, iconsKey, saltRounds));
 // Note: mount other resources here, using the same pattern above
-
 
 // Home page
 // Warning: avoid creating more routes in this file!
