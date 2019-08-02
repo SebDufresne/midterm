@@ -38,6 +38,28 @@ module.exports = (db, iconsKey) => {
 
   router.post("/", (req, res) => {
     const userId = req.session.userId || "";
+    const newName = req.body.name;
+    const newPhone = req.body.phone;
+
+    if (!newPhone && (newName.length >= 1)) {
+      const updateUserName = {
+        text: `UPDATE users SET name = $1 WHERE id = ${userId}`,
+        values: [newName]
+      };
+
+      db.query(updateUserName);
+      res.send(`Succesfully updated name in DB!`);
+    }
+
+    if (!newName && (newPhone.length >= 1)) {
+      const updateUserPhone = {
+        text: `UPDATE users SET phone_number = $1 WHERE id = ${userId}`,
+        values: [newPhone]
+      };
+
+      db.query(updateUserPhone);
+      res.send(`Succesfully updated phone number in DB!`);
+    }
 
   });
 

@@ -16,32 +16,67 @@
 
   <!-- Font Awesome External JS-->
   <script src="https://kit.fontawesome.com/<%= iconsKey %>.js"></script>
+
+
+  <style>
+
+    main {
+      padding-bottom: 5rem;
+    }
+
+    #error-message-name, #error-message-phone {
+      display: none;
+      color: #BB2705;
+    }
+
+    .avatar-wrapper, .name-wrapper, .phone-wrapper, .email-wrapper {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar-wrapper {
+      margin-top: 0;
+    }
+
+    .hide-name, .hide-phone {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
   <% include ./partials/_header %>
   <main>
     <form method='POST' action='/profile'>
-      <img src="<%= user.picture_url %>" alt="">
-      <button type="submit">Upload</button>
-
-      <div class="name">
-        <p>Name: <%= user.name %></p>
-        <input type='name' name='name' placeholder='Name'>
-        <button type="submit">Update</button>
+      <div class="avatar-wrapper">
+        <img src="<%= user.picture_url %>" alt="">
       </div>
 
-      <br>
-      <br>
-      <div class="phone">
-        <p>Phone number: <%= user.phone_number %></p>
-        <input type='phone' name='phone' placeholder='Phone Number'>
-        <button type="submit">Update</button>
+      <div class="email-wrapper">
+        <p>Email: <%= user.email %></p>
       </div>
 
-      <br>
-      <br>
-      <p>Email: <%= user.email %></p>
+      <div class="name-wrapper">
+        <p>Name: <span><%= user.name %></span></p>
+        <button class="edit-name" type="submit">Edit</button>
+        <div class="hide-name show-name">
+          <button class="update-name" type="submit">Update</button>
+          <input type='name' name='name' placeholder='Name'>
+          <div id="error-message-name"></div>
+        </div>
+      </div>
+
+      <div class="phone-wrapper">
+        <p>Phone number: <span><%= user.phone_number %></span></p>
+        <button class="edit-phone" type="submit">Edit</button>
+        <div class="hide-phone show-phone">
+          <button class="update-phone" type="submit">Update</button>
+          <input type='phone' name='phone' placeholder='Phone Number'>
+          <div id="error-message-phone"></div>
+        </div>
+      </div>
     </form>
   </main>
   <% include ./partials/_footer %>
@@ -53,45 +88,95 @@
 
 <script>
 $( document ).ready(function() {
+
   console.log( "Profile ready!" );
 
-  $('main form').on('submit', function(event) {
+  $("input[name='name']").val('');
+
+  $("button.edit-name").click(function(event) {
     event.preventDefault();
 
-    let fieldName = $(event.target).find('.name input').val();
-    let fieldPhone = $(event.target).find('.phone input').val();
-    let $error = $('<p>');
+    $("button.edit-name").addClass("hide-name");
+    $(".show-name").removeClass("hide-name");
+  })
 
-    console.log("fieldName:", fieldName);
-    console.log("fieldPhone:", fieldPhone);
+  $("button.update-name").click(function(event) {
+    event.preventDefault();
+
+    let fieldName = $('form').find("input[name='name']").val();
+
+    let $error = $('<p>');
+    $("#error-message-name").html($error);
 
     if (!fieldName) {
       $error.text("To update, please fill the empty fields.");
-      console.log("To update, please fill the empty fields.");
+      $("#error-message-name").slideDown().addClass('show_error_msg');
     } else if (fieldName.length >= 25) {
       $error.text("Maximum number of characters reached.");
-      console.log("Maximum number of characters reached.");
+      $("#error-message-name").slideDown().addClass('show_error_msg');
     } else if (fieldName.indexOf(" ") !== -1) {
       $error.text("Remove spaces.");
-      console.log("Remove spaces.");
+      $("#error-message-name").slideDown().addClass('show_error_msg');
     } else {
-      $error.text("NEXT PART!");
-      console.log("NEXT PART!");
 
-      // const updateUserInfo = {
-      //   text: "UPDATE users SET (name, phone, picture_url) VALUES ($1, $2, $3)",
-      //   values: ['name!!!', 'phone!!!', 'picture_url!!!']
-      // };
+      $.ajax({
+        type: "POST",
+        url: "/profile",
+        data: {
+          name: fieldName
+        },
+        success: (data) => {console.log("Retrieved new name!", data)}
+        // ,
+        // dataType: dataType
+      });
 
-      // db.query(updateUserInfo)
-      //   .then(data => {
-      //     console.log(">>>>>>>>>updateUserInfo<<<<<<<<<", updateUserInfo);
-      //   })
-      //   .catch(err => {
-      //     res.status(500).json({ error: err.message });
-      //   });
+      $(".show-name").addClass("hide-name");
+      $("button.edit-name").removeClass("hide-name");
+
+      $(".name-wrapper span").text(fieldName);
+      $("input[name='name']").val('');
     }
+  })
 
+  $("button.edit-phone").click(function(event) {
+    event.preventDefault();
+
+    $("button.edit-phone").addClass("hide-phone");
+    $(".show-phone").removeClass("hide-phone");
+  })
+
+  $("button.update-phone").click(function(event) {
+    event.preventDefault();
+
+    let fieldPhone = $('form').find("input[name='phone']").val();
+    let $error = $('<p>');
+    $("#error-message-phone").html($error);
+
+    if (!fieldPhone) {
+      $error.text("To update, please fill the empty fields.");
+      $("#error-message-phone").slideDown().addClass('show_error_msg');
+    } else if (fieldPhone.length >= 25) {
+      $error.text("Maximum number of characters reached.");
+      $("#error-message-phone").slideDown().addClass('show_error_msg');
+    } else {
+
+      $.ajax({
+        type: "POST",
+        url: "/profile",
+        data: {
+          phone: fieldPhone
+        },
+        success: (data) => {console.log("Retrieved new phone!", data)}
+        // ,
+        // dataType: dataType
+      });
+
+      $(".show-phone").addClass("hide-phone");
+      $("button.edit-phone").removeClass("hide-phone");
+
+      $(".phone-wrapper span").text(fieldPhone);
+      $("input[name='phone']").val('');
+    }
   })
 
 });
