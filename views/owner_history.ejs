@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Top Dogs! - Orders</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+
+  <script type="text/javascript" src="/vendor/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/vendor/jquery.timeago.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <!-- Font Awesome External JS-->
+  <script src="https://kit.fontawesome.com/<%= iconsKey %>.js"></script>
+</head>
+
+<body>
+  <% include ./partials/_header %>
+  <main>
+    <div id="owners-history">
+      <h1>Orders History</h1>
+
+      <!-- Fields are displayed for information purposes only -->
+      <% for (const order of structuredOrders) { %>
+
+        <div class="accordion" id="accordionHistory">
+
+          <div class="card">
+            <div class="card-header" id="heading-<%= order.order_id %>">
+              <h2 class="order-id">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-<%= order.order_id %>" aria-expanded="true" aria-controls="collapse-<%= order.order_id %>">
+                  Order: <%= order.order_id %>
+                </button>
+              </h2>
+              <p class="customer-name"><%= order.user.customer_name %></p>
+              <p class="order-date"><time class="timeago" datetime="<%= order.ordered_at %>"></time></p>
+              <p class="order-status status-<%= order.order_status %>"><%= order.order_status %></p>
+            </div>
+
+            <div id="collapse-<%= order.order_id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionHistory">
+              <div class="card-body">
+                <table class="order-table">
+                  <tr >
+                      <th class="">Quantity</th>
+                      <th class="items">item(s)</th>
+                  </tr>
+
+                  <% for (const food of order.foods) { %>
+                    <tr>
+                      <td class="must-see"><%= food.food_qty %></td>
+                      <td class="must-see ordered-food"><%= food.food_name %></td>
+                    </tr>
+                  <% } %>
+                </table>
+              </div>
+            </div>
+          </div>
+
+      <% } %>
+    </div>
+  </main>
+  <% include ./partials/_footer %>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

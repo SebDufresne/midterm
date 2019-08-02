@@ -4,6 +4,7 @@ header {
   height: $nav-height;
   // background-color: $color-yellow; // Seb
   // border-bottom: 5px $color-dark solid;
+  z-index: 1;
 }
 
 nav {

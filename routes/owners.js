@@ -16,15 +16,32 @@ module.exports = (db, iconsKey) => {
   router.get("/:id/orders", (req, res) => {
     const userId = req.session.userId || '';
 
-    console.log('REQ!!!!!', req.query.tagId);
+    const section = req.query.section;
 
     getUserInfo(userId, db)
       .then(userInfo => {
 
         if (userInfo.admin) {
 
-          if (req.query.section === 'history') {
+          if (section === 'history') {
+            const orderSummQuery = `SELECT * FROM order_summary
+            WHERE order_status IN ('declined', 'fulfilled')`;
 
+            db.query(orderSummQuery)
+              .then(data => {
+                const orderData = data.rows;
+
+                const structuredOrders = refactorOrder(orderData);
+
+                const user = userInfo;
+                const params = {user, structuredOrders, iconsKey};
+                res.render("owner_history", params);
+              })
+              .catch(err => {
+                res
+                  .status(500)
+                  .json({ error: err.message });
+              });
           } else {
             const orderSummQuery = `SELECT * FROM order_summary
             WHERE order_status IN ('new', 'processing')
