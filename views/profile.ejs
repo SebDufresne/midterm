@@ -20,11 +20,23 @@
 
   <style>
 
-    main {
-      padding-bottom: 5rem;
+    main#profile {padding-bottom: 5rem;}
+    main#profile form p {font-family: "Quicksand", sans-serif; font-size: 20px;}
+    main#profile form span {border-bottom: #F1D000 solid 2px;}
+
+    .edit-name, .edit-phone, .update-name, .update-phone {
+      background-color: #F1D000;
+      padding: 0.5rem 2rem;
+      border: 3px solid #000;
+    }
+
+    .show-name input, .show-phone input {
+      padding: 0.5rem;
+      border: 3px solid #000;
     }
 
     #error-message-name, #error-message-phone {
+      margin-top: 0.5rem;
       display: none;
       color: #BB2705;
     }
@@ -36,26 +48,37 @@
       align-items: center;
     }
 
-    .avatar-wrapper {
-      margin-top: 0;
+    .avatar-wrapper {margin-top: 0;}
+    .avatar-wrapper img {width: 30%;}
+
+    .hide-name, .hide-phone {display: none;}
+
+    @media only screen and (max-width: 700px) {
+      .avatar-wrapper img {
+        padding-top: 2rem;
+        width: 60%;
+      }
     }
 
-    .hide-name, .hide-phone {
-      display: none;
+    @media only screen and (max-width: 388px) {
+      .show-name input, .show-phone input {margin-top: 0.5rem;}
+      .name-wrapper, .phone-wrapper, .email-wrapper {
+        display: block;
+        padding-right: 1em;
+        padding-left: 1em;
+      }
     }
+
+
   </style>
 </head>
 
 <body>
   <% include ./partials/_header %>
-  <main>
+  <main id="profile">
     <form method='POST' action='/profile'>
       <div class="avatar-wrapper">
         <img src="<%= user.picture_url %>" alt="">
-      </div>
-
-      <div class="email-wrapper">
-        <p>Email: <%= user.email %></p>
       </div>
 
       <div class="name-wrapper">
@@ -77,6 +100,10 @@
           <div id="error-message-phone"></div>
         </div>
       </div>
+
+      <div class="email-wrapper">
+        <p>Email: <span><%= user.email %></span></p>
+      </div>
     </form>
   </main>
   <% include ./partials/_footer %>
@@ -86,100 +113,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<script>
-$( document ).ready(function() {
-
-  console.log( "Profile ready!" );
-
-  $("input[name='name']").val('');
-
-  $("button.edit-name").click(function(event) {
-    event.preventDefault();
-
-    $("button.edit-name").addClass("hide-name");
-    $(".show-name").removeClass("hide-name");
-  })
-
-  $("button.update-name").click(function(event) {
-    event.preventDefault();
-
-    let fieldName = $('form').find("input[name='name']").val();
-
-    let $error = $('<p>');
-    $("#error-message-name").html($error);
-
-    if (!fieldName) {
-      $error.text("To update, please fill the empty fields.");
-      $("#error-message-name").slideDown().addClass('show_error_msg');
-    } else if (fieldName.length >= 25) {
-      $error.text("Maximum number of characters reached.");
-      $("#error-message-name").slideDown().addClass('show_error_msg');
-    } else if (fieldName.indexOf(" ") !== -1) {
-      $error.text("Remove spaces.");
-      $("#error-message-name").slideDown().addClass('show_error_msg');
-    } else {
-
-      $.ajax({
-        type: "POST",
-        url: "/profile",
-        data: {
-          name: fieldName
-        },
-        success: (data) => {console.log("Retrieved new name!", data)}
-        // ,
-        // dataType: dataType
-      });
-
-      $(".show-name").addClass("hide-name");
-      $("button.edit-name").removeClass("hide-name");
-
-      $(".name-wrapper span").text(fieldName);
-      $("input[name='name']").val('');
-    }
-  })
-
-  $("button.edit-phone").click(function(event) {
-    event.preventDefault();
-
-    $("button.edit-phone").addClass("hide-phone");
-    $(".show-phone").removeClass("hide-phone");
-  })
-
-  $("button.update-phone").click(function(event) {
-    event.preventDefault();
-
-    let fieldPhone = $('form').find("input[name='phone']").val();
-    let $error = $('<p>');
-    $("#error-message-phone").html($error);
-
-    if (!fieldPhone) {
-      $error.text("To update, please fill the empty fields.");
-      $("#error-message-phone").slideDown().addClass('show_error_msg');
-    } else if (fieldPhone.length >= 25) {
-      $error.text("Maximum number of characters reached.");
-      $("#error-message-phone").slideDown().addClass('show_error_msg');
-    } else {
-
-      $.ajax({
-        type: "POST",
-        url: "/profile",
-        data: {
-          phone: fieldPhone
-        },
-        success: (data) => {console.log("Retrieved new phone!", data)}
-        // ,
-        // dataType: dataType
-      });
-
-      $(".show-phone").addClass("hide-phone");
-      $("button.edit-phone").removeClass("hide-phone");
-
-      $(".phone-wrapper span").text(fieldPhone);
-      $("input[name='phone']").val('');
-    }
-  })
-
-});
-</script>
+<script type="text/javascript" src="/scripts/edit-profile.js"></script>
 
 </html>
