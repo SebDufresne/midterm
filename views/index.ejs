@@ -27,7 +27,7 @@
       <div>
         <i id="vegan" class="fas fa-carrot"> vegan</i>
         <i class="fas fa-seedling"> vegetarian</i>
-        <i class="fas fa-bread-slice"> gluten-free</i>
+        <i class="fas"><img class="gluten-free" src="/src/images/icons/gluten-free.svg"> gluten-free</i>
       </div>
       <% if(!user.id) { %>
         <p>Please log-in to order.</p>
@@ -54,7 +54,8 @@
             <% } %>
 
             <% if(foods[food].gluten_free) { %></li>
-              <i class="fas fa-bread-slice"></i>
+              <img class="gluten-free" src="/src/images/icons/gluten-free.svg">
+              <!-- <i class="fas fa-bread-slice"></i> -->
             <% } %>
           </div>
         </div>
