@@ -115,3 +115,60 @@
   background-color: orange;
 }
  }
+
+
+ #owners-history {
+   width: 90%;
+   margin: auto;
+
+   .status-declined {
+    color: $color-orders-cancel;
+  }
+
+  .status-fulfilled {
+    color: orange;
+  }
+
+   h1 {
+     text-align: center;
+     padding: 3rem;
+   }
+
+   div.card-header {
+    display: inline-grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-areas: "order-id name date status";
+
+    align-items: center;
+
+    h2,
+    p {
+      display: inline-block;
+    }
+
+    .order-id {
+      grid-area: order-id;
+    }
+
+    .customer-name {
+      grid-area: name;
+    }
+
+    .order-date {
+      grid-area: date;
+    }
+
+    .order-status {
+      grid-area: status;
+      justify-self: end;
+    }
+   }
+
+   .order-table {
+    width: 70%;
+
+    align-self: center;
+
+   }
+
+ }
