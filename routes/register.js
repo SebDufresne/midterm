@@ -15,6 +15,7 @@ const { generateEmptyUser } = require('../lib/helpers');
 
 module.exports = (db, iconsKey, saltRounds) => {
 
+  // GET of /register
   router.get("/", (req, res) => {
     const userId = req.session.userId || '';
     if (userId) {
@@ -28,6 +29,7 @@ module.exports = (db, iconsKey, saltRounds) => {
     }
   });
 
+  // POST of /register
   router.post("/", (req, res) => {
     const userId = req.session.userId || '';
 

@@ -13,6 +13,9 @@ const { sendSMS } = require("../public/scripts/sms");
 const { getPhoneNumber, getUserInfo, refactorOrder } = require('../lib/helpers');
 
 module.exports = (db, iconsKey) => {
+
+  // GET of /owners/:id/orders
+  // GET of /owners/:id/orders?section=history
   router.get("/:id/orders", (req, res) => {
     const userId = req.session.userId || '';
 
@@ -75,6 +78,8 @@ module.exports = (db, iconsKey) => {
           .json({ error: err.message });
       });
   });
+
+  // POST of /owners/:userId/orders/:orderId
   router.post("/:userId/orders/:orderId", (req, res) => {
     const userId = req.session.userId || '';
 

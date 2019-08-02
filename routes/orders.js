@@ -18,6 +18,7 @@ const {
 } = require("../lib/helpers");
 
 module.exports = (db, iconsKey, PHONE_OWNER) => {
+  // GET of /orders
   router.get("/", (req, res) => {
     const userId = req.session.userId || "";
 
@@ -59,6 +60,7 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
     }
   });
 
+  // POST of /orders
   router.post("/", (req, res) => {
     const userId = req.session.userId || '';
     const processedOrder = req.body.cart;
@@ -105,6 +107,7 @@ module.exports = (db, iconsKey, PHONE_OWNER) => {
     }
   });
 
+  // GET of /orders/:id
   router.get('/:id', (req, res) => {
     const userId = req.session.userId || "";
     const orderIdForUser = req.params.id;

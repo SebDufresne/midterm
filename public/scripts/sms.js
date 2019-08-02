@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+//  Responsible of sending SMS
 const sendSMS = function(phone, message, PHONE_TWILIO = process.env.PHONE_TWILIO, ACCOUNT_SID = process.env.ACCOUNT_SID, AUTH_TOKEN = process.env.AUTH_TOKEN) {
   const accountSid = 'ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'; // Seb: Do we still need those?
   const authToken = 'your_auth_token'; // Seb: Do we still need those?

@@ -15,16 +15,16 @@ const addFoodToCart = (foodId, cartValueAsString) => {
   return cartValueAsString;
 };
 
-// Price is like 0.00$, let's change it to a number:
+// For a price like 0.00$, returns a number:
 const priceStringToNumber = priceAsString => {
   return Number(priceAsString.replace(/[.$\s]/g, ''));
 };
 
-// Takes current total and adds food item price to it
+// Adds food item price to current totals
 const updatePrice = (foodPrice, currentTotal) => {
   currentTotal = priceStringToNumber(currentTotal);
 
-  if (currentTotal) { // If it's not a number, will return NaN which is false
+  if (currentTotal) { // If it's not a number, will return NaN which is falsy
     currentTotal += foodPrice;
   } else {
     currentTotal = foodPrice;
@@ -33,8 +33,12 @@ const updatePrice = (foodPrice, currentTotal) => {
   return (currentTotal / 100).toFixed(2) + '$';
 };
 
+
+// On Page Load
 $(() => {
 
+  // Dynamically modifies times from time elements of class timeago
+  // The time element MUST BE in ISO 8601
   $(document).ready(function() {
     $("time.timeago").timeago();
   });
@@ -59,15 +63,16 @@ $(() => {
   });
 
 
-  $(".expanded-order").hide();
-
+  // Modify pointer style for .brief-summary
   $('.brief-summary').css('cursor', 'pointer');
 
-  $(".brief-summary").click(function(){
-    console.log($(this).next(".expanded-order"));
+  // Hide Expanded orders
+  $(".expanded-order").hide();
+
+  // Manage animation for .expanded-order
+  $(".brief-summary").click(function() {
     $(this).next(".expanded-order").slideToggle('slow', () => {
       $(this).toggleClass('unfolded');
-      // $(this).next('.expanded-order').addClass('unfolded');
     });
   });
 });

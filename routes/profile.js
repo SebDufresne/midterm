@@ -8,13 +8,11 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  getUserInfo,
-  getPhoneNumber,
-  refactorOrder
-} = require("../lib/helpers");
+const { getUserInfo } = require("../lib/helpers");
 
 module.exports = (db, iconsKey) => {
+
+  // GET of /profile
   router.get("/", (req, res) => {
     const userId = req.session.userId || "";
 
@@ -36,6 +34,7 @@ module.exports = (db, iconsKey) => {
     }
   });
 
+  // POST of /profile
   router.post("/", (req, res) => {
     const userId = req.session.userId || "";
     const newName = req.body.name;

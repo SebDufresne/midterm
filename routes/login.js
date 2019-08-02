@@ -14,6 +14,8 @@ const bcrypt = require("bcrypt");
 const { generateEmptyUser } = require("../lib/helpers");
 
 module.exports = (db, iconsKey) => {
+
+  // GET of /login
   router.get("/", (req, res) => {
     const userId = req.session.userId || "";
     if (userId) {
@@ -27,6 +29,8 @@ module.exports = (db, iconsKey) => {
     }
   });
 
+
+  // POST of /login
   router.post("/", (req, res) => {
     const userId = req.session.userId || "";
 

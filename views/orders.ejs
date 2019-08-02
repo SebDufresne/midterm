@@ -23,7 +23,7 @@
   <% include ./partials/_header %>
   <main class="customer-order-history">
     <h1>Order History</h1>
-    <!-- Fields are displayed for information purposes only -->
+
     <% for (const order of structuredOrders) { %>
       <div class ="brief-summary">
         <p><time class="timeago" datetime="<%= order.ordered_at %>"></time></p>
@@ -35,35 +35,30 @@
             <th class="table-heads">item</th>
             <th class="table-heads">price</th>
           </tr>
-          <!-- </table> -->
           <% let total = 0 %>
           <% for (const food of order.foods) { %>
-          <!-- <table> -->
-          <tr>
-            <td class="centered-handwriting"><%= food.food_qty %></td>
-            <td><%= food.food_name %></td>
-            <td class="centered-handwriting"></td>
-          </tr>
-          <% total += food.price * food.food_qty %>
+            <tr>
+              <td class="centered-handwriting"><%= food.food_qty %></td>
+              <td><%= food.food_name %></td>
+              <td class="centered-handwriting"></td>
+            </tr>
+            <% total += food.price * food.food_qty %>
           <% } %>
 
           <tr>
             <td></td>
             <td></td>
-            <!-- <td></td> -->
           </tr>
           <tr>
             <td></td>
             <td class="subtotal">subtotal</td>
             <td class="centered-handwriting"><%= (order.total_cost /100).toFixed(2) %>$</td>
-
           </tr>
           <tr>
             <td></td>
             <td class="tax">tax</td>
             <% let tax = (order.total_cost /100 * 0.15).toFixed(2) %>
             <td class="centered-handwriting"><%= tax %>$</td>
-
           </tr>
           <tr>
             <td></td>

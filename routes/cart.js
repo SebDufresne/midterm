@@ -11,6 +11,8 @@ const router  = express.Router();
 const { getUserInfo } = require('../lib/helpers');
 
 module.exports = (db, iconsKey) => {
+
+  // GET of /carts
   router.get("/", (req, res) => {
     const userId = req.session.userId || '';
 
