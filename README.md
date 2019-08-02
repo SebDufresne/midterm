@@ -8,11 +8,25 @@ A node express web app to connect customers with restaurant owners.
 
 ### Client Side
 
-Users can register with their email and phone number. Users can then select menu items and add them to their cart, once an order if confirmed, and the restaurant has accepted the order, the user is notified via text message when their order will be ready for pickup. 
+Users can register with their email and phone number. Users can then select menu items and add them to their cart, once an order if confirmed, and the restaurant has accepted the order, the user is notified via text message when their order will be ready for pickup.
 
 Order history lists a users order history and can be clicked to show details of the order.
 
-!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/tweeter/blob/master/docs/desktop_highlight_menu.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/404.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/active_orders.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/cart.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/dropdown_navigation.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/empty_cart.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items_mobile.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/login.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/new_order.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/owner_order_history.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/registration.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/sms_owner.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_order_history.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_profile_edit.png)
+!["Screen capture of highlighting in desktop mode"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/user_profile.png)
 
 ### Admin Side
 
