@@ -66,12 +66,13 @@ module.exports = (db, iconsKey) => {
 
           const updateOrderQuery = {
             text:
-              "UPDATE orders SET status = $1 WHERE id = $2",
+              "UPDATE orders SET status = $1 WHERE id = $2 RETURNING user_id",
             values: [newState, orderId]
           };
 
           db.query(updateOrderQuery)
-            .then(() => {
+            .then((data) => {
+              const customerId = data.rows[0].user_id;
               let message = `Your order #${orderId} `;
               if (newState === 'declined') {
                 message += 'has been cancelled by Top Dog.';
@@ -81,7 +82,7 @@ module.exports = (db, iconsKey) => {
                 message += 'is now ready to be picked up.';
               }
 
-              const custumerPhone = getPhoneNumber(userId, db);
+              const custumerPhone = getPhoneNumber(customerId, db);
 
               sendSMS(
                 custumerPhone,
@@ -89,6 +90,7 @@ module.exports = (db, iconsKey) => {
               );
 
               res.redirect(`/owners/${userId}/orders`);
+
             })
             .catch(err => {
               res
