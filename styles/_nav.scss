@@ -5,9 +5,12 @@ header {
   // background-color: $color-yellow; // Seb
   // border-bottom: 5px $color-dark solid;
   z-index: 1;
+  background-color: $color-yellow;
+
 }
 
 nav {
+  background-color: $color-yellow;
   position: fixed;
   display: flex;
   flex-flow: row;
@@ -16,23 +19,12 @@ nav {
   width: 100%;
   height: auto;
   font-family: $secondary-font;
-  background-color: $color-yellow;
 
   .cart-icon {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
-  }
-
-  h1 {
-    // display: inline-block;
-    align-content: center; // Added to replace space-between approach (trial) // Seb
-    display: inline-block;
-    padding-top: 7px;
-    font-family: $logo-font;
-    color: $color-red;
-    text-shadow: 1px 1px $color-off-white;
   }
 
   span, a.user-profile {
@@ -71,4 +63,27 @@ nav {
 
 a {
   color: $color-dark-blue;
+}
+
+a.logo {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  margin: 0 auto;
+  font-family: $logo-font;
+  color: $color-red;
+  text-shadow: 1px 1px $color-off-white;
+  margin-top: 0.5rem;
+}
+a.logo:hover {text-decoration: none;}
+
+@media only screen and (max-width: 400px) {
+  a.logo {
+    margin-top: 1.5rem;
+    text-align: center;
+    h1 {font-size: 1.2rem;}
+  }
 }
