@@ -1,21 +1,15 @@
+// For index.ejs
+
 body {
 
   main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    // h1 {
-    //   color: $color-dark-blue;
-    //   font-family: $logo-font;
-    //   margin-left: 5rem;
-    //   padding-bottom: 1rem;
-
-    // }
-
   }
 }
 
+// Top of menu display including icons for food restrictions
 .menu-params {
   display: flex;
   flex-direction: row;
@@ -26,16 +20,19 @@ body {
   font-family: $logo-font;
   margin-left: 5rem;
   padding: 1rem;
+
   div {
     padding-left: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 
+    // Dietary restriction icons
     i {
       padding-right: 1rem;
     }
   }
+
   h1 {
     color: $color-dark-blue;
       font-family: $logo-font;
@@ -44,11 +41,13 @@ body {
   }
 }
 
+// Gluten-free icon is different format from other icons
 .menu-params div img.gluten-free {
   width: 1rem !important;
   height: 1rem;
 }
 
+// Box for each food item
 .food-item {
   display: flex;
   flex-direction: row;
@@ -57,7 +56,6 @@ body {
   border-radius: 10px;
   border-color: $color-dark;
   width: 90%;
-  // padding-bottom: 1rem;
   margin: auto;
   margin-bottom: 1rem;
   padding: .5rem;
@@ -69,10 +67,6 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
-    // justify-content: left;
-    // text-align: left;
-
-
 
     h1 {
       color: $color-red;
@@ -82,7 +76,6 @@ body {
     }
   }
   .photos {
-    // padding: .5rem;
     max-width: 25%;
 
   }
@@ -112,9 +105,10 @@ body {
   }
 }
 
+
+// Responsive properties
 @media only screen and (max-width: 720px) {
   .food-item {
-    // background-color: pink;
     flex-direction: column;
     align-items: center;
 

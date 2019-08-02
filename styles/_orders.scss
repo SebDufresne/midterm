@@ -1,3 +1,5 @@
+// For orders.ejs
+
 .customer-order-history {
   display: flex;
   flex-direction: column;
@@ -65,7 +67,6 @@ table, tr, td {
 }
 
 div.expanded-order {
-  // form {
     width: 65%;
     font-family: $handwriting-font;
     display: flex;
@@ -73,7 +74,6 @@ div.expanded-order {
     align-items: center;
     background-color: $color-paper;
     background-image: $paper-texture;
-    // margin-top: 5rem;
     border: 1px solid black;
     border-top: none;
     box-shadow: 0 2px 2px #362A21;
@@ -81,22 +81,6 @@ div.expanded-order {
     .table-heads {
       font-family: Arial, Helvetica, sans-serif;
       color: $color-dark-blue;
-    // }
-
-    // button {
-    //   // font-family: Arial, Helvetica, sans-serif;
-    //   margin-right: 3rem;
-    //   margin-top: 1rem;
-    //   margin-bottom: 1rem;
-    //   font-family: $logo-font;
-    //   color: $color-yellow;
-    //   background-color: $color-red;
-    //   padding: .25rem .40rem, .35rem .40rem;
-    //   // padding-top: .25rem;
-    //   // padding:
-    //   border: .5px solid $color-red;
-    //   border-radius: 10px;
-    // }
     }
 }
 

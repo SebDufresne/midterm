@@ -1,11 +1,13 @@
+// For login.ejs
+
 .container {
   width: 30%;
   margin-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-
   font-family: $secondary-font;
+
   form {
     display: flex;
     flex-direction: column;

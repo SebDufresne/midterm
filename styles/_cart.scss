@@ -1,3 +1,5 @@
+// Used in cart.ejs
+
 .order-summary-containter {
   width: 100%;
   display: flex;
@@ -18,12 +20,12 @@ h1 {
 
 table {
   width: 90%;
-  // border: 1px solid $color-dark;
 }
 
 table, tr, td {
   border: 1px solid $color-table-border;
 }
+
 
 .tax, .subtotal, .total {
   text-align: right;
@@ -32,6 +34,7 @@ table, tr, td {
 }
 }
 
+// Handwritten elements on the receipt which need centering
 .centered-handwriting {
   text-align: center;
 }
@@ -54,7 +57,6 @@ div.order-summary-containter {
     }
 
     button {
-      // font-family: Arial, Helvetica, sans-serif;
       margin-right: 3rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
@@ -62,8 +64,6 @@ div.order-summary-containter {
       color: $color-yellow;
       background-color: $color-red;
       padding: .25rem .40rem, .35rem .40rem;
-      // padding-top: .25rem;
-      // padding:
       border: .5px solid $color-red;
       border-radius: 10px;
     }
@@ -85,6 +85,7 @@ div.order-summary-containter {
   width: 100%;
   font-family: $secondary-font;
 
+  // Photo in empty cart page
   .crying-dog {
     max-width: 7rem;
     height: auto;
