@@ -42,12 +42,16 @@
   .must-see {
     font-weight: bold;
     font-size: 2rem;
-  }
+
+
  }
 
+ .ordered-food {
+   padding-left: 3rem;
+ }
  .order-table {
    margin: .5rem;
-   width: 90%;
+   width: 75%;
    border: 1px solid black;
 
 
@@ -110,3 +114,4 @@
 .status-fulfilled {
   background-color: orange;
 }
+ }
