@@ -13,8 +13,6 @@
       <a id="login" href="/login" alt="login">Login</a>
     <% } %>
 
-    <a href="/"><h1>Top Dogs!</h1></a>
-
     <div>
       <!-- User Is Authenticated AND is NOT an admin-->
       <% if(user.id && !user.admin) { %>
@@ -66,3 +64,5 @@
     <% } %>
   </nav>
 </header>
+<a href="/" class="logo"><h1>Top Dogs!</h1></a>
+
