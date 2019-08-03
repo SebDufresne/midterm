@@ -1,16 +1,19 @@
 # Top Dogs
 
-A Hot Dog ordering app.
+A hot dog ordering app.
 
 ## Final Product
 
 A node express web app to connect customers with restaurant owners.
 
+## Authors
+Sebastien D, Robin W and Jess N-L.
+
 ### Client Side
 
-Users can register with their email and phone number. Users can then select menu items and add them to their cart, once an order if confirmed, and the restaurant has accepted the order, the user is notified via text message when their order will be ready for pickup.
+Users can register with their email and phone number. Users can then select menu items and add them to their cart. Once an order has been confirmed and the restaurant has accepted the order, the user is notified via text message when their order will be ready for pick up.
 
-Order history lists a users order history and can be clicked to show details of the order.
+Order history lists a users order history which can be clicked to expand and display details of the order.
 
 !["List of available offers"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items.png)
 
@@ -28,9 +31,9 @@ Order history lists a users order history and can be clicked to show details of 
 
 ### Admin Side
 
-Admin users would typically be restaurants. Admins are notified when an order is placed, via text message. Admins can then use their active order page to either accept the order, and indicate how long it will take to fulfill, or reject the order. The admins response is communicated to the user through text-message.
+Admin users would typically be the restaurant's owner(s). Admins are notified when an order is placed via text message. Admins can then use their active order page to either accept the order while also indicating how long it will take to fulfill or reject the order. The admins response is communicated to the user through SMS message.
 
-Admins can see a history of their orders on order-history page, with drop down to show details.
+Admins can see a history of their orders on the Order History's page which can be selected to expand and display further details about a specific order.
 
 !["List of active orders"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/active_orders.png)
 
@@ -38,7 +41,7 @@ Admins can see a history of their orders on order-history page, with drop down t
 
 ### Mobile Mode
 
-Food menu designed to be comfortable for both mobile and desktop views. Menu item pictures bigger on mobile.
+The restaurant's food menu is designed to be comfortable for both mobile and desktop views. Menu items on mobile are displayed as a single column and the images widened.
 
 !["Mobile integration"](https://github.com/SebDufresne/midterm/blob/master/docs/screenshots/food_items_mobile.png)
 
