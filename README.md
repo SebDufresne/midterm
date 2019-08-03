@@ -9,6 +9,8 @@ A node express web app to connect customers with restaurant owners.
 ## Authors
 Sebastien D, Robin W and Jess N-L.
 
+## Project Summary
+
 ### Client Side
 
 Users can register with their email and phone number. Users can then select menu items and add them to their cart. Once an order has been confirmed and the restaurant has accepted the order, the user is notified via SMS message when their order will be ready for pick up.
